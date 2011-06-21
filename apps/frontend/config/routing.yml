@@ -4,26 +4,31 @@
 # default rules
 homepage:
   url:   /
-  param: { module: default, action: index }
+  param: { module: user, action: index }
   
 facebook_connect:
   url:   /facebook_connect
-  param: {  module: register, action: fbConnect }
+  param: {  module: user, action: fbConnect }
+
+register:
+  url:   /register
+  param: { module: user, action: register }
+  
+sf_guard_signin:
+  url: /login 
+  params: { module: sfGuardAuth, action: signin }
+
+sf_guard_signout:
+  url: /logout
+  params: { module: sfGuardAuth, action: signout }
   
 # generic rules
 # please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
+#default_index:
+#  url:   /:module
+#  param: { action: index }
 
 default:
   url:   /:module/:action/*
 
-sf_guard_signin:
-  url:   /login
-  param: {  module: sfGuardAuth, action: signin  }
-
-sf_guard_signout:
-  url:   /logout
-  param: {  module: sfGuardAuth, action: signout  }
 
