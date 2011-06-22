@@ -1,18 +1,10 @@
-
+<?php use_helper('I18N') ?>
+<?php if (!$sf_user->isAuthenticated()): ?>
 <fb:login-button perms="email"></fb:login-button>
-<?php 
-echo $mensaje;
- ?>
-<br>
-<?php 
-echo link_to('Registrar', 'register/index');
-echo link_to('loguear', '@sf_guard_signin');
-
-if(isset($username))
-{
-	echo $username;
-	echo link_to('desloguear', '@sf_guard_signout');
-	}
-
-
- ?>
+<?php echo get_partial('sfGuardAuth/signin_form', array('form' => $form)); 
+      echo link_to('Registrar', 'register/index');
+endif ?>
+<?php if ($sf_user->isAuthenticated()): ?>
+Hola <?php echo $sf_user->getProfile()->getFirstName() ?>
+<?php echo link_to('Salir','@sf_guard_signout') ?>
+<?php endif ?>

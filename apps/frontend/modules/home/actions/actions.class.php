@@ -17,29 +17,7 @@ class homeActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    //$this->forward('default', 'module');
-    $this->mensaje = "Este es el mensaje de bienvenida";
-    
-	if($this->getUser()->isAuthenticated())
-	{
-		$this->usuario = $this->getUser();
-		//$this->username = $this->getUser()->getAttribute('username');
-		
-		 $this->username = $this->getUser()->getAttribute('username', 'Anonymous');
-	  //$this->id = $this->getUser()->getId();
-	 
-	   $this->username =  $this->getUser()->getUsername();
-	   
-	   $this->profile =  $this->getUser()->getProfile();
-		
-      $this->mensaje = "usuario logueado";
-	  }
-	  else
-	  {
-	  $this->mensaje = "usuario sin loguear";
-	  }
-	 
-	  
-	
+    $class = sfConfig::get('app_sf_guard_plugin_signin_form', 'sfGuardFormSignin'); 
+    $this->form = new $class();
   }
 }
