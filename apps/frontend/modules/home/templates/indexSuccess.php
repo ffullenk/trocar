@@ -6,5 +6,15 @@
 endif ?>
 <?php if ($sf_user->isAuthenticated()): ?>
 Hola <?php echo $sf_user->getProfile()->getFirstName() ?>
+<?php
+	echo '<br><br><br><br>';
+echo "ultimos productos en el sistema";
+
+foreach ($productos as $producto) 
+{
+echo '<br>';
+    echo $producto['name'];
+}
+?>
 <?php echo link_to('Salir','@sf_guard_signout') ?>
 <?php endif ?>
