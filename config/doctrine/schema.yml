@@ -53,19 +53,19 @@ Havelist:
   actAs:
     Timestampable: ~
   columns:
-    id:            {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
-    id_product:   {  type: integer,  notnull: true  }
-    id_object:     {  type: integer,  notnull: true  }
-    user_id:       {  type: integer,  notnull: true  }
+    id:             {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    id_product:     {  type: integer,  notnull: true                                       }
+    id_object:      {  type: integer                                                       }
+    user_id:        {  type: integer,  notnull: true                                       }
   relations:
     Product:
-      local: id_product
-      foreign: id
-      type: one
+      local:        id_product
+      foreign:      id
+      type:         one
     Object:
-      local: id_object
-      foreign: id
-      type: one
+      local:        id_object
+      foreign:      id
+      type:         one
     User:
       class:        sfGuardUser
       local:        user_id
@@ -80,21 +80,21 @@ Object:
   actAs:
     Timestampable: ~
   columns:
-    id:      {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
-    status:  {  type: string(45)  }
-    detail:  {  type: string(150)  }
-    picture: {  type: string(200)  }
-    weight:  {  type: integer  }
-    height:  {  type: integer  }
-    width:   {  type: integer  }
-    lenght:  {  type: integer  }
-    is_new:  {  type: boolean  }
-    color:   {  type: string(45)  }
+    id:        {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    status:    {  type: string(45)   }
+    detail:    {  type: string(150)  }
+    picture:   {  type: string(200)  }
+    weight:    {  type: integer      }
+    height:    {  type: integer      }
+    width:     {  type: integer      }
+    lenght:    {  type: integer      }
+    is_new:    {  type: boolean      }
+    color:     {  type: string(45)   }
   relations:
     Havelist:
-      local: id
+      local:   id
       foreign: id_object
-      type: many
+      type:    one
 
 Product:
   tableName: product
@@ -102,6 +102,7 @@ Product:
     Timestampable: ~
   columns:
     id:           {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    id_category:  {  type: integer  }
     name:         {  type: string(45)  }
     description:  {  type: string(150)  }
     picture:      {  type: string(200)  }
@@ -110,6 +111,28 @@ Product:
     model:        {  type: string(45)  }
   relations:
     Havelist:
-      local: id
-      foreign: id_product
-      type: many
+      local:      id
+      foreign:    id_product
+      type:       many
+    Category:
+      class:      Category
+      local:      id_category
+      foreign:    id
+      type:       one
+      
+Category:
+  tableName: category
+  columns:
+    id:             {  type: integer, primary: true, autoincrement: true, notnull: true  }
+    id_root:        {  type: integer  }
+    name:           {  type: string(50)  }
+  relations:
+    Category:
+      local:        id_root
+      foreign:      id
+      type:         one
+    Products:
+      class:        Product
+      local:        id
+      foreign:      id_category
+      foreignAlias: Categories

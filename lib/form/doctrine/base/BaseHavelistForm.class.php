@@ -17,7 +17,7 @@ abstract class BaseHavelistForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
       'id_product' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Product'), 'add_empty' => false)),
-      'id_object'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Object'), 'add_empty' => false)),
+      'id_object'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Object'), 'add_empty' => true)),
       'user_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => false)),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
@@ -26,7 +26,7 @@ abstract class BaseHavelistForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
       'id_product' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Product'))),
-      'id_object'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Object'))),
+      'id_object'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Object'), 'required' => false)),
       'user_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('User'))),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
