@@ -49,7 +49,6 @@ abstract class BaseHavelist extends sfDoctrineRecord
              ));
         $this->hasColumn('id_object', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
              ));
         $this->hasColumn('user_id', 'integer', null, array(
              'type' => 'integer',

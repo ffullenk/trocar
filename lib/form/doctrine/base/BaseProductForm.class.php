@@ -16,6 +16,7 @@ abstract class BaseProductForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'id'          => new sfWidgetFormInputHidden(),
+      'id_category' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Category'), 'add_empty' => true)),
       'name'        => new sfWidgetFormInputText(),
       'description' => new sfWidgetFormInputText(),
       'picture'     => new sfWidgetFormInputText(),
@@ -28,6 +29,7 @@ abstract class BaseProductForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'id'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'id_category' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Category'), 'required' => false)),
       'name'        => new sfValidatorString(array('max_length' => 45, 'required' => false)),
       'description' => new sfValidatorString(array('max_length' => 150, 'required' => false)),
       'picture'     => new sfValidatorString(array('max_length' => 200, 'required' => false)),
