@@ -47,3 +47,69 @@ sfGuardUserProfile:
       foreignType:  one
       type:         one
       onDelete:     CASCADE
+
+Havelist:
+  tableName: havelist
+  actAs:
+    Timestampable: ~
+  columns:
+    id:            {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    id_product:   {  type: integer,  notnull: true  }
+    id_object:     {  type: integer,  notnull: true  }
+    user_id:       {  type: integer,  notnull: true  }
+  relations:
+    Product:
+      local: id_product
+      foreign: id
+      type: one
+    Object:
+      local: id_object
+      foreign: id
+      type: one
+    User:
+      class:        sfGuardUser
+      local:        user_id
+      foreign:      id
+      foreignAlias: Havelist
+      foreignType:  one
+      type:         one
+      onDelete:     CASCADE
+      
+Object:
+  tableName: object
+  actAs:
+    Timestampable: ~
+  columns:
+    id:      {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    status:  {  type: string(45)  }
+    detail:  {  type: string(150)  }
+    picture: {  type: string(200)  }
+    weight:  {  type: integer  }
+    height:  {  type: integer  }
+    width:   {  type: integer  }
+    lenght:  {  type: integer  }
+    is_new:  {  type: boolean  }
+    color:   {  type: string(45)  }
+  relations:
+    Havelist:
+      local: id
+      foreign: id_object
+      type: many
+
+Product:
+  tableName: product
+  actAs:
+    Timestampable: ~
+  columns:
+    id:           {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    name:         {  type: string(45)  }
+    description:  {  type: string(150)  }
+    picture:      {  type: string(200)  }
+    link:         {  type: string(45)  }
+    brand:        {  type: string(45)  }
+    model:        {  type: string(45)  }
+  relations:
+    Havelist:
+      local: id
+      foreign: id_product
+      type: many

@@ -32,7 +32,7 @@ class sfGuardValidatorUser extends sfValidatorBase
     $password = isset($values[$this->getOption('password_field')]) ? $values[$this->getOption('password_field')] : '';
 
     $allowEmail = sfConfig::get('app_sf_guard_plugin_allow_login_with_email', true);
-    $method = $allowEmail ? 'retrieveByUsernameOrEmailAddress' : 'retrieveByUsername';
+    $method = $allowEmail ? 'retrieveByUsername' : 'retrieveByUsername';
 
     // don't allow to sign in with an empty username
     if ($username)

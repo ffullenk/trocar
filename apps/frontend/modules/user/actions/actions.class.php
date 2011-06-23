@@ -9,14 +9,15 @@
  */
 class userActions extends sfActions
 {
- /**
+  public function executeIndex(sfWebRequest $request)
+  {
+  }
+  
+  /**
   * Ejecuta la accion de registro de un usuario
   *
   * @param sfRequest $request Objeto http request
   */
-  public function executeIndex(sfWebRequest $request)
-  {
-  }
   public function executeRegister(sfWebRequest $request)
   {
     if($this->getUser()->isAuthenticated())
@@ -125,6 +126,31 @@ class userActions extends sfActions
       catch (FacebookApiException $e) 
       {
         error_log($e);
+      }
+    }
+  }
+  
+  /**
+  * Accion para editar los datos del perfil de un usuario
+  *
+  * @param sfRequest $request Objeto http request
+  */
+  public function executeEditProfile(sfWebRequest $request)
+  {
+    //se obtiene el perfil del usuario
+    $profile = $this->getUser()->getProfile();
+    //se crea el formulario que permitira editar sus datos
+    $this->form = new sfGuardUserProfileForm($profile);
+    //se postea el formulario
+    if($request->isMethod('put'))
+    {
+      $params = $request->getParameter('edit');
+      $this->form->bind($params);
+      if($this->form->isValid())
+      {
+        $this->form->save();
+        $this->redirect($this->generateUrl('default', array('module' => 'user',
+                                            'action' => 'editProfile')));
       }
     }
   }

@@ -12,5 +12,14 @@ class sfGuardUserProfileForm extends BasesfGuardUserProfileForm
 {
   public function configure()
   {
+    unset(
+      $this['user_id'],
+      $this['token'],
+      $this['facebook_uid'],
+      $this['created_at'],
+      $this['updated_at']
+    );
+    
+    $this->widgetSchema->setNameFormat('edit[%s]');
   }
 }
