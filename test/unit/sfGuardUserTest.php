@@ -39,7 +39,7 @@ function create_user($defaults = array())
 { 
   $user = new sfGuardUser();
   $user->fromArray(array_merge(array(
-    'username'      => 'usertest',
+    'username'      => 'usertest80',
     'algorithm'     => 'sha1',
   ), $defaults));
  
