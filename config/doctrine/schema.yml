@@ -49,21 +49,23 @@ sfGuardUserProfile:
       onDelete:     CASCADE
 
 Havelist:
-  tableName: havelist
+  tableName: have_list
   actAs:
     Timestampable: ~
   columns:
     id:             {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
-    id_product:     {  type: integer,  notnull: true                                       }
-    id_object:      {  type: integer                                                       }
+    product_id:     {  type: integer,  notnull: true                                       }
+    object_id:      {  type: integer                                                       }
     user_id:        {  type: integer,  notnull: true                                       }
   relations:
     Product:
-      local:        id_product
+      class:        Product
+      local:        product_id
       foreign:      id
       type:         one
     Object:
-      local:        id_object
+      class:        Object
+      local:        object_id
       foreign:      id
       type:         one
     User:
@@ -71,7 +73,7 @@ Havelist:
       local:        user_id
       foreign:      id
       foreignAlias: Havelist
-      foreignType:  one
+      foreignType:  many
       type:         one
       onDelete:     CASCADE
       
@@ -136,3 +138,30 @@ Category:
       local:        id
       foreign:      id_category
       foreignAlias: Categories
+  
+Wantlist:
+  tableName: want_list
+  actAs:
+    Timestampable: ~
+  columns:
+    id:                       {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    user_id:                  {  type: integer,  primary: true,  notnull: true  }
+    producto_id:              {  type: integer,  primary: true,  notnull: true  }
+    
+  relations:
+    Product:
+      local:        producto_id
+      class:        Product
+      foreign:      id
+      type:         one
+      foreignType:  many
+      foreignAlias: Wantlist
+  
+    User:
+      class:        sfGuardUser
+      local:        user_id
+      foreign:      id
+      foreignAlias: Wantlist
+      foreignType:  many
+      type:         one
+      onDelete:     CASCADE
