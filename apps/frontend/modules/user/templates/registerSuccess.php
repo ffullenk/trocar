@@ -2,7 +2,7 @@
 
 <h1>Registrar</h1>
 
-<?php echo $form->renderFormTag(url_for('user/index'), array('name' => 'signup_form')); ?>
+<?php echo $form->renderFormTag(url_for('user/register'), array('name' => 'signup_form')); ?>
   <table>
     <?php echo $form;?>
   </table>
