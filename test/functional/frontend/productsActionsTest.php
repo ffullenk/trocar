@@ -21,3 +21,4 @@ $browser->get('/')->click('Signin', array( 'signin' => array(
     checkElement('body', '/Dell Vostro/')->
   end()
 ;
+ 
