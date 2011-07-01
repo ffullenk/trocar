@@ -234,26 +234,6 @@ class sfGuardSecurityUser extends sfBasicSecurityUser
   }
 
   /**
-   * Returns the name(first and last) of the user
-   *
-   * @return string
-   */
-  public function getName()
-  {
-    return $this->getGuardUser()->getName();
-  }
-
-  /**
-   * Returns the sfGuardUser object's email.
-   *
-   * @return string
-   */
-  public function getEmail()
-  {
-    return $this->getGuardUser()->getEmail();
-  }
-
-  /**
    * Sets the user's password.
    *
    * @param string $password The password

@@ -17,7 +17,8 @@ class homeActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $class = sfConfig::get('app_sf_guard_plugin_signin_form', 'sfGuardFormSignin'); 
+    $class = sfConfig::get('app_sf_guard_plugin_signin_form', 'sfGuardFormSignin');
+	$this->productos = Doctrine_Core::getTable('Product')->createQuery('c')->orderBy('c.updated_at ASC')->execute();
     $this->form = new $class();
   }
 }

@@ -47,3 +47,121 @@ sfGuardUserProfile:
       foreignType:  one
       type:         one
       onDelete:     CASCADE
+
+Havelist:
+  tableName: have_list
+  actAs:
+    Timestampable: ~
+  columns:
+    id:             {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    product_id:     {  type: integer,  notnull: true                                       }
+    object_id:      {  type: integer                                                       }
+    user_id:        {  type: integer,  notnull: true                                       }
+  relations:
+    Product:
+      class:        Product
+      local:        product_id
+      foreign:      id
+      type:         one
+    Object:
+      class:        Object
+      local:        object_id
+      foreign:      id
+      type:         one
+    User:
+      class:        sfGuardUser
+      local:        user_id
+      foreign:      id
+      foreignAlias: Havelist
+      foreignType:  many
+      type:         one
+      onDelete:     CASCADE
+      
+Object:
+  tableName: object
+  actAs:
+    Timestampable: ~
+  columns:
+    id:        {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    status:    {  type: string(45)   }
+    detail:    {  type: string(150)  }
+    picture:   {  type: string(200)  }
+    weight:    {  type: integer      }
+    height:    {  type: integer      }
+    width:     {  type: integer      }
+    lenght:    {  type: integer      }
+    is_new:    {  type: boolean      }
+    color:     {  type: string(45)   }
+  relations:
+    Havelist:
+      local:   id
+      foreign: id_object
+      type:    one
+
+Product:
+  tableName: product
+  actAs:
+    Timestampable: ~
+  columns:
+    id:           {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    id_category:  {  type: integer  }
+    name:         {  type: string(45)  }
+    description:  {  type: string(150)  }
+    picture:      {  type: string(200)  }
+    link:         {  type: string(45)  }
+    brand:        {  type: string(45)  }
+    model:        {  type: string(45)  }
+  relations:
+    Havelist:
+      local:      id
+      foreign:    id_product
+      type:       many
+    Category:
+      class:      Category
+      local:      id_category
+      foreign:    id
+      type:       one
+      
+Category:
+  tableName: category
+  columns:
+    id:             {  type: integer, primary: true, autoincrement: true, notnull: true  }
+    id_root:        {  type: integer  }
+    name:           {  type: string(50)  }
+  relations:
+    Category:
+      local:        id_root
+      foreign:      id
+      type:         one
+    Products:
+      class:        Product
+      local:        id
+      foreign:      id_category
+      foreignAlias: Categories
+  
+Wantlist:
+  tableName: want_list
+  actAs:
+    Timestampable: ~
+  columns:
+    id:                       {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    user_id:                  {  type: integer,  primary: true,  notnull: true  }
+    producto_id:              {  type: integer,  primary: true,  notnull: true  }
+    
+  relations:
+    Product:
+      local:        producto_id
+      class:        Product
+      foreign:      id
+      type:         one
+      foreignType:  many
+      foreignAlias: Wantlist
+  
+    User:
+      class:        sfGuardUser
+      local:        user_id
+      foreign:      id
+      foreignAlias: Wantlist
+      foreignType:  many
+      type:         one
+      onDelete:     CASCADE

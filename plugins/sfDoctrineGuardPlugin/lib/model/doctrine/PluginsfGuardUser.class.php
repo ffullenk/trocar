@@ -22,17 +22,7 @@ abstract class PluginsfGuardUser extends BasesfGuardUser
    */
   public function __toString()
   {
-    return (string) $this->getName().' ('.$this->getUsername().')';
-  }
-
-  /**
-   * Returns the first and last name of the user concatenated together
-   *
-   * @return string $name
-   */
-  public function getName()
-  {
-    return trim($this->getFirstName().' '.$this->getLastName());
+    return (string) $this->getUsername();
   }
 
   /**
