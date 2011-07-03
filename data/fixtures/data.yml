@@ -1,0 +1,127 @@
+Category:
+  Category_1:
+    name: electronico
+  Category_2:
+    Category: Category_1
+    name: computadores
+Product:
+  Product_1:
+    Category: Category_1
+    name: 'Dell Vostro'
+    description: 'muy buen notebook'
+    picture: 'http://bit.ly/kwHdOU'
+    link: www.dell.com
+    brand: dell
+    model: 'vostro 3500'
+    created_at: '2011-07-01 21:25:06'
+    updated_at: '2011-07-01 21:25:06'
+sfGuardGroup:
+  sfGuardGroup_1:
+    name: admin
+    description: 'Administrator group'
+    created_at: '2011-06-30 21:52:48'
+    updated_at: '2011-06-30 21:52:48'
+  sfGuardGroup_2:
+    name: member
+    description: 'Grupo de usuarios comunes'
+    created_at: '2011-06-30 21:52:48'
+    updated_at: '2011-06-30 21:52:48'
+sfGuardGroupPermission:
+  sfGuardGroupPermission_1_1:
+    Group: sfGuardGroup_1
+    Permission: sfGuardPermission_1
+    created_at: '2011-06-30 21:52:48'
+    updated_at: '2011-06-30 21:52:48'
+  sfGuardGroupPermission_2_2:
+    Group: sfGuardGroup_2
+    Permission: sfGuardPermission_2
+    created_at: '2011-06-30 21:52:48'
+    updated_at: '2011-06-30 21:52:48'
+sfGuardPermission:
+  sfGuardPermission_1:
+    name: admin
+    description: 'Administrator permission'
+    created_at: '2011-06-30 21:52:48'
+    updated_at: '2011-06-30 21:52:48'
+  sfGuardPermission_2:
+    name: member
+    description: 'Permiso de usuario comun'
+    created_at: '2011-06-30 21:52:48'
+    updated_at: '2011-06-30 21:52:48'
+sfGuardRememberKey:
+  sfGuardRememberKey_1:
+    User: sfGuardUser_1
+    remember_key: its0d4w1tlc8480040sc48g80sgk488
+    ip_address: 127.0.0.1
+    created_at: '2011-06-30 21:54:28'
+    updated_at: '2011-06-30 21:54:28'
+sfGuardUser:
+  sfGuardUser_1:
+    username: admin@trocar.cl
+    algorithm: sha1
+    salt: f132f767d27ec430ff0d50d18edec7af
+    password: ef1872ccf0ec795165879b5b06b73eee78bac8ab
+    is_active: true
+    is_super_admin: true
+    last_login: '2011-06-30 21:54:28'
+    created_at: '2011-06-30 21:52:48'
+    updated_at: '2011-06-30 21:54:28'
+  sfGuardUser_2:
+    username: usertest80
+    algorithm: sha1
+    salt: null
+    password: null
+    is_active: true
+    is_super_admin: false
+    last_login: null
+    created_at: '2011-06-30 21:55:11'
+    updated_at: '2011-06-30 21:55:11'
+  sfGuardUser_3:
+    username: francisco000@gmail.com
+    algorithm: sha1
+    salt: c492a41cc8a9e443c0f6cfbcbd1123df
+    password: 64bb25648e169b5a8c374fe57336769bdc9bb7e1
+    is_active: true
+    is_super_admin: false
+    last_login: '2011-07-01 21:04:23'
+    created_at: '2011-07-01 21:04:23'
+    updated_at: '2011-07-01 21:04:23'
+sfGuardUserGroup:
+  sfGuardUserGroup_1_1:
+    User: sfGuardUser_1
+    Group: sfGuardGroup_1
+    created_at: '2011-06-30 21:52:48'
+    updated_at: '2011-06-30 21:52:48'
+  sfGuardUserGroup_3_2:
+    User: sfGuardUser_3
+    Group: sfGuardGroup_2
+    created_at: '2011-07-01 21:04:23'
+    updated_at: '2011-07-01 21:04:23'
+sfGuardUserProfile:
+  sfGuardUserProfile_1:
+    User: sfGuardUser_1
+    first_name: Diego
+    last_name: Acuna
+    address: null
+    token: null
+    facebook_uid: null
+    created_at: '2011-06-30 21:52:48'
+    updated_at: '2011-06-30 21:52:48'
+  sfGuardUserProfile_2:
+    User: sfGuardUser_2
+    first_name: null
+    last_name: null
+    address: null
+    token: null
+    facebook_uid: null
+    created_at: '2011-06-30 21:55:11'
+    updated_at: '2011-06-30 21:55:11'
+  sfGuardUserProfile_3:
+    User: sfGuardUser_3
+    first_name: null
+    last_name: null
+    address: null
+    token: null
+    facebook_uid: null
+    created_at: '2011-07-01 21:04:23'
+    updated_at: '2011-07-01 21:04:23'
