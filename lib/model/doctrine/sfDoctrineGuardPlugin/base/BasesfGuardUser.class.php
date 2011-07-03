@@ -19,7 +19,8 @@
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
  * @property sfGuardUserProfile $Profile
- * @property Havelist $Havelist
+ * @property Doctrine_Collection $Havelist
+ * @property Doctrine_Collection $Wantlist
  * 
  * @method string                getUsername()              Returns the current record's "username" value
  * @method string                getAlgorithm()             Returns the current record's "algorithm" value
@@ -35,7 +36,8 @@
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
  * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
- * @method Havelist              getHavelist()              Returns the current record's "Havelist" value
+ * @method Doctrine_Collection   getHavelist()              Returns the current record's "Havelist" collection
+ * @method Doctrine_Collection   getWantlist()              Returns the current record's "Wantlist" collection
  * @method sfGuardUser           setUsername()              Sets the current record's "username" value
  * @method sfGuardUser           setAlgorithm()             Sets the current record's "algorithm" value
  * @method sfGuardUser           setSalt()                  Sets the current record's "salt" value
@@ -50,7 +52,8 @@
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
  * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
- * @method sfGuardUser           setHavelist()              Sets the current record's "Havelist" value
+ * @method sfGuardUser           setHavelist()              Sets the current record's "Havelist" collection
+ * @method sfGuardUser           setWantlist()              Sets the current record's "Wantlist" collection
  * 
  * @package    trocar
  * @subpackage model
@@ -136,7 +139,11 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasOne('Havelist', array(
+        $this->hasMany('Havelist', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Wantlist', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
