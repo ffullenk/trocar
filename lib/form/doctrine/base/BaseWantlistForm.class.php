@@ -15,6 +15,7 @@ abstract class BaseWantlistForm extends BaseFormDoctrine
   public function setup()
   {
     $this->setWidgets(array(
+
       'id'         => new sfWidgetFormInputHidden(),
       'user_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => false)),
       'product_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Product'), 'add_empty' => false)),
@@ -28,6 +29,7 @@ abstract class BaseWantlistForm extends BaseFormDoctrine
       'product_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Product'))),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
+
     ));
 
     $this->widgetSchema->setNameFormat('wantlist[%s]');

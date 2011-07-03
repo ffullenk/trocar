@@ -14,3 +14,4 @@ class Wantlist extends BaseWantlist
 {
 
 }
+
