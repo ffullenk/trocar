@@ -25,14 +25,14 @@ class productsActions extends sfActions
 
   public function executeNew(sfWebRequest $request)
   {
-    $this->form = new ProductForm();
+    $this->form = new NewProductForm();
   }
 
   public function executeCreate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST));
 
-    $this->form = new ProductForm();
+    $this->form = new NewProductForm();
 
     $this->processForm($request, $this->form);
 
