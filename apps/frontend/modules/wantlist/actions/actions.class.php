@@ -24,11 +24,11 @@ class wantlistActions extends sfActions
   {
   	$this->forward404Unless($request->hasParameter('id'));
   	
-  	$idProducto    = $request->getParameter('id');
+  	$idProduct    = $request->getParameter('id');
   	$idUsuario     = $this->getUser()->getGuardUser()->getId();
   	
   	$nuevoWantList = new Wantlist();
-  	$nuevoWantList->setProductoId($idProducto);
+  	$nuevoWantList->setProductId($idProduct);
   	$nuevoWantList->setUserId($idUsuario);
   	$nuevoWantList->save();
   }
