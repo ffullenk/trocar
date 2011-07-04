@@ -7,9 +7,12 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
+    <?php use_helper('jQuery') ?>
+    
   </head>
   <body>
     <div id="fb-root"></div>
+
     <script>
       FB.init({
         appId  : '179663705425430',

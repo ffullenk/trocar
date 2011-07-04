@@ -28,10 +28,12 @@ $t->comment('2. ->getProfile() - Non existing user:');
 //segundo caso: se obtiene un usuario conocido sin perfil, entonces la llamada a ->getProfile()
 //debe devolver un nuevo perfil 	
 $user2 = create_user();
+$conn = Doctrine_Manager::connection();
+$conn->beginTransaction();
 $user2->getProfile();
 $user2->save();
 $t->is($user2->getProfile()->getFirstName(), null, '->getProfile()->getFirstName() devuelve null pues no existe un perfil creado para este usuario');
-
+$conn->rollback();
 //FIN TEST PERFIL DE USUARIO
 
 
@@ -39,7 +41,7 @@ function create_user($defaults = array())
 { 
   $user = new sfGuardUser();
   $user->fromArray(array_merge(array(
-    'username'      => 'usertest80',
+    'username'      => 'usertest',
     'algorithm'     => 'sha1',
   ), $defaults));
  

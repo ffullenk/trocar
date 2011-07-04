@@ -1,3 +1,4 @@
+<?php use_helper('jQuery'); ?>
 <table>
   <tbody>
     <tr>
@@ -28,19 +29,17 @@
       <th>Model:</th>
       <td><?php echo $product->getModel() ?></td>
     </tr>
-    <tr>
-      <th>Created at:</th>
-      <td><?php echo $product->getCreatedAt() ?></td>
-    </tr>
-    <tr>
-      <th>Updated at:</th>
-      <td><?php echo $product->getUpdatedAt() ?></td>
-    </tr>
+
   </tbody>
 </table>
 
 <hr />
+<?php  if($product->usuarioHasWantedProduct($sf_user->getGuardUser()->getId()))
+			echo jq_link_to_remote('remover de WantList', array('url'=> 'wantlist/remove?id='.$product->getId()));
+		else echo jq_link_to_remote('agregar a WantList', array('url'=> 'wantlist/add?id='.$product->getId()));
+		  ?>
 
+&nbsp;
 <a href="<?php echo url_for('products/edit?id='.$product->getId()) ?>">Edit</a>
 &nbsp;
 <a href="<?php echo url_for('products/index') ?>">List</a>

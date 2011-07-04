@@ -15,6 +15,7 @@
  * @property string $model
  * @property Doctrine_Collection $Havelist
  * @property Category $Category
+ * @property Doctrine_Collection $Wantlist
  * 
  * @method integer             getId()          Returns the current record's "id" value
  * @method integer             getIdCategory()  Returns the current record's "id_category" value
@@ -26,6 +27,7 @@
  * @method string              getModel()       Returns the current record's "model" value
  * @method Doctrine_Collection getHavelist()    Returns the current record's "Havelist" collection
  * @method Category            getCategory()    Returns the current record's "Category" value
+ * @method Doctrine_Collection getWantlist()    Returns the current record's "Wantlist" collection
  * @method Product             setId()          Sets the current record's "id" value
  * @method Product             setIdCategory()  Sets the current record's "id_category" value
  * @method Product             setName()        Sets the current record's "name" value
@@ -36,6 +38,7 @@
  * @method Product             setModel()       Sets the current record's "model" value
  * @method Product             setHavelist()    Sets the current record's "Havelist" collection
  * @method Product             setCategory()    Sets the current record's "Category" value
+ * @method Product             setWantlist()    Sets the current record's "Wantlist" collection
  * 
  * @package    trocar
  * @subpackage model
@@ -91,6 +94,12 @@ abstract class BaseProduct extends sfDoctrineRecord
         $this->hasOne('Category', array(
              'local' => 'id_category',
              'foreign' => 'id'));
+
+        $this->hasMany('Wantlist', array(
+             'local' => 'id',
+
+             'foreign' => 'product_id'));
+
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);
