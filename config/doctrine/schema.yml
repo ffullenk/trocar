@@ -139,40 +139,6 @@ Category:
       foreign:      id_category
       foreignAlias: Categories
       type:         many
-    Brand:
-      class:        Brand
-      local:        id
-      foreign:      id_category
-      type:         many
-
-Brand:
-  tableName: brand
-  columns:
-    id:             {  type: integer, primary:true, autoincrement: true, notnull:true  }
-    name:           {  type: string(50)  }
-  relations:
-    Category:
-      class:        Category
-      local:        id
-      foreign:      id_category
-      type:         one
-    Model:
-      class:        Model
-      local:        id_model
-      type:         many
-      foreign:      id
-  
-Model:
-  tableName: model
-  columns:
-    id:             {  type: integer, primary:true, autoincrement: true, notnull:true  }
-    name:           {  type: string(50)  }
-  relations:
-    Brand:
-      class:        Brand
-      local:        id
-      foreign:      id_brand
-      type:         one
 
 Wantlist:
   tableName: want_list
