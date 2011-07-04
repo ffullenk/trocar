@@ -21,6 +21,15 @@ class productsActions extends sfActions
   {
     $this->product = Doctrine_Core::getTable('Product')->find(array($request->getParameter('id')));
     $this->forward404Unless($this->product);
+    $this->userId = $this->getUser()->getGuardUser()->getId();
+    
+    $q = Doctrine_Core::getTable('WantList')
+		    ->createQuery('c')
+		    ->where('c.user_id = ?',  $this->userId)
+		    ->andWhere('c.product_id = ?',  $this->product->getId());
+    
+    $this->wantlist = $q->execute();
+    $this->wantlist = $this->wantlist->count();
   }
 
   public function executeNew(sfWebRequest $request)

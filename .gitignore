@@ -1,3 +1,10 @@
 /cache/*
 /log/*
 /config/databases.yml
+/lib/filter/doctrine/base/*
+/lib/filter/doctrine/sfDoctrineGuardPlugin/base/*
+/lib/form/doctrine/base/*
+/lib/form/doctrine/sfDoctrineGuardPlugin/base/*
+/lib/model/doctrine/base/*
+symfony.bat
+/data/sql/schema.sql

@@ -15,10 +15,7 @@ class wantlistActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  public function executeIndex(sfWebRequest $request)
-  {
-    $this->forward('default', 'module');
-  }
+
   
   public function executeAdd(sfWebRequest $request)
   {
@@ -31,5 +28,32 @@ class wantlistActions extends sfActions
   	$nuevoWantList->setProductId($idProduct);
   	$nuevoWantList->setUserId($idUsuario);
   	$nuevoWantList->save();
+  }
+  
+  
+  public function executeRemove(sfWebRequest $request)
+  {
+  	$this->forward404Unless($request->hasParameter('id'));
+  	 
+  	$idProduct    = $request->getParameter('id');
+  	$idUsuario     = $this->getUser()->getGuardUser()->getId();
+
+  	$q = Doctrine_Core::getTable('WantList')
+  	->createQuery('c')
+  	->delete()
+  	->where('c.user_id = ?',  $idUsuario)
+  	->andWhere('c.product_id = ?',  $idProduct );
+  	
+  	$resultado = $q->execute();
+  	
+  }
+  
+  public function executeIndex(sfWebRequest $request)
+  {
+  	
+  
+  	$this->wantlist	= $this->getUser()->getGuardUser()->getWantlist();
+
+  	 
   }
 }
