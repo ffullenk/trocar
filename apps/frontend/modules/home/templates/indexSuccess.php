@@ -8,7 +8,7 @@ endif ?>
 Hola <?php echo $sf_user->getProfile()->getFirstName() ?>
 <?php
 	echo '<br><br><br><br>';
-echo "ultimos productos en el sistema";
+echo "ultimos ".link_to('Productos','products/index')." en el sistema";
 
 foreach ($productos as $producto) 
 {
