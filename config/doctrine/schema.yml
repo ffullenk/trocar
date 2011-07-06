@@ -150,7 +150,7 @@ Wantlist:
     producto_id:              {  type: integer,  primary: true,  notnull: true  }
   relations:
     Product:
-      local:        producto_id
+      local:        product_id
       class:        Product
       foreign:      id
       type:         one
