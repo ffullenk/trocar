@@ -185,7 +185,7 @@ Wantlist:
     
   relations:
     Product:
-      local:        producto_id
+      local:        product_id
       class:        Product
       foreign:      id
       type:         one

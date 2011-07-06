@@ -13,6 +13,7 @@ dev:
     cache:                  false
     no_script_name:         false
     etag:                   false
+    file_link_format:       txmt://open?url=file://%f&line=%l
 
 test:
   .settings:
