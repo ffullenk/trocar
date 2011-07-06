@@ -148,7 +148,6 @@ Wantlist:
     id:                       {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
     user_id:                  {  type: integer,  primary: true,  notnull: true  }
     producto_id:              {  type: integer,  primary: true,  notnull: true  }
-    
   relations:
     Product:
       local:        producto_id
@@ -157,7 +156,6 @@ Wantlist:
       type:         one
       foreignType:  many
       foreignAlias: Wantlist
-  
     User:
       class:        sfGuardUser
       local:        user_id

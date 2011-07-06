@@ -1,0 +1,17 @@
+Category:
+  Category_1:
+    name: electronico
+  Category_2:
+    Category: Category_1
+    name: computadores
+Product:
+  Product_1:
+    Category: Category_1
+    name: 'Dell Vostro'
+    description: 'muy buen notebook'
+    picture: 'http://bit.ly/kwHdOU'
+    link: www.dell.com
+    brand: dell
+    model: 'vostro 3500'
+    created_at: '2011-07-01 21:25:06'
+    updated_at: '2011-07-01 21:25:06'

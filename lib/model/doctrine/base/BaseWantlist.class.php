@@ -7,21 +7,21 @@
  * 
  * @property integer $id
  * @property integer $user_id
- * @property integer $product_id
+ * @property integer $producto_id
  * @property Product $Product
  * @property sfGuardUser $User
  * 
- * @method integer     getId()         Returns the current record's "id" value
- * @method integer     getUserId()     Returns the current record's "user_id" value
- * @method integer     getProductId()  Returns the current record's "product_id" value
- * @method Product     getProduct()    Returns the current record's "Product" value
- * @method sfGuardUser getUser()       Returns the current record's "User" value
- * @method Wantlist    setId()         Sets the current record's "id" value
- * @method Wantlist    setUserId()     Sets the current record's "user_id" value
- * @method Wantlist    setProductId()  Sets the current record's "product_id" value
- * @method Wantlist    setProduct()    Sets the current record's "Product" value
- * @method Wantlist    setUser()       Sets the current record's "User" value
-
+ * @method integer     getId()          Returns the current record's "id" value
+ * @method integer     getUserId()      Returns the current record's "user_id" value
+ * @method integer     getProductoId()  Returns the current record's "producto_id" value
+ * @method Product     getProduct()     Returns the current record's "Product" value
+ * @method sfGuardUser getUser()        Returns the current record's "User" value
+ * @method Wantlist    setId()          Sets the current record's "id" value
+ * @method Wantlist    setUserId()      Sets the current record's "user_id" value
+ * @method Wantlist    setProductoId()  Sets the current record's "producto_id" value
+ * @method Wantlist    setProduct()     Sets the current record's "Product" value
+ * @method Wantlist    setUser()        Sets the current record's "User" value
+ * 
  * @package    trocar
  * @subpackage model
  * @author     Your name here
@@ -39,24 +39,19 @@ abstract class BaseWantlist extends sfDoctrineRecord
              ));
         $this->hasColumn('user_id', 'integer', null, array(
              'type' => 'integer',
-
-             'notnull' => true,
-             ));
-        $this->hasColumn('product_id', 'integer', null, array(
-             'type' => 'integer',
-             'notnull' => true,
              'primary' => true,
              ));
-
+        $this->hasColumn('producto_id', 'integer', null, array(
+             'type' => 'integer',
+             'primary' => true,
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
         $this->hasOne('Product', array(
-
-             'local' => 'product_id',
-
+             'local' => 'producto_id',
              'foreign' => 'id'));
 
         $this->hasOne('sfGuardUser as User', array(
