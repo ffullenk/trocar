@@ -38,14 +38,18 @@ class wantlistActions extends sfActions
   	$idProduct    = $request->getParameter('id');
   	$idUsuario     = $this->getUser()->getGuardUser()->getId();
 
-  	$q = Doctrine_Core::getTable('WantList')
-  	->createQuery('c')
-  	->delete()
-  	->where('c.user_id = ?',  $idUsuario)
-  	->andWhere('c.product_id = ?',  $idProduct );
+  	$tablaWantlist = WantlistTable::getInstance();
   	
-  	$resultado = $q->execute();
-  	
+  	if($tablaWantlist->usuarioHasWantedProduct($idUsuario,$idProduct))
+  	{
+  		 	$q = $tablaWantlist
+		  	->createQuery('c')
+		  	->delete()
+		  	->where('c.user_id = ?',  $idUsuario)
+		  	->andWhere('c.product_id = ?',  $idProduct );
+		  	
+		  	$resultado = $q->execute();
+  	}
   }
   
   public function executeIndex(sfWebRequest $request)

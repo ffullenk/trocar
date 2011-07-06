@@ -12,24 +12,23 @@ class productsActions extends sfActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->products = Doctrine_Core::getTable('Product')
+    $this->products = ProductTable::getInstance()
       ->createQuery('a')
       ->execute();
+    
+    
   }
 
   public function executeShow(sfWebRequest $request)
   {
-    $this->product = Doctrine_Core::getTable('Product')->find(array($request->getParameter('id')));
+    $this->product = ProductTable::getInstance()->find(array($request->getParameter('id')));
     $this->forward404Unless($this->product);
     $this->userId = $this->getUser()->getGuardUser()->getId();
+   
     
-    $q = Doctrine_Core::getTable('WantList')
-		    ->createQuery('c')
-		    ->where('c.user_id = ?',  $this->userId)
-		    ->andWhere('c.product_id = ?',  $this->product->getId());
-    
-    $this->wantlist = $q->execute();
-    $this->wantlist = $this->wantlist->count();
+    $tablaWantlist = WantlistTable::getInstance();
+    $this->wantList = $tablaWantlist->usuarioHasWantedProduct($this->userId,$this->product->getId());
+  
   }
 
   public function executeNew(sfWebRequest $request)
@@ -50,14 +49,14 @@ class productsActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
-    $this->forward404Unless($product = Doctrine_Core::getTable('Product')->find(array($request->getParameter('id'))), sprintf('Object product does not exist (%s).', $request->getParameter('id')));
+    $this->forward404Unless($product = ProductTable::getInstance()->find(array($request->getParameter('id'))), sprintf('Object product does not exist (%s).', $request->getParameter('id')));
     $this->form = new ProductForm($product);
   }
 
   public function executeUpdate(sfWebRequest $request)
   {
     $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-    $this->forward404Unless($product = Doctrine_Core::getTable('Product')->find(array($request->getParameter('id'))), sprintf('Object product does not exist (%s).', $request->getParameter('id')));
+    $this->forward404Unless($product = ProductTable::getInstance()->find(array($request->getParameter('id'))), sprintf('Object product does not exist (%s).', $request->getParameter('id')));
     $this->form = new ProductForm($product);
 
     $this->processForm($request, $this->form);
@@ -69,7 +68,7 @@ class productsActions extends sfActions
   {
     $request->checkCSRFProtection();
 
-    $this->forward404Unless($product = Doctrine_Core::getTable('Product')->find(array($request->getParameter('id'))), sprintf('Object product does not exist (%s).', $request->getParameter('id')));
+    $this->forward404Unless($product = ProductTable::getInstance()->find(array($request->getParameter('id'))), sprintf('Object product does not exist (%s).', $request->getParameter('id')));
     $product->delete();
 
     $this->redirect('products/index');

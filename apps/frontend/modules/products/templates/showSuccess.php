@@ -34,7 +34,7 @@
 </table>
 
 <hr />
-<?php  if($product->usuarioHasWantedProduct($sf_user->getGuardUser()->getId()))
+<?php  if($wantList)
 			echo jq_link_to_remote('remover de WantList', array('url'=> 'wantlist/remove?id='.$product->getId()));
 		else echo jq_link_to_remote('agregar a WantList', array('url'=> 'wantlist/add?id='.$product->getId()));
 		  ?>
