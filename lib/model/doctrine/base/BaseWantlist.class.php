@@ -21,7 +21,7 @@
  * @method Wantlist    setProductId()  Sets the current record's "product_id" value
  * @method Wantlist    setProduct()    Sets the current record's "Product" value
  * @method Wantlist    setUser()       Sets the current record's "User" value
-
+ * 
  * @package    trocar
  * @subpackage model
  * @author     Your name here
@@ -39,24 +39,19 @@ abstract class BaseWantlist extends sfDoctrineRecord
              ));
         $this->hasColumn('user_id', 'integer', null, array(
              'type' => 'integer',
-
-             'notnull' => true,
+             'primary' => true,
              ));
         $this->hasColumn('product_id', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
              'primary' => true,
              ));
-
     }
 
     public function setUp()
     {
         parent::setUp();
         $this->hasOne('Product', array(
-
              'local' => 'product_id',
-
              'foreign' => 'id'));
 
         $this->hasOne('sfGuardUser as User', array(
