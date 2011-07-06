@@ -36,6 +36,8 @@ all:
     use_database:           true
     #modules
     enabled_modules:        [default, sfGuardAuth]
+    
+    standard_helpers:       [Partial, Cache, jQuery]
 
     login_module:           sfGuardAuth
     login_action:           signin
