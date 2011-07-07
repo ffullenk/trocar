@@ -1,0 +1,108 @@
+body {
+  color: #333;
+  font-size: 13px;
+  height: auto;
+  padding-top: 10px;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+.left{
+  float: left;
+}
+.container_16 {
+  border: 1px solid #7f7f7f;
+  background-color: #fff;
+  margin-bottom: 20px;
+  width: 940px;
+  padding-top: 10px;
+}
+
+#social-menu  ul{
+  margin: 0px;
+  padding: 0;
+  float:left;
+}
+
+#social-menu  li{
+  list-style: none;
+  margin: 0px 15px 0px 0px;
+  display: inline;
+}
+
+#social-menu  li:first-child{
+  margin-left: 20px;
+}
+
+#submit {
+ color: #fff;
+ font-size: 11px;
+ width: 100px;
+ height: 29px;
+ border: 1px solid #044d70;
+ margin: 0;
+ padding: 0;
+ background: #fff url(../images/menu-bg.png) 0 0 repeat-x;
+}
+
+form input{
+  height: 24px;
+}
+
+form select{
+  height:30px;
+}
+
+.menu-title{
+  border: 1px solid #044d70;
+  background: #fff url(../images/menu-bg.png) 0 0 repeat-x;
+  height: 27px;
+}
+
+.menu-title p{
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  margin: -5px 0px 5px 10px;
+}
+
+#sidebar{
+  height: 299px;
+  width: 220px;
+}
+
+#tour{
+  border: 1px solid #a3a3a3;
+  width: 580px;
+  height: 330px;
+  color:#6a6a6a;
+}
+
+.container{
+  margin-top: 2px;
+  border: 1px solid #a3a3a3;
+  background: #ececec;
+}
+
+.second-line{
+  height: 332px;
+}
+
+#footer{
+  height: 112px;
+  width: 940px;
+  background: #737373 url(../images/footer.jpg) 0 0 no-repeat;
+}
+

@@ -114,7 +114,7 @@ Product:
   relations:
     Havelist:
       local:      id
-      foreign:    id_product
+      foreign:    product_id
       type:       many
     Category:
       class:      Category
@@ -148,16 +148,14 @@ Wantlist:
     id:                       {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
     user_id:                  {  type: integer,  primary: true,  notnull: true  }
     product_id:              {  type: integer,  primary: true,  notnull: true  }
-    
   relations:
     Product:
-      local:        product_id
       class:        Product
+      local:        product_id
       foreign:      id
       type:         one
       foreignType:  many
       foreignAlias: Wantlist
-  
     User:
       class:        sfGuardUser
       local:        user_id
