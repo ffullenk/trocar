@@ -1,5 +1,5 @@
 <?php 
-class UserTestFunctional extends sfTestFunctional
+class UserTestFunctional extends TrocarTestFunctional
 {
 	public function getValidUser()
 	{
@@ -9,15 +9,6 @@ class UserTestFunctional extends sfTestFunctional
                         ->limit(1); 
         $user = $q->fetchOne();
         return $user;
-	}
-	public function signin($username, $password)
-	{
-		return $this->info(sprintf('Signin user using username "%s"', $username))
-			->post('/login',array('signin' => array(
-				'username' => $username,
-				'password' => $password,
-			)))
-			;
 	}
 }
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <fb:login-button perms="email"></fb:login-button>
 
 <h1>Registrar</h1>

@@ -26,4 +26,16 @@ class Product extends BaseProduct
 		else return true;
 		
 	}
+	public function usuarioHasProduct($userId){
+		$q = Doctrine_Core::getTable("HaveList")
+		->createQuery('c')
+		->where('c.user_id = ?', $userId)
+		->andWhere('c.product_id = ?', $this->getId());
+		
+		$resultado = $q->execute();
+		
+		return ($resultado->count() != 0);
+		
+		
+		}
 }

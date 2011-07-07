@@ -89,7 +89,7 @@ abstract class BaseProduct extends sfDoctrineRecord
         parent::setUp();
         $this->hasMany('Havelist', array(
              'local' => 'id',
-             'foreign' => 'product_id'));
+             'foreign' => 'id_product'));
 
         $this->hasOne('Category', array(
              'local' => 'id_category',
