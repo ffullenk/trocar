@@ -49,8 +49,8 @@
       <div class="grid_8 alpha">
         <div id="social-menu">
           <ul>
-            <li><?php echo image_tag('facebook.png');?></li>
-            <li><?php echo image_tag('twitter.png');?></li>
+            <li><a href="http://www.facebook.com/pages/trocarcl/125428490873626"><?php echo image_tag('facebook.png');?></a></li>
+            <li><a href="http://www.twitter.com/trocarcl"><?php echo image_tag('twitter.png');?></a></li>
             <li><?php echo image_tag('rss.png');?></li>
           </ul>
           <iframe src="http://www.facebook.com/plugins/like.php?app_id=241244122553572&amp;href=http%3A%2F%2Fwww.trocar.cl&amp;send=false&amp;layout=standard&amp;width=220&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:280px; height:30px;float:left;padding-top:4px;" allowTransparency="true"></iframe>

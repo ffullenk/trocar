@@ -12,7 +12,7 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [main.css, reset.css, 960_cols.css, text.css, trocar.css]
+  stylesheets:    [reset.css, 960_cols.css, text.css, trocar.css]
 
   javascripts:    [facebook.js]
 
