@@ -147,11 +147,11 @@ Wantlist:
   columns:
     id:                       {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
     user_id:                  {  type: integer,  primary: true,  notnull: true  }
-    producto_id:              {  type: integer,  primary: true,  notnull: true  }
+    product_id:              {  type: integer,  primary: true,  notnull: true  }
     
   relations:
     Product:
-      local:        producto_id
+      local:        product_id
       class:        Product
       foreign:      id
       type:         one
