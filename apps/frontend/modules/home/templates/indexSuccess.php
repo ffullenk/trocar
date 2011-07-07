@@ -1,20 +1,115 @@
-<?php use_helper('I18N') ?>
-<?php if (!$sf_user->isAuthenticated()): ?>
-<fb:login-button perms="email"></fb:login-button>
-<?php echo get_partial('sfGuardAuth/signin_form', array('form' => $form)); 
-      echo link_to('Registrar', 'register/index');
-endif ?>
-<?php if ($sf_user->isAuthenticated()): ?>
-Hola <?php echo $sf_user->getProfile()->getFirstName() ?>
-<?php
-	echo '<br><br><br><br>';
-echo "ultimos ".link_to('Productos','products/index')." en el sistema";
+<div class="grid_1 second-line alpha"></div>
+   
+<div class="grid_4">
+  
+  <div class="grid_4 alpha menu-title">
+    <p>Menu principal</p>
+  </div>
+	 
+  <div class="grid_4 alpha container" id="sidebar">
+	   
+    <div>
+      <?php echo image_tag('catalogo.png','class="sidebar-image"');?>
+      <p class="sidebar-text">
+        <b>Catalogo</b><br><br>
+        <span>Revisa todos los articulos a tu disposici&oacute;n</span>
+      </p>
+    </div>
+    <?php echo image_tag('lines.png');?>
+	   
+    <div>
+      <?php echo image_tag('libros.png','class="sidebar-image"');?>
+      <p class="sidebar-text">
+        <b>Libros</b><br><br>
+        <span>Buscas libros o deseas intercambiar alguno</span>
+      </p>
+    </div>
+    <?php echo image_tag('lines.png');?>
+	   
+    <div>
+      <?php echo image_tag('musica.png','class="sidebar-image"');?>
+      <p class="sidebar-text">
+        <b>M&uacute;sica</b><br><br>
+        <span>Intercambia tu m&uacute;sica favorita mediante trocar</span>
+      </p>
+    </div>
+    <?php echo image_tag('lines.png');?>
+	   
+    <div>
+      <?php echo image_tag('peliculas.png','class="sidebar-image"');?>
+      <p class="sidebar-text">
+        <b>Pel&iacute;culas</b><br><br>
+        <span>Busca e intercambia todo el cine que desees</span>
+      </p>
+    </div>
+	   
+  </div>
+	 
+</div>
+   
+<div class="grid_10">
+  <div id="tour">
+    <?php echo image_tag('howworks.jpg','style="margin:9px;float:left;"');?>
 
-foreach ($productos as $producto) 
-{
-echo '<br>';
-    echo $producto['name'];
-}
-?>
-<?php echo link_to('Salir','@sf_guard_signout') ?>
-<?php endif ?>
+    <div class="left" style="margin-top:20px;">
+      <div style="width:155px;">
+        <?php echo image_tag('havelist.png','class="left"');?>
+        <p class="tour-title" style="margin-top:5px;"><b>Have list</b></p>
+        <p class="tour-p" style="margin-bottom:6px;">Qu&eacute; objetos tienes y deseas intercambiar.</p>
+      </div>
+    </div>
+
+    <div class="left">
+      <div style="width:155px;">
+        <?php echo image_tag('wantlist.png','class="left"');?>
+        <p class="tour-title" style="margin-top:7px;"><b>Want list</b></p>
+        <p class="tour-p" style="padding-top:7px;">Qu&eacute; objetos te gustar&iacute;a tener e intercambiar por los tuyos.</p>
+      </div>
+    </div>
+
+    <div class="left">
+      <div style="width:155px;">
+        <p class="tour-title" style="margin:0px;padding:0px;text-align:center;margin-left:15px;"><b>&#161;Intercambialos&#33;</b></p>
+        <p class="tour-p" style="padding-top:0px;">Asi de sencillo es usar trocar.cl</p>
+      </div>
+    </div>
+  </div>
+</div>
+   
+<div class="grid_1 second-line omega"></div>
+   
+<div class="clear" style="margin:15px;"></div>
+   
+<div class="grid_1 alpha"><p>&nbsp;</p></div>
+   
+<div class="grid_4">
+  <div class="grid_4 alpha menu-title">
+    <p>Noticias trocar.cl</p>
+  </div>
+	 
+  <div class="grid_4 alpha container">
+    <p>hola</p>
+  </div>
+</div>
+	
+<div class="grid_5">
+  <div class="grid_5 alpha menu-title">
+    <p>Lo que la gente tiene</p>
+  </div>
+	 
+  <div class="grid_5 alpha container">
+    <p>hola</p>
+  </div>
+</div>
+	
+<div class="grid_5">
+  <div class="grid_5 alpha menu-title">
+	   <p>Lo que la gente quiere</p>
+  </div>
+	 
+  <div class="grid_5 alpha container">
+    <p>hola</p>
+  </div>	 
+</div>
+	
+<div class="grid_1 omega"><p style="height:50px;">&nbsp;</p></div>  

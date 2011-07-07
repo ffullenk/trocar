@@ -6,7 +6,7 @@ body {
 }
 
 a {
-  color: #fff;
+  color: #333;
   text-decoration: none;
 }
 
@@ -83,11 +83,46 @@ form select{
   width: 220px;
 }
 
+#sidebar div{
+  width:220px;
+}
+
+#sidebar div:first-child{
+  margin-top:10px;
+}
+
+.sidebar-image{
+  float:left;
+  margin:6px 10px 5px 5px;
+}
+
+.sidebar-text{
+color:#6a6a6a;float:left;font-size:15px;width:150px;margin-top:6px;margin-bottom:7px;padding:0px;line-height:0.8em;
+}
+
+.sidebar-text span{
+  font-size: 12px;
+}
+
 #tour{
   border: 1px solid #a3a3a3;
   width: 580px;
   height: 330px;
   color:#6a6a6a;
+}
+
+.tour-title{
+  float:left;
+  font-size:16px;
+  margin-left:5px;
+}
+
+.tour-p{
+  float:left;
+  margin:0px;
+  line-height:1.1em;
+  text-align:center;
+  font-size:12px;
 }
 
 .container{
