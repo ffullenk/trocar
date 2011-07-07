@@ -9,18 +9,18 @@
  * @property integer $id_root
  * @property string $name
  * @property Category $Category
- * @property Product $Products
+ * @property Doctrine_Collection $Products
  * 
- * @method integer  getId()       Returns the current record's "id" value
- * @method integer  getIdRoot()   Returns the current record's "id_root" value
- * @method string   getName()     Returns the current record's "name" value
- * @method Category getCategory() Returns the current record's "Category" value
- * @method Product  getProducts() Returns the current record's "Products" value
- * @method Category setId()       Sets the current record's "id" value
- * @method Category setIdRoot()   Sets the current record's "id_root" value
- * @method Category setName()     Sets the current record's "name" value
- * @method Category setCategory() Sets the current record's "Category" value
- * @method Category setProducts() Sets the current record's "Products" value
+ * @method integer             getId()       Returns the current record's "id" value
+ * @method integer             getIdRoot()   Returns the current record's "id_root" value
+ * @method string              getName()     Returns the current record's "name" value
+ * @method Category            getCategory() Returns the current record's "Category" value
+ * @method Doctrine_Collection getProducts() Returns the current record's "Products" collection
+ * @method Category            setId()       Sets the current record's "id" value
+ * @method Category            setIdRoot()   Sets the current record's "id_root" value
+ * @method Category            setName()     Sets the current record's "name" value
+ * @method Category            setCategory() Sets the current record's "Category" value
+ * @method Category            setProducts() Sets the current record's "Products" collection
  * 
  * @package    trocar
  * @subpackage model
@@ -53,7 +53,7 @@ abstract class BaseCategory extends sfDoctrineRecord
              'local' => 'id_root',
              'foreign' => 'id'));
 
-        $this->hasOne('Product as Products', array(
+        $this->hasMany('Product as Products', array(
              'local' => 'id',
              'foreign' => 'id_category'));
     }

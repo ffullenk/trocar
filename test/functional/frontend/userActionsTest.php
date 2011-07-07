@@ -6,10 +6,7 @@ $browser = new UserTestFunctional(new sfBrowser());
 $user = $browser->getValidUser();
 
 $browser->info('1 - Login de usuario valido');
-$browser->get('/')->click('Signin', array( 'signin' => array(
-	                 'username' => $user->getUsername(), 
-					 'password' => 'admin'
-				 )))
+$browser->signin($user->getUsername(), 'admin')
 	      ->get('/')
           ->with('user')->begin()
 		  ->isAuthenticated()

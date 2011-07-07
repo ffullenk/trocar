@@ -31,10 +31,9 @@
 						else echo jq_link_to_remote('agregar a WantList', array('url'=> 'wantlist/add?id='.$product->getId()));
 		  ?>
       </td> 
-
-
-      
-     
+      <td><?php echo link_to_unless($product->usuarioHasProduct($sf_user->getGuardUser()->getId()),
+		   'Lo tengo', 'have_list/add?id='.$product->getId()); ?>
+	  </td>
     </tr>
     <?php endforeach; ?>
   </tbody>

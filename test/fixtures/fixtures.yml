@@ -15,23 +15,48 @@
 #     password: changeme
 #     name:     Kris Wallsmith
 #     email:    kris.wallsmith@symfony-project.com
+sfGuardUser:
+  User_admin:
+    username:       admin@trocar.cl
+    password:       admin
+    is_super_admin: true
+    Profile:
+      first_name:   Diego
+      last_name:    Acuna
+    Groups:         [Group_admin]
+
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin]
+  Group_member:
+    name:           member
+    description:    Grupo de usuarios comunes
+    Permissions:    [Permission_member]
+
+sfGuardPermission:
+  Permission_admin:
+    name:           admin
+    description:    Administrator permission
+  Permission_member: 
+    name:           member
+    description:    Permiso de usuario comun
+
 Category:
   Computacion:
-    id_root: 1
+    id: 1
+    id_root:
     name: 'Computacion'
-Brand:
-  Dell:
-    name: 'Dell'
-Model:
-  Vostro: 
-    name: 'Vostro'
-product:
+
+Product:
    Dell:
+     id: 1
      id_category: 1
      name: 'Dell Vostro'
      description: 'Dell Vostro PC'
      picture: ''
      link: ''
-     brand: 1
-     model: 1
+     brand: ''
+     model: ''
        

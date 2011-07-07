@@ -97,9 +97,7 @@ abstract class BaseProduct extends sfDoctrineRecord
 
         $this->hasMany('Wantlist', array(
              'local' => 'id',
-
              'foreign' => 'product_id'));
-
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);
