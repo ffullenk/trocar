@@ -12,7 +12,7 @@ $browser->signin('admin@trocar.cl','admin')->
   with('request')->begin()->
     isParameter('module', 'have_list')->
     isParameter('action', 'add')->
-    isParameter('id','1')->
+//    isParameter('id','1')->
   end()->followRedirect()->
   info(' 1.1 - El modulo have list reenvia al object/new con la id del nuevo have_list')->
   with('request')->begin()->
