@@ -15,23 +15,4 @@
 #     password: changeme
 #     name:     Kris Wallsmith
 #     email:    kris.wallsmith@symfony-project.com
-Category:
-  Computacion:
-    id_root: 1
-    name: 'Computacion'
-Brand:
-  Dell:
-    name: 'Dell'
-Model:
-  Vostro: 
-    name: 'Vostro'
-product:
-   Dell:
-     id_category: 1
-     name: 'Dell Vostro'
-     description: 'Dell Vostro PC'
-     picture: ''
-     link: ''
-     brand: 1
-     model: 1
        

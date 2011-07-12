@@ -13,7 +13,7 @@ $browser->signin($user->getUsername(), 'admin')
 		  ->end()
 		  ;
 $browser->info('2 - Login de usuario valido, remember');
-$browser->get('/')->click('Salir')
+$browser->get('/')->click('SALIR')
 	     ->get('/')
 	     ->click('Signin', array( 'signin' => array(
 	                 'username' => $user->getUsername(), 
