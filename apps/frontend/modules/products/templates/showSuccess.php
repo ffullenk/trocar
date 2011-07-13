@@ -38,3 +38,32 @@
 
 &nbsp;
 <a href="<?php echo url_for('products/index') ?>">Volver al indice de productos</a>
+
+<br>
+Usuarios que quieren este producto
+<br>
+    <?php 
+		foreach ($product->getWantlist() as $want):
+			echo $want->getUser()->getUsername();
+			echo '<br>';
+		endforeach;
+    
+    
+    
+    
+    ?>
+    
+<br>
+Usuarios que tienen este producto
+<br>
+    <?php 
+		foreach ($product->getHavelist() as $have):
+			echo $have->getUser()->getUsername();
+			echo '<br>';
+		endforeach;
+    
+    
+    
+    
+    ?>
+    	
