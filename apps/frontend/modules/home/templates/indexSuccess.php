@@ -52,7 +52,7 @@
     <?php echo image_tag('howworks.jpg','style="margin:9px;float:left;"');?>
 
     <div class="left" style="margin-top:20px;">
-      <div style="width:155px;">
+      <div style="width:155px;">	
         <?php echo image_tag('havelist.png','class="left"');?>
         <p class="tour-title" style="margin-top:5px;"><b>Have list</b></p>
         <p class="tour-p" style="margin-bottom:6px;">Qu&eacute; objetos tienes y deseas intercambiar.</p>

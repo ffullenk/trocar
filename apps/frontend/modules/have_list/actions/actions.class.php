@@ -25,9 +25,7 @@ class have_listActions extends sfActions
   }
   public function executeIndex(sfWebRequest $request)
   {
-    $this->have_lists = Doctrine_Core::getTable('HaveList')
-      ->createQuery('a')
-      ->execute();
+    $this->have_lists = Havelist::getUserHaveList($this->getUser()->getGuardUser()->getId());
   }
 
   public function executeShow(sfWebRequest $request)

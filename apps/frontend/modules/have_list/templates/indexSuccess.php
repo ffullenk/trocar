@@ -1,6 +1,6 @@
 <h1>Have lists List</h1>
 
-<table>
+<table class="product">
   <thead>
     <tr>
       <th>Id</th>
@@ -17,9 +17,6 @@
       <td><a href="<?php echo url_for('have_list/show?id='.$have_list->getId()) ?>"><?php echo $have_list->getId() ?></a></td>
       <td><?php echo $have_list->getProductId() ?></td>
       <td><?php echo $have_list->getObjectId() ?></td>
-      <td><?php echo $have_list->getUserId() ?></td>
-      <td><?php echo $have_list->getCreatedAt() ?></td>
-      <td><?php echo $have_list->getUpdatedAt() ?></td>
     </tr>
     <?php endforeach; ?>
   </tbody>

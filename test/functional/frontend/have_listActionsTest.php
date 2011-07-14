@@ -2,7 +2,7 @@
 
 include(dirname(__FILE__).'/../../bootstrap/functional.php');
 
-$browser = new TrocarTestFunctional(new sfBrowser());
+$browser = new UserTestFunctional(new sfBrowser());
 $browser->loadData();
 
 $browser->signin('admin@trocar.cl','admin')->
@@ -59,3 +59,13 @@ $browser->signin('admin@trocar.cl','admin')->
     								->orderBy('id DESC')
     								->fetchOne()
     								->getId(), ' El have_list fue actualizado correctamente');
+    								
+    $haveList = Havelist::getUserHaveList($browser->getAdminUser()->getId());
+    $browser->
+    info('3 - Test de la lista de have list ')->
+    get('/have_list')->
+    info(' 3.1 - Estan todos los productos de la have list del usuario ')->
+    with('response')->begin()->
+    checkElement('.product th:contains("Id")',count($haveList))->
+    end();
+    

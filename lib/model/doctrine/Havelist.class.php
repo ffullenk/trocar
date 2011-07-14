@@ -12,4 +12,12 @@
  */
 class Havelist extends BaseHavelist
 {
+	static public function getUserHaveList($userId)
+	{
+		$q = Doctrine_Core::getTable('HaveList')
+			->createQuery('q')
+			->select('q.*')
+			->where('q.user_id = ?',$userId);
+		return $q->execute();
+	}
 }

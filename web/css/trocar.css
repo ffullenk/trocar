@@ -141,3 +141,7 @@ color:#6a6a6a;float:left;font-size:15px;width:150px;margin-top:6px;margin-bottom
   background: #737373 url(../images/footer.jpg) 0 0 no-repeat;
 }
 
+tr.hide{
+	visibility: hidden;
+}
+
