@@ -50,7 +50,7 @@ Category:
     name: 'Computacion'
 
 Product:
-   Dell:
+   Dell_1:
      id_category: 1
      name: 'Dell Vostro'
      description: 'Dell Vostro PC'
@@ -58,4 +58,16 @@ Product:
      link: ''
      brand: ''
      model: ''
+     
+Object:
+   Dell_object:
+     status: 'Nuevo'
+     detail: 'Dell nuevo a buen precio'
+     picture: ''
+     
+Havelist:
+   Dell_have:
+     Product: Dell_1
+     Object: Dell_object
+     User: User_admin
        

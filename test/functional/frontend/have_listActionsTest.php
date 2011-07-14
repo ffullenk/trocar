@@ -3,7 +3,7 @@
 include(dirname(__FILE__).'/../../bootstrap/functional.php');
 
 $browser = new UserTestFunctional(new sfBrowser());
-$browser->loadData();
+$browser->loadData(2);
 
 $browser->signin('admin@trocar.cl','admin')->
   get('/products')->
