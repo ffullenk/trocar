@@ -25,9 +25,10 @@ class productsActions extends sfActions
     $this->forward404Unless($this->product);
     $this->userId = $this->getUser()->getGuardUser()->getId();
    
-    
     $tablaWantlist = WantlistTable::getInstance();
     $this->wantList = $tablaWantlist->usuarioHasWantedProduct($this->userId,$this->product->getId());
+    
+    
   
   }
 
