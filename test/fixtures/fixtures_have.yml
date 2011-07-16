@@ -1,0 +1,61 @@
+# # Populate this file with data to be loaded by your ORM's *:data-load task.
+# # You can create multiple files in this directory (i.e. 010_users.yml,
+# # 020_articles.yml, etc) which will be loaded in alphabetical order.
+# # 
+# # See documentation for your ORM's *:data-load task for more information.
+# 
+# User:
+#   fabien:
+#     username: fabien
+#     password: changeme
+#     name:     Fabien Potencier
+#     email:    fabien.potencier@symfony-project.com
+#   kris:
+#     username: Kris.Wallsmith
+#     password: changeme
+#     name:     Kris Wallsmith
+#     email:    kris.wallsmith@symfony-project.com
+sfGuardUser:
+  User_admin:
+    username:       admin@trocar.cl
+    password:       admin
+    is_super_admin: true
+    Profile:
+      first_name:   Diego
+      last_name:    Acuna
+    Groups:         [Group_admin]
+
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin]
+  Group_member:
+    name:           member
+    description:    Grupo de usuarios comunes
+    Permissions:    [Permission_member]
+
+sfGuardPermission:
+  Permission_admin:
+    name:           admin
+    description:    Administrator permission
+  Permission_member: 
+    name:           member
+    description:    Permiso de usuario comun
+
+Category:
+  Computacion:
+    id: 1
+    id_root:
+    name: 'Computacion'
+
+Product:
+   Dell_1:
+     id_category: 1
+     name: 'Dell Vostro'
+     description: 'Dell Vostro PC'
+     picture: ''
+     link: ''
+     brand: ''
+     model: ''
+ 
