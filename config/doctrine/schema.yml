@@ -164,3 +164,31 @@ Wantlist:
       foreignType:  many
       type:         one
       onDelete:     CASCADE
+
+Review:
+  tableName: review
+  actAs:
+    Timestampable: ~
+  columns:
+    id:                       {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    user_id:                  {  type: integer,  primary: true,  notnull: true  }
+    product_id:               {  type: integer,  primary: true,  notnull: true  }
+    text:                     {  type: string(150)                              }
+  relations:
+    Product:
+      class:        Product
+      local:        product_id
+      foreign:      id
+      type:         one
+      foreignType:  many
+      foreignAlias: Review
+      onDelete:     CASCADE
+    User:
+      class:        sfGuardUser
+      local:        user_id
+      foreign:      id
+      foreignAlias: Review
+      foreignType:  many
+      type:         one
+      onDelete:     CASCADE
+
