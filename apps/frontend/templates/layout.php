@@ -92,6 +92,7 @@
               echo isset($name) ? $name : $sf_user->getUsername(); ?>
             </b>
             </li>
+            <li><?php echo link_to('Tu Perfil', 'user/editProfile'); ?></li>
           </ul>
         </div>
     
@@ -156,7 +157,7 @@
         <div>
           <?php echo image_tag('catalogo.png','class="sidebar-image"');?>
           <p class="sidebar-text">
-            <b>Catalogo</b><br><br>
+            <b><?php echo link_to('Cat&aacute;logo', 'products/index'); ?></b><br><br>
             <span>Revisa todos los articulos a tu disposici&oacute;n</span>
           </p>
         </div>

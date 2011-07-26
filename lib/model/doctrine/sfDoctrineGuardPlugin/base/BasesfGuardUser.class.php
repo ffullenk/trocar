@@ -21,6 +21,7 @@
  * @property sfGuardUserProfile $Profile
  * @property Doctrine_Collection $Havelist
  * @property Doctrine_Collection $Wantlist
+ * @property Doctrine_Collection $Review
  * 
  * @method string                getUsername()              Returns the current record's "username" value
  * @method string                getAlgorithm()             Returns the current record's "algorithm" value
@@ -38,6 +39,7 @@
  * @method sfGuardUserProfile    getProfile()               Returns the current record's "Profile" value
  * @method Doctrine_Collection   getHavelist()              Returns the current record's "Havelist" collection
  * @method Doctrine_Collection   getWantlist()              Returns the current record's "Wantlist" collection
+ * @method Doctrine_Collection   getReview()                Returns the current record's "Review" collection
  * @method sfGuardUser           setUsername()              Sets the current record's "username" value
  * @method sfGuardUser           setAlgorithm()             Sets the current record's "algorithm" value
  * @method sfGuardUser           setSalt()                  Sets the current record's "salt" value
@@ -54,6 +56,7 @@
  * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
  * @method sfGuardUser           setHavelist()              Sets the current record's "Havelist" collection
  * @method sfGuardUser           setWantlist()              Sets the current record's "Wantlist" collection
+ * @method sfGuardUser           setReview()                Sets the current record's "Review" collection
  * 
  * @package    trocar
  * @subpackage model
@@ -144,6 +147,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'foreign' => 'user_id'));
 
         $this->hasMany('Wantlist', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Review', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 

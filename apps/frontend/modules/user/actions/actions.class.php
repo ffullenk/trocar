@@ -149,6 +149,7 @@ class userActions extends sfActions
       if($this->form->isValid())
       {
         $this->form->save();
+        $this->getUser()->setFlash('edit', 'Tus datos se han actualizado con exito');
         $this->redirect($this->generateUrl('default', array('module' => 'user',
                                             'action' => 'editProfile')));
       }
