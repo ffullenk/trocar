@@ -16,7 +16,7 @@
       <tr>
         <td colspan="2">
           <?php echo $form['_csrf_token']->render() ?>
-          <input style="margin:15px;margin-left:80px;" type="submit" value="<?php echo __('Iniciar Sesi&oacute;n', null, 'sf_guard') ?>" />
+          <input style="margin:15px;margin-left:80px;" type="submit" value="<?php echo __('Login', null, 'sf_guard') ?>" />
           
           <?php $routes = $sf_context->getRouting()->getRoutes() ?>
           <?php if (isset($routes['sf_guard_forgot_password'])): ?>

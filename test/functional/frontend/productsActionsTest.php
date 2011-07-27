@@ -4,7 +4,7 @@ include(dirname(__FILE__).'/../../bootstrap/functional.php');
 
 $browser = new TrocarTestFunctional(new sfBrowser());
 $browser->loadData();
-$browser->get('/')->click('Signin', array( 'signin' => array(
+$browser->get('/')->click('Login', array( 'signin' => array(
 	                 'username' => 'admin@trocar.cl', 
 					 'password' => 'admin'
 				 )))
