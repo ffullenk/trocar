@@ -3,7 +3,7 @@
 <div class="grid_10 suffix_1 omega">
   <div class="grid_10 alpha" style="border: 1px solid #a3a3a3;">
     <h3 style="margin:10px;">Productos</h3>
-
+    <p style="margin:0px 0px 0px 10px;padding:0px;">&gt;&gt; <a href="<?php echo url_for('products/new') ?>">Agregar un producto</a></p>
       <?php foreach ($products as $product): ?>
           <div style="margin:10px;">
               <div class="menu-title">
@@ -41,8 +41,5 @@
               </div>
         </div>
             <?php endforeach; ?>
-
-        <a href="<?php echo url_for('products/new') ?>">New</a>
-      
   </div>
 </div>

@@ -1,69 +1,59 @@
-<?php use_helper('jQuery'); ?>
-<table>
-  <tbody>
-    
-    <tr>
-      <th>Nombre del producto:</th>
-      <td><?php echo $product->getName() ?></td>
-    </tr>
-    <tr>
-      <th>Descripcion:</th>
-      <td><?php echo $product->getDescription() ?></td>
-    </tr>
-    <tr>
-      <th>Foto:</th>
-       <td><?php echo image_tag($product->getPicture(),'size=60x60') ?></td>
-      </tr>
-    <tr>
-      <th>Link:</th>
-      <td><?php echo $product->getLink() ?></td>
-    </tr>
-    <tr>
-      <th>Marca:</th>
-      <td><?php echo $product->getBrand() ?></td>
-    </tr>
-    <tr>
-      <th>Modelo:</th>
-      <td><?php echo $product->getModel() ?></td>
-    </tr>
+<div class="grid_10 suffix_1 omega">
+  <div class="menu-title">
+      <p>Detalle de producto</p>
+  </div>
+  
+  <div class="container" style="background:#fff;">  
+      
+      <div class="left" style="margin:15px;">
+        <?php echo image_tag($product->getPicture(),'size=124x124') ?>
+      </div>
+      
+      <div class="left" style="margin:15px;margin-left:10px;margin-bottom:0px;">
+        <h3 style="margin-bottom:0px;"><?php echo $product->getName() ?></h3>
+        <p style="margin-bottom:0px;"><?php echo $product->getDescription() ?></p>
+        <p style="margin-bottom:0px;">
+          Marca: <?php echo $product->getBrand() ?><br/>
+          Modelo: <?php echo $product->getModel() ?>
+        </p>
+      </div>
 
-  </tbody>
-</table>
+      <hr style="margin-bottom:10px;" />
+      
+      <div style="margin-left:15px;">
+        
+        <div style="width:100%;">
+          <?php  
+            if($wantList)
+              echo jq_link_to_remote('Ya no lo quiero', array('url'=> 'wantlist/remove?id='.$product->getId()));
+            else 
+              echo jq_link_to_remote('Lo quiero', array('url'=> 'wantlist/add?id='.$product->getId()));
+          ?>
 
-<hr />
-<?php  if($wantList)
-			echo jq_link_to_remote('Ya no lo quiero', array('url'=> 'wantlist/remove?id='.$product->getId()));
-		else echo jq_link_to_remote('Lo quiero', array('url'=> 'wantlist/add?id='.$product->getId()));
-		  ?>
+          &nbsp;
+          <a href="<?php echo url_for('products/index') ?>">Volver al indice de productos</a>
+        </div>
 
-&nbsp;
-<a href="<?php echo url_for('products/index') ?>">Volver al indice de productos</a>
-
-<br>
-Usuarios que quieren este producto
-<br>
-    <?php 
-		foreach ($product->getWantlist() as $want):
-			echo $want->getUser()->getUsername();
-			echo '<br>';
-		endforeach;
-    
-    
-    
-    
-    ?>
-    
-<br>
-Usuarios que tienen este producto
-<br>
-    <?php 
-		foreach ($product->getHavelist() as $have):
-			echo $have->getUser()->getUsername();
-			echo '<br>';
-		endforeach;
-    
-    
-    
-    
-    ?>
-    	
+        <p style="margin-bottom:0px;">Usuarios que quieren este producto:</p>
+          <ul style="margin-bottom:10px;">
+          <?php 
+            foreach ($product->getWantlist() as $want):
+              echo '<li>'.$want->getUser()->getUsername().'</li>';
+            endforeach;
+          ?>
+          </ul>
+        
+        
+        <p style="margin-bottom:0px;">Usuarios que tienen este producto:</p>
+          <ul style="margin-bottom:10px;">
+          <?php 
+            foreach ($product->getHavelist() as $have):
+              echo '<li>'.$have->getUser()->getUsername().'</li>';
+            endforeach;
+          ?>
+          </ul>
+        
+      </div>
+  </div>
+  
+</div>
