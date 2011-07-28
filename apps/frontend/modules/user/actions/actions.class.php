@@ -145,7 +145,7 @@ class userActions extends sfActions
     if($request->isMethod('put'))
     {
       $params = $request->getParameter('edit');
-      $this->form->bind($params);
+      $this->form->bind($params, $request->getFiles($this->form->getName()));
       if($this->form->isValid())
       {
         $this->form->save();
