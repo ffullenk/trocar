@@ -120,24 +120,21 @@
     <div class="grid_1 alpha"><p>&nbsp;</p></div>
     
     <div class="grid_8">
-      <form>
+        <form method="post" action="<?php echo url_for('search/index');?>">
         <input type="text" name="buscar" size="50">
-      </form>
     </div>
     
     <div class="grid_3">
-      <form>
-        <select name="buscar">
-          <option>Todas las categorias</option>
-          <option>Electronica</option>
-          <option>blablabla</option>
+        <select name="search_type">
+          <option value="books">Libros</option>
+          <option value="music">M&uacute;sica</option>
+          <option value="movies">Pel&iacute;culas</option>
+          <option value="movies">Otras categor&iacute;as...</option>
         </select>
-      </form>
     </div>
     
     <div class="grid_2">
-      <form>
-        <input type="submit" name="buscar" id="submit" value="BUSCAR">
+        <input type="submit" name="enviar" id="submit" value="BUSCAR">
       </form>
     </div>
     
