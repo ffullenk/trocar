@@ -61,9 +61,10 @@
 			<input type="submit" class="submit" value=" Enviar review " />
 			</form>
 			</div>
+			<div id="flash"></div>
 			<ol class="box" id="update">
 			</ol>
-			<div id="flash"></div>
+			
           <ul style="margin-bottom:10px;">
           <?php 
             foreach ($product->getReview() as $review):
@@ -92,7 +93,7 @@ $(".submit").click(function()
 var review = $("#review").val();
 var dataString = 'review='+ review + '&productid=' + <?php echo $product->getId() ?>;
 $("#flash").show();
-$("#flash").fadeIn(400).html('Cargando comentario...');
+$("#flash").fadeIn(400).html('<img src="../../../../images/loader.gif" />Cargando comentario...');
 $.ajax({
 type: "POST",
 url: '../../addreview',
