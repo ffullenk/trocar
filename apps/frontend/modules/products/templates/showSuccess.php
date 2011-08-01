@@ -52,8 +52,58 @@
             endforeach;
           ?>
           </ul>
+          
+        <p style="margin-bottom:0px;">Reviews:</p>
+         
+			<div >
+			<form action="#" method="post">
+			<textarea id="review"></textarea><br />
+			<input type="submit" class="submit" value=" Enviar review " />
+			</form>
+			</div>
+			<ol class="box" id="update">
+			</ol>
+			<div id="flash"></div>
+          <ul style="margin-bottom:10px;">
+          <?php 
+            foreach ($product->getReview() as $review):
+				?>
+				<li class="box">
+					
+				<?php echo $review->getUser()->getUsername() ?>
+				<?php echo $review->getText()?><br />
+
+				</li>
+				<?php 
+            endforeach;
+          ?>
+          </ul>
         
       </div>
   </div>
   
 </div>
+
+
+<script type="text/javascript" >
+$(function() {
+$(".submit").click(function() 
+{
+var review = $("#review").val();
+var dataString = 'review='+ review + '&productid=' + <?php echo $product->getId() ?>;
+$("#flash").show();
+$("#flash").fadeIn(400).html('Cargando comentario...');
+$.ajax({
+type: "POST",
+url: '../../addreview',
+data: dataString,
+cache: false,
+success: function(html){
+$("ol#update").append(html);
+$("ol#update li:last").fadeIn("slow");
+$("#flash").hide();
+}
+});
+return false;
+}); });
+</script>
