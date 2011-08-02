@@ -64,6 +64,22 @@ class productsActions extends sfActions
 
     $this->setTemplate('edit');
   }
+  
+  public function executeAddreview(sfWebRequest $request)
+  {
+  	$this->forward404Unless($request->isMethod(sfRequest::POST));
+  	
+  	$review = new Review();
+  	$review->setText($request->getParameter('review'));
+  	$review->setProductId($request->getParameter('productid'));
+  	$review->setUserId($this->getUser()->getGuardUser()->getId());
+  	$review->save();
+  	
+  	$this->username = $this->getUser()->getUsername();
+  	$this->text = $review->getText();
+  	
+  	
+  }
 
   public function executeDelete(sfWebRequest $request)
   {

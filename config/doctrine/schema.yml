@@ -110,6 +110,7 @@ Product:
     description:  {  type: string(150)  }
     picture:      {  type: string(200)  }
     link:         {  type: string(45)  }
+    youtube:      {  type: string(100)  }
     brand:        {  type: string(45)  }
     model:        {  type: string(45)  }
   relations:
