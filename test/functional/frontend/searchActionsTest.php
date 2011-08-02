@@ -13,7 +13,7 @@ $browser->
   end()->
 
   with('response')->begin()->
-    isStatusCode(200)->
-    checkElement('body', '!/This is a temporary page/')->
+   //llamada directa debe ser 404 puesto que solo admite llamadas por POST
+	 isStatusCode(404)->
   end()
 ;
