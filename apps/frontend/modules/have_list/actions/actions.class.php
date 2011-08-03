@@ -32,8 +32,7 @@ class have_listActions extends sfActions
   {
     $this->have_list = Doctrine_Core::getTable('HaveList')->find(array($request->getParameter('id')));
     $this->forward404Unless($this->have_list);
-  }
-
+  }	
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new HaveListForm();
@@ -72,7 +71,10 @@ class have_listActions extends sfActions
     $request->checkCSRFProtection();
 
     $this->forward404Unless($have_list = Doctrine_Core::getTable('HaveList')->find(array($request->getParameter('id'))), sprintf('Object have_list does not exist (%s).', $request->getParameter('id')));
+    $this->forward404Unless($have_list->getUserId() == $this->getUser()->getGuardUser()->getId());
+    $objectId = $have_list->getObjectId();
     $have_list->delete();
+    if ($object = Doctrine_Core::getTable('Object')->find($objectId)) $object->delete();
 
     $this->redirect('have_list/index');
   }
@@ -83,7 +85,7 @@ class have_listActions extends sfActions
     if ($form->isValid())
     {
       $have_list = $form->save();
-
+	  	Doctrine_core::getTable('HaveList')->updateObject($have_list->getId(),$have_list->getObjectId());
       $this->redirect('have_list/edit?id='.$have_list->getId());
     }
   }

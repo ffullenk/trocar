@@ -66,6 +66,44 @@ $browser->signin('admin@trocar.cl','admin')->
     get('/have_list')->
     info(' 3.1 - Estan todos los productos de la have list del usuario ')->
     with('response')->begin()->
-    checkElement('.product th:contains("Id")',count($haveList))->
+    checkElement('.container td:contains("Estado")',count($haveList))->
     end();
+    $id_havelist = Doctrine_Core::getTable('HaveList')->
+    					createQuery('u')
+    					->select('u.id')
+    					->limit(1)
+    					->fetchOne()->getId();
+    $browser->
+    info(' 4 - Test de edit de have_list ')->
+    get('/have_list/edit/id/'.$id_havelist)->
+    with('response')->begin()->
+    isStatusCode(200)->end()->
+    info( ' 4.1 - Funciona una edicion normal ')->
+    click('Save', array('havelist' => array('Object' => array(
+    										'status' => 'nuevo',
+    										'detail' => 'Objeto de muy buena calidad',
+    										'picture'=> '',
+    										'weight' => '28',
+    										'height' => '35',
+    										'width'  => '50',
+    										'lenght' => '90',
+    										'color'  => 'negro'))));
+    $browser->
+    test()->is(Doctrine_Core::getTable('Object')->
+    					createQuery('u')
+    					->orderBy('id desc')
+    					->limit(1)
+    					->fetchOne()->getDetail(),'Objeto de muy buena calidad',"Objeto guardado exitosamente");
+    $browser->
+    test()->is(Doctrine_Core::getTable('HaveList')->
+    					createQuery('u')
+    					->where('u.id = ?', $id_havelist)
+    					->limit(1)
+    					->fetchOne()->getObjectId(),
+    					Doctrine_Core::getTable('Object')->
+    					createQuery('u')
+    					->orderBy('id desc')
+    					->limit(1)
+    					->fetchOne()->getId(),"Have List actualizada con la id del objeto");	
+  
     

@@ -84,13 +84,12 @@ Object:
   columns:
     id:        {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
     status:    {  type: string(45)   }
-    detail:    {  type: string(150)  }
+    detail:    {  type: string(255)  }
     picture:   {  type: string(200)  }
     weight:    {  type: integer      }
     height:    {  type: integer      }
     width:     {  type: integer      }
     lenght:    {  type: integer      }
-    is_new:    {  type: boolean      }
     color:     {  type: string(45)   }
   relations:
     Havelist:

@@ -12,5 +12,14 @@ class HavelistForm extends BaseHavelistForm
 {
   public function configure()
   {
+  	unset(
+  	  $this['created_at'],
+  	  $this['updated_at'],
+  	  $this['object_id'],
+  	  $this['user_id'],
+  	  $this['product_id']
+  	  );
+  	  $this->embedRelation('Object');
   }
+  
 }

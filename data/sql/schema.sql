@@ -1,7 +1,8 @@
 CREATE TABLE category (id BIGINT AUTO_INCREMENT, id_root BIGINT, name VARCHAR(50), INDEX id_root_idx (id_root), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE have_list (id BIGINT AUTO_INCREMENT, product_id BIGINT NOT NULL, object_id BIGINT, user_id BIGINT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX product_id_idx (product_id), INDEX object_id_idx (object_id), INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
-CREATE TABLE object (id BIGINT AUTO_INCREMENT, status VARCHAR(45), detail VARCHAR(150), picture VARCHAR(200), weight BIGINT, height BIGINT, width BIGINT, lenght BIGINT, is_new TINYINT(1), color VARCHAR(45), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE object (id BIGINT AUTO_INCREMENT, status VARCHAR(45), detail VARCHAR(255), picture VARCHAR(200), weight BIGINT, height BIGINT, width BIGINT, lenght BIGINT, color VARCHAR(45), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE product (id BIGINT AUTO_INCREMENT, id_category BIGINT, name VARCHAR(45), description VARCHAR(150), picture VARCHAR(200), link VARCHAR(45), brand VARCHAR(45), model VARCHAR(45), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX id_category_idx (id_category), PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE review (id BIGINT AUTO_INCREMENT, user_id BIGINT, product_id BIGINT, text VARCHAR(150), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id, user_id, product_id)) ENGINE = INNODB;
 CREATE TABLE want_list (id BIGINT AUTO_INCREMENT, user_id BIGINT, product_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id, user_id, product_id)) ENGINE = INNODB;
 CREATE TABLE forgot_password (id BIGINT AUTO_INCREMENT, user_id BIGINT NOT NULL, unique_key VARCHAR(255), expires_at DATETIME NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE groups (id BIGINT AUTO_INCREMENT, name VARCHAR(255) UNIQUE, description TEXT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
@@ -17,6 +18,8 @@ ALTER TABLE have_list ADD CONSTRAINT have_list_user_id_user_login_id FOREIGN KEY
 ALTER TABLE have_list ADD CONSTRAINT have_list_product_id_product_id FOREIGN KEY (product_id) REFERENCES product(id);
 ALTER TABLE have_list ADD CONSTRAINT have_list_object_id_object_id FOREIGN KEY (object_id) REFERENCES object(id);
 ALTER TABLE product ADD CONSTRAINT product_id_category_category_id FOREIGN KEY (id_category) REFERENCES category(id);
+ALTER TABLE review ADD CONSTRAINT review_user_id_user_login_id FOREIGN KEY (user_id) REFERENCES user_login(id) ON DELETE CASCADE;
+ALTER TABLE review ADD CONSTRAINT review_product_id_product_id FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE;
 ALTER TABLE want_list ADD CONSTRAINT want_list_user_id_user_login_id FOREIGN KEY (user_id) REFERENCES user_login(id) ON DELETE CASCADE;
 ALTER TABLE want_list ADD CONSTRAINT want_list_product_id_product_id FOREIGN KEY (product_id) REFERENCES product(id);
 ALTER TABLE forgot_password ADD CONSTRAINT forgot_password_user_id_user_login_id FOREIGN KEY (user_id) REFERENCES user_login(id) ON DELETE CASCADE;

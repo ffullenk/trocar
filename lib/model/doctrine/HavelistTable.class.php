@@ -16,4 +16,13 @@ class HavelistTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Havelist');
     }
+    public static function updateObject($id,$objectId)
+    {
+    	$q= Doctrine_Core::getTable('HaveList')->
+    				      createQuery()->
+    				      update()->
+    				      set('object_id',$objectId)->
+    				      where('id = ?',$id);	
+        return $q->execute();
+    }
 }

@@ -1,25 +1,42 @@
-<h1>Have lists List</h1>
-
-<table class="product">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Product</th>
-      <th>Object</th>
-      <th>User</th>
-      <th>Created at</th>
-      <th>Updated at</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach ($have_lists as $have_list): ?>
-    <tr>
-      <td><a href="<?php echo url_for('have_list/show?id='.$have_list->getId()) ?>"><?php echo $have_list->getId() ?></a></td>
-      <td><?php echo $have_list->getProductId() ?></td>
-      <td><?php echo $have_list->getObjectId() ?></td>
-    </tr>
+<div class="grid_10 suffix_1 omega">
+  <div class="grid_10 alpha">
+    <h3 style="margin:10px;"> Lo que tienes </h3>
+    
+    <?php foreach ( $have_lists as $have_list): ?>
+    <div style="margin:10px;">
+      
+      <div class="container">
+        <table style="margin-bottom:0px">
+          <tr>
+            <td><?php echo image_tag($have_list->getProduct()->getPicture(), 'size=124x124 style="margin:10px; border:1px solid #a3a3a3;"')?></td>
+            <td style="padding-right:30px">
+             <p>
+               <?php echo $have_list->getProduct()->getName() ?><br>
+               <?php echo $have_list->getProduct()->getDescription() ?><br>
+               Marca: &nbsp;&nbsp;<?php echo $have_list->getProduct()->getBrand()?><br>
+               Modelo: &nbsp;&nbsp;<?php echo $have_list->getProduct()->getModel()?>
+             </p>
+             <p style="margin-bottom:1px">
+               <?php echo link_to('Ver mas', 'have_list/show?id='.$have_list->getId())?><br>
+               <?php echo link_to('Editar/Eliminar', 'have_list/edit?id='.$have_list->getId()) ?>	
+             </p>
+            </td>
+            <td>
+               <p>
+               Estado: &nbsp;&nbsp; <?php echo $have_list->getObject()->getStatus() ?><br>
+               Detalle: &nbsp;&nbsp; <?php echo $have_list->getObject()->getDetail() ?><br>
+               Otra Informacion: <br>
+               <?php if(!is_null($have_list->getObject()->getWeight())) echo 'Peso: '.$have_list->getObject()->getWeight()?><br>
+               <?php if(!is_null($have_list->getObject()->getWidth()))  echo 'Largo: '.$have_list->getObject()->getWidth()?><br>
+               <?php if(!is_null($have_list->getObject()->getHeight())) echo 'Ancho: '.$have_list->getObject()->getHeight()?><br>
+               <?php if(!is_null($have_list->getObject()->getColor()))  echo 'Color: '.$have_list->getObject()->getColor()?><br>
+               <?php if(!is_null($have_list->getObject()->getLenght())) echo 'Medida: '.$have_list->getObject()->getLenght()?><br>
+               </p>
+            </td>
+          </tr>
+         </table>
+      </div>
+    </div>
     <?php endforeach; ?>
-  </tbody>
-</table>
-
-  <a href="<?php echo url_for('have_list/new') ?>">New</a>
+  </div>
+</div>
