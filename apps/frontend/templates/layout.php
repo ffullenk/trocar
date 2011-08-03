@@ -30,6 +30,10 @@
     });
   </script>
   
+  <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'es-419'}
+</script>
+  
   <script type="text/javascript">
     $(document).ready(function(){
         $('#isesion').click(function(){
@@ -53,7 +57,10 @@
             <li><a href="http://www.twitter.com/trocarcl"><?php echo image_tag('twitter.png');?></a></li>
             <li><?php echo image_tag('rss.png');?></li>
           </ul>
-          <iframe src="http://www.facebook.com/plugins/like.php?app_id=241244122553572&amp;href=http%3A%2F%2Fwww.trocar.cl&amp;send=false&amp;layout=standard&amp;width=220&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:280px; height:30px;float:left;padding-top:4px;" allowTransparency="true"></iframe>
+          <g:plusone size="medium"></g:plusone>
+            <a href="http://twitter.com/share" class="twitter-share-button" data-text="Estoy en Trocar.cl!" data-count="none" data-via="trocarcl" data-lang="es">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>  
+            <iframe src="http://www.facebook.com/plugins/like.php?app_id=241244122553572&amp;href=http%3A%2F%2Fwww.trocar.cl&amp;send=false&amp;layout=standard&amp;width=220&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:280px; height:30px;float:left;padding-top:4px;" allowTransparency="true"></iframe>
+        	
         </div>
       </div>
   

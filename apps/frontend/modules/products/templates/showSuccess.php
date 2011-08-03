@@ -2,9 +2,9 @@
   <div class="menu-title">
       <p>Detalle de producto</p>
   </div>
-  
   <div class="container" style="background:#fff;">  
-      
+    <a href="http://twitter.com/share" class="twitter-share-button" data-text="Míralo en Trocar.cl!" data-count="none" data-via="trocarcl" data-lang="es">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>  
+     <g:plusone size="medium"></g:plusone>
       <div class="left" style="margin:15px;">
         <?php echo image_tag($product->getPicture(),'size=124x124') ?>
       </div>
@@ -147,3 +147,7 @@ success: function(html) {
 return false;
 	}
 </script> 
+
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'es-419'}
+</script>
