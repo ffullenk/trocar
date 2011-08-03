@@ -13,7 +13,7 @@ class TrocarTestFunctional extends sfTestFunctional
 	{
 		
 		return $this->info(sprintf('Signin user using username "%s"', $username))
-			->get('/')->click('Signin', array( 'signin' => array(
+			->get('/')->click('Login', array( 'signin' => array(
 	                 'username' => $username, 
 					 'password' => 'admin'
 				 )));

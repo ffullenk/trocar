@@ -30,6 +30,10 @@
     });
   </script>
   
+  <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'es-419'}
+</script>
+  
   <script type="text/javascript">
     $(document).ready(function(){
         $('#isesion').click(function(){
@@ -51,9 +55,12 @@
           <ul>
             <li><a href="http://www.facebook.com/pages/trocarcl/125428490873626"><?php echo image_tag('facebook.png');?></a></li>
             <li><a href="http://www.twitter.com/trocarcl"><?php echo image_tag('twitter.png');?></a></li>
-            <li><?php echo image_tag('rss.png');?></li>
-          </ul>
-          <iframe src="http://www.facebook.com/plugins/like.php?app_id=241244122553572&amp;href=http%3A%2F%2Fwww.trocar.cl&amp;send=false&amp;layout=standard&amp;width=220&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:280px; height:30px;float:left;padding-top:4px;" allowTransparency="true"></iframe>
+             </ul>
+          <g:plusone size="medium"></g:plusone>
+            <a href="http://twitter.com/trocarcl" class="twitter-follow-button" data-show-count="false" data-lang="es">Follow @trocarcl</a>
+<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+            <iframe src="http://www.facebook.com/plugins/like.php?app_id=241244122553572&amp;href=http%3A%2F%2Fwww.trocar.cl&amp;send=false&amp;width="100";layout="button_count"&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:280px; height:30px;float:left;padding-top:4px;" allowTransparency="true"></iframe>
+        	
         </div>
       </div>
   
@@ -92,6 +99,7 @@
               echo isset($name) ? $name : $sf_user->getUsername(); ?>
             </b>
             </li>
+            <li><?php echo link_to('Tu Perfil', 'user/editProfile'); ?></li>
           </ul>
         </div>
     
@@ -119,24 +127,21 @@
     <div class="grid_1 alpha"><p>&nbsp;</p></div>
     
     <div class="grid_8">
-      <form>
+        <form method="post" action="<?php echo url_for('search/index');?>">
         <input type="text" name="buscar" size="50">
-      </form>
     </div>
     
     <div class="grid_3">
-      <form>
-        <select name="buscar">
-          <option>Todas las categorias</option>
-          <option>Electronica</option>
-          <option>blablabla</option>
+        <select name="search_type">
+          <option value="books">Libros</option>
+          <option value="music">M&uacute;sica</option>
+          <option value="movies">Pel&iacute;culas</option>
+          <option value="movies">Otras categor&iacute;as...</option>
         </select>
-      </form>
     </div>
     
     <div class="grid_2">
-      <form>
-        <input type="submit" name="buscar" id="submit" value="BUSCAR">
+        <input type="submit" name="enviar" id="submit" value="BUSCAR">
       </form>
     </div>
     
@@ -156,7 +161,7 @@
         <div>
           <?php echo image_tag('catalogo.png','class="sidebar-image"');?>
           <p class="sidebar-text">
-            <b>Catalogo</b><br><br>
+            <b><?php echo link_to('Cat&aacute;logo', 'products/index'); ?></b><br><br>
             <span>Revisa todos los articulos a tu disposici&oacute;n</span>
           </p>
         </div>

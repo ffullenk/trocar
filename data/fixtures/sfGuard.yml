@@ -6,6 +6,7 @@ sfGuardUser:
     Profile:
       first_name:   Diego
       last_name:    Acuna
+      picture:      img.jpg
     Groups:         [Group_admin]
 
 sfGuardGroup:

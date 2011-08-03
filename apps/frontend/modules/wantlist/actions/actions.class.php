@@ -19,9 +19,9 @@ class wantlistActions extends sfActions
   
   public function executeAdd(sfWebRequest $request)
   {
-  	$this->forward404Unless($request->hasParameter('id'));
+  	$this->forward404Unless($request->hasParameter('idproduct'));
   	
-  	$idProduct    = $request->getParameter('id');
+  	$idProduct    = $request->getParameter('idproduct');
   	$idUsuario     = $this->getUser()->getGuardUser()->getId();
   	
   	$nuevoWantList = new Wantlist();
@@ -33,9 +33,9 @@ class wantlistActions extends sfActions
   
   public function executeRemove(sfWebRequest $request)
   {
-  	$this->forward404Unless($request->hasParameter('id'));
+  	$this->forward404Unless($request->hasParameter('idproduct'));
   	 
-  	$idProduct    = $request->getParameter('id');
+  	$idProduct    = $request->getParameter('idproduct');
   	$idUsuario     = $this->getUser()->getGuardUser()->getId();
 
   	$tablaWantlist = WantlistTable::getInstance();

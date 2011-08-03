@@ -15,7 +15,7 @@ $browser->signin($user->getUsername(), 'admin')
 $browser->info('2 - Login de usuario valido, remember');
 $browser->get('/')->click('SALIR')
 	     ->get('/')
-	     ->click('Signin', array( 'signin' => array(
+	     ->click('Login', array( 'signin' => array(
 	                 'username' => $user->getUsername(), 
 					 'password' => 'admin',
 					 'remember' => true
