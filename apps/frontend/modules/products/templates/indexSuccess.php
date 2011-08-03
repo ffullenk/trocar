@@ -22,18 +22,37 @@
                             <a href="<?php echo $product->getLink(); ?>">P&aacute;gina oficial</a> 
                       </p>
                       
-                      <p style="margin:0px;">
-                        <?php  if($product->usuarioHasWantedProduct($sf_user->getGuardUser()->getId()))
-                                  echo jq_link_to_remote('Ya no lo quiero', 
-                                    array('url'   => 'wantlist/remove?id='.$product->getId()
-                                    ));
-                                else 
-                                  echo jq_link_to_remote('Lo quiero', array('url'=> 'wantlist/add?id='.$product->getId()));
-                          ?>   &mdash;
+                      
+                      <div id="flash2"></div>
+                      <div id="wantlist" style="width:100%;">
+                      <?php
+                      if($product->usuarioHasWantedProduct($sf_user->getGuardUser()->getId())){
+                      	?>
+                      			<a href="#" onclick="javascript:wantlist(<?php echo $product->getId() ?>,true)">Ya no lo quiero</a>
+                           	 <?php  
+                                 } else{ 
+                      			?>
+                      			<a href="#" onclick="javascript:wantlist(<?php echo $product->getId() ?>,false)">Lo quiero</a>
+                              <?php  
+                                 }
+                      ?> 
+                      </div>
+                                   
+                      &mdash;
+                          
+                          
+                          
+                          
+                          
                           <?php echo link_to_unless($product->usuarioHasProduct($sf_user->getGuardUser()->getId()),
                                       'Lo tengo', 'have_list/add?id='.$product->getId()); 
                           ?>
-                      </p>
+                    
+                    
+                    
+                    
+                    
+                    
                     </td>
                   </tr>
                 </table>
@@ -43,3 +62,40 @@
             <?php endforeach; ?>
   </div>
 </div>
+
+
+
+
+
+
+<script type="text/javascript">
+function wantlist(idproduct,valor) {
+	
+	if(valor){
+		direccion= "wantlist/remove"
+	}
+	else{
+		direccion= "wantlist/add"
+	}
+	var dataString = 'idproduct='+ idproduct;
+	$("#flash2").show();
+	$("#flash2").fadeIn(400).html('<img src="../images/loader.gif" />Cargando...');
+$.ajax({
+type: "POST",
+url: direccion,
+data: dataString,
+
+cache: false,
+
+success: function(html) {
+     $("#wantlist").html(html)
+    .fadeIn(1500, function() {
+    	 $("#flash2").hide("slow");
+    });
+    
+  }
+});
+
+return false;
+	}
+</script> 

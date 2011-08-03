@@ -21,19 +21,23 @@
       <hr style="margin-bottom:10px;" />
       
       <div style="margin-left:15px;">
-        
-        <div style="width:100%;">
+        <div id="flash2"></div>
+        <div id="wantlist" style="width:100%;">
           <?php  
-            if($wantList)
-              echo jq_link_to_remote('Ya no lo quiero', array('url'=> 'wantlist/remove?id='.$product->getId()));
-            else 
-              echo jq_link_to_remote('Lo quiero', array('url'=> 'wantlist/add?id='.$product->getId()));
-          ?>
-
+            if($wantList){
+			?>
+			<a href="#" onclick="javascript:wantlist(<?php echo $product->getId() ?>,true)">Ya no lo quiero</a>
+     	 <?php  
+           } else{ 
+			?>
+			<a href="#" onclick="javascript:wantlist(<?php echo $product->getId() ?>,false)">Lo quiero</a>
+        <?php  
+           }
+?>
           &nbsp;
-          <a href="<?php echo url_for('products/index') ?>">Volver al indice de productos</a>
+          
         </div>
-
+<a href="<?php echo url_for('products/index') ?>">Volver al indice de productos</a>
         <p style="margin-bottom:0px;">Usuarios que quieren este producto:</p>
           <ul style="margin-bottom:10px;">
           <?php 
@@ -108,3 +112,38 @@ $("#flash").hide();
 return false;
 }); });
 </script>
+
+
+
+
+<script type="text/javascript">
+function wantlist(idproduct,valor) {
+	
+	if(valor){
+		direccion= "../../../wantlist/remove"
+	}
+	else{
+		direccion= "../../../wantlist/add"
+	}
+	var dataString = 'idproduct='+ idproduct;
+	$("#flash2").show();
+	$("#flash2").fadeIn(400).html('<img src="../../../../images/loader.gif" />Cargando...');
+$.ajax({
+type: "POST",
+url: direccion,
+data: dataString,
+
+cache: false,
+
+success: function(html) {
+     $("#wantlist").html(html)
+    .fadeIn(1500, function() {
+    	 $("#flash2").hide("slow");
+    });
+    
+  }
+});
+
+return false;
+	}
+</script> 
