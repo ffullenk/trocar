@@ -6,3 +6,7 @@ all:
   sf_guard_plugin:
     success_signin_url: @homepage
     success_signout_url: @homepage
+
+  sfTwitterAuth:
+    consumer_key: 'cEbJRk6jHYib6dOr6Vrurg'
+    consumer_secret: '9VA7meeXeqcxRy8837fmaDxLJBnJaVAGGcOI6M2ss';

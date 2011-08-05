@@ -26,5 +26,6 @@ class ProjectConfiguration extends sfProjectConfiguration
     $this->enablePlugins('sfDoctrineGuardPlugin');
     require_once realpath(dirname(__FILE__).'/../lib/vendor/facebook/facebook.php');
     $this->enablePlugins('sfJqueryReloadedPlugin');
+    $this->enablePlugins('twitterOAuthPlugin');
   }
 }
