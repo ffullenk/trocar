@@ -16,7 +16,7 @@ class productsActions extends sfActions
       ->createQuery('a')
       ->execute();
     
-    //twitterOAuthPlugin::sendTweet("Probando el sistema de tweets");
+    twitterOAuthPlugin::sendTweet("Listando productos");
   }
   
    public function executeSearch(sfWebRequest $request)

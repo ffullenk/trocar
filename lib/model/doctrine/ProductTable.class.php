@@ -16,12 +16,12 @@ class ProductTable extends Doctrine_Table
 	{
 		return Doctrine_Core::getTable('Product');
 	}
-	
-	public function getLuceneIndex()
+
+	public static function getLuceneIndex()
 	{
 	  ProjectConfiguration::registerZend();
-	 
-	  if (file_exists($index = $this->getLuceneIndexFile()))
+
+	  if (file_exists($index = ProductTable::getLuceneIndexFile()))
 	  {
 	    return Zend_Search_Lucene::open($index);
 	  }
@@ -30,7 +30,7 @@ class ProductTable extends Doctrine_Table
 	    return Zend_Search_Lucene::create($index);
 	  }
 	}
-	 
+
 public function getForLuceneQuery($query)
 {
   $hits = self::getLuceneIndex()->find($query);
@@ -50,12 +50,10 @@ public function getForLuceneQuery($query)
     ->whereIn('j.id', $pks)
     ->limit(20);
  
-  //$q = $this->addActiveJobsQuery($q);
- 
   return $q->execute();
 }
 
-	public function getLuceneIndexFile()
+	public static function getLuceneIndexFile()
 	{
 	  return sfConfig::get('sf_data_dir').'\products.'.sfConfig::get('sf_environment').'.index';
 	}
