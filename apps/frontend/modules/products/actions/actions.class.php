@@ -23,7 +23,7 @@ class productsActions extends sfActions
   {
     $this->forwardUnless($query = $request->getParameter('query'), 'product', 'index');
  
-    $this->products = Doctrine_Core::getTable('Product') ->getForLuceneQuery($query);
+    $this->products = ProductTable::getInstance()->getForLuceneQuery($query);
   }
   
   public function executeShow(sfWebRequest $request)

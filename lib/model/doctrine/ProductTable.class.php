@@ -50,13 +50,13 @@ public function getForLuceneQuery($query)
     ->whereIn('j.id', $pks)
     ->limit(20);
  
-  $q = $this->addActiveJobsQuery($q);
+  //$q = $this->addActiveJobsQuery($q);
  
   return $q->execute();
 }
 
 	public function getLuceneIndexFile()
 	{
-	  return sfConfig::get('sf_data_dir').'/products.'.sfConfig::get('sf_environment').'.index';
+	  return sfConfig::get('sf_data_dir').'\products.'.sfConfig::get('sf_environment').'.index';
 	}
 }
