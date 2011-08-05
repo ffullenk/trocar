@@ -38,7 +38,7 @@ class Product extends BaseProduct
 		
 		
 		}
-		
+		/*
 		public function save(Doctrine_Connection $conn = null)
 		{  
 		  $conn = $conn ? $conn : ProductTable::getConnection();
@@ -109,7 +109,7 @@ class Product extends BaseProduct
 	  $index->commit();
 	}
 
-	
+	*/
 		
 		
 		
