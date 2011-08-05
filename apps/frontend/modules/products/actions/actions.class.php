@@ -18,7 +18,14 @@ class productsActions extends sfActions
     
     //twitterOAuthPlugin::sendTweet("Probando el sistema de tweets");
   }
-
+  
+   public function executeSearch(sfWebRequest $request)
+  {
+    $this->forwardUnless($query = $request->getParameter('query'), 'product', 'index');
+ 
+    $this->products = Doctrine_Core::getTable('Product') ->getForLuceneQuery($query);
+  }
+  
   public function executeShow(sfWebRequest $request)
   {
     $this->product = ProductTable::getInstance()->find(array($request->getParameter('id')));
