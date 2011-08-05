@@ -25,7 +25,7 @@ class twitterOAuthPlugin{
 
 // Send an API request to verify credentials
         $credentials = $oauth->get("account/verify_credentials");
-        echo "Connected as @" . $credentials->screen_name;
+       // echo "Connected as @" . $credentials->screen_name;
 
 // Post our new "hello world" status
         $posted = $oauth->post('statuses/update', array('status' => $message));

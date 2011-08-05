@@ -9,7 +9,12 @@
   <?php include_javascripts() ?>
     
 </head>
+
 <body>
+    <script src="http://platform.twitter.com/anywhere.js?id=OZIdqD0P8SKU47MYZDXg&v=1" type="text/javascript"></script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'es-419'}
+</script>
   <div id="fb-root"></div>
   <script>
     FB.init({
@@ -29,10 +34,15 @@
       }
     });
   </script>
-  
-  <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-  {lang: 'es-419'}
+
+<script type="text/javascript">
+ 
+  twttr.anywhere(function (T) {
+    T("#twitterlogin").connectButton();
+  });
+ 
 </script>
+
   
   <script type="text/javascript">
     $(document).ready(function(){
@@ -74,7 +84,7 @@
         </div>
         
         <div class="left"><fb:login-button perms="email"></fb:login-button></div>
-    
+ <span id="twitterlogin"></span>
         <div id="social-menu" class="left">
           <ul>
             <li><?php echo link_to('REGISTRARSE', 'register/index');?></li>
