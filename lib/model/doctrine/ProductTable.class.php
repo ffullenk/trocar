@@ -16,13 +16,9 @@ class ProductTable extends Doctrine_Table
 	{
 		return Doctrine_Core::getTable('Product');
 	}
-<<<<<<< HEAD
 
 	public static function getLuceneIndex()
-=======
-	/*
-	public function getLuceneIndex()
->>>>>>> 655749c0619eb87c63b60b984a8f5780bf2fa9f2
+
 	{
 	  ProjectConfiguration::registerZend();
 
@@ -61,5 +57,5 @@ public function getForLuceneQuery($query)
 	public static function getLuceneIndexFile()
 	{
 	  return sfConfig::get('sf_data_dir').'\products.'.sfConfig::get('sf_environment').'.index';
-	}*/
+	}
 }
