@@ -38,7 +38,11 @@ class Product extends BaseProduct
 
 
 		}
+<<<<<<< HEAD
 
+=======
+		/*
+>>>>>>> 655749c0619eb87c63b60b984a8f5780bf2fa9f2
 		public function save(Doctrine_Connection $conn = null)
 		{  
 		  $conn = $conn ? $conn : Doctrine_Manager::connection();
@@ -104,8 +108,15 @@ class Product extends BaseProduct
 	  $index->commit();
 	}
 
+<<<<<<< HEAD
 
 
 
 
+=======
+	*/
+		
+		
+		
+>>>>>>> 655749c0619eb87c63b60b984a8f5780bf2fa9f2
 }
