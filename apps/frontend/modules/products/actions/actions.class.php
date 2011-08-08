@@ -21,7 +21,7 @@ class productsActions extends sfActions
   
    public function executeSearch(sfWebRequest $request)
   {
-    $this->forwardUnless($query = $request->getParameter('query'), 'product', 'index');
+    $this->forwardUnless($query = $request->getParameter('query'), 'products', 'index');
  
     $this->products = ProductTable::getInstance()->getForLuceneQuery($query);
   }

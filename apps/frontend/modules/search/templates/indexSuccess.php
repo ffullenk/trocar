@@ -14,7 +14,7 @@
     if($type == 'books' && !$sf_user->hasFlash('resultados')){
       $cant = 1;
       foreach($books as $book): ?>
-        <div class="grid_3" style="border:1px solid #6a6a6a;height:340px;">
+        value="<?php echo $sf_request->getParameter('query') ?>" id="search_keywords"
           <p style="text-align:center;margin-bottom:0px;">
             <a href="#" style="font-size:16px;">
             <b><?php echo $book->getName();?> &mdash; <?php	echo $book->printAuthors();?></b>
@@ -78,6 +78,7 @@
             $cant++;
           endforeach;
     }else{
+    	
       echo $sf_user->getFlash('resultados');
     } ?>
 </div>
