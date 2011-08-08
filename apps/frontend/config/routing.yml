@@ -22,10 +22,13 @@ sf_guard_signout:
   url: /logout
   params: { module: sfGuardAuth, action: signout }
   
+
 products_search:
-  url:   /search
-  param: { module: products, action: search }
-  
+  url:   /search.:sf_format
+  param: { module: products, action: search, sf_format: html }
+  requirements:
+    sf_format: (?:html|js)
+      
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

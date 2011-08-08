@@ -45,8 +45,10 @@ public function getForLuceneQuery($query)
   if (empty($pks))
   {
     return array();
+    
+    
   }
- 
+   
   $q = $this->createQuery('j')
     ->whereIn('j.id', $pks)
     ->limit(20);

@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+  <?php use_javascript('search.js') ?>
+  <?php use_javascript('jquery-1.6.2.min.js') ?>
   <?php include_http_metas() ?>
   <?php include_metas() ?>
   <?php include_title() ?>
@@ -139,6 +141,8 @@
     <div class="grid_8">
         <form method="post" action="<?php echo url_for('search/index');?>">
         <input type="text" name="query" size="50"  value="<?php echo $sf_request->getParameter('query') ?>" id="search_keywords"/>
+    	<img id="loader" src="/images/loader.gif" style="vertical-align: middle; display: none" />
+    	
     </div>
     
     <div class="grid_3">

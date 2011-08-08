@@ -24,6 +24,17 @@ class productsActions extends sfActions
     $this->forwardUnless($query = $request->getParameter('query'), 'products', 'index');
  
     $this->products = ProductTable::getInstance()->getForLuceneQuery($query);
+    
+    if ($request->isXmlHttpRequest())
+  {
+    if ('*' == $query || !$this->products)
+    {
+      return $this->renderText('Sin resultados');
+    }
+ 
+    return $this->renderText('Con resultados');
+  }
+    
   }
   
   public function executeShow(sfWebRequest $request)

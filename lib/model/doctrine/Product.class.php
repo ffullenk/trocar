@@ -39,7 +39,7 @@ class Product extends BaseProduct
 
 		}
 
-		public function save(Doctrine_Connection $conn = null)
+	public function save(Doctrine_Connection $conn = null)
 		{  
 		  $conn = $conn ? $conn : Doctrine_Manager::connection();
 		  $conn->beginTransaction();
