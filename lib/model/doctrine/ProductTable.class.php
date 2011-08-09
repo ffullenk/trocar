@@ -50,7 +50,6 @@ class ProductTable extends Doctrine_Table
   		$q = $this->createQuery('j')
    	 	->whereIn('j.id', $pks)
    	 	->limit(20);
- 
 	  	return $q->execute();
 	}
 
