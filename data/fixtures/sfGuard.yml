@@ -8,6 +8,14 @@ sfGuardUser:
       last_name:    Acuna
       picture:      img.jpg
     Groups:         [Group_admin]
+  User_member:
+    username:       kubrick.dm101@gmal.com
+    password:       kubrick
+    is_super_admin: false
+    Profile:
+      first_name:   Juan
+      last_name:    Pavez
+    Groups:         [Group_member]
 
 sfGuardGroup:
   Group_admin:

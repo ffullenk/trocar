@@ -15,3 +15,36 @@ Product:
     model: 'vostro 3500'
     created_at: '2011-07-01 21:25:06'
     updated_at: '2011-07-01 21:25:06'
+  Toshiba_1:
+     Category: Category_1
+     name: 'Toshiba 545'
+     description:  'Toshiba Notebook'
+     picture: 'http://bit.ly/kwHdOU'
+     link: ''
+     brand: ''
+     model: ''     
+
+Object:
+   Dell_object:
+     status: 'Nuevo'
+     detail: 'Dell nuevo a buen precio'
+     picture: ''
+   Toshiba_object:
+     status: 'Nuevo'
+     detail: 'Dell como nuevo a excelente precio'
+     picture: ''
+
+Havelist:
+   Dell_have:
+     Product: Product_1
+     Object: Dell_object
+     User: User_admin
+   Toshiba_have:
+     Product: Toshiba_1
+     Object: Toshiba_object
+     User: User_member
+
+Wantlist:
+   Dell_want:
+     Product: Product_1
+     User:    User_member

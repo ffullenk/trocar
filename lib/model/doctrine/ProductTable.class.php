@@ -32,30 +32,30 @@ class ProductTable extends Doctrine_Table
 	  }
 	}
 
-public function getForLuceneQuery($query)
-{
-  $hits = self::getLuceneIndex()->find($query);
+	public function getForLuceneQuery($query)
+	{
+  		$hits = self::getLuceneIndex()->find($query);
  
-  $pks = array();
-  foreach ($hits as $hit)
-  {
-    $pks[] = $hit->pk;
-  }
+	  	$pks = array();
+  		foreach ($hits as $hit)
+ 	 	{
+    		$pks[] = $hit->pk;
+  		}
  
-  if (empty($pks))
-  {
-    return array();
-  }
+  		if (empty($pks))
+  		{
+  		  return array();
+  		}
  
-  $q = $this->createQuery('j')
-    ->whereIn('j.id', $pks)
-    ->limit(20);
+  		$q = $this->createQuery('j')
+   	 	->whereIn('j.id', $pks)
+   	 	->limit(20);
  
-  return $q->execute();
-}
+	  	return $q->execute();
+	}
 
 	public static function getLuceneIndexFile()
 	{
-	  return sfConfig::get('sf_data_dir').'\products.'.sfConfig::get('sf_environment').'.index';
+	  	return sfConfig::get('sf_data_dir').'\products.'.sfConfig::get('sf_environment').'.index';
 	}
 }

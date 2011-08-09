@@ -18,7 +18,8 @@
              </p>
              <p style="margin-bottom:1px">
                <?php echo link_to('Ver mas', 'have_list/show?id='.$have_list->getId())?><br>
-               <?php echo link_to('Editar/Eliminar', 'have_list/edit?id='.$have_list->getId()) ?>	
+               <?php echo link_to('Editar/Eliminar', 'have_list/edit?id='.$have_list->getId()) ?><br>
+               <?php echo link_to('Intercambiar', 'have_list/swaplist?id='.$have_list->getId()) ?>	
              </p>
             </td>
             <td>

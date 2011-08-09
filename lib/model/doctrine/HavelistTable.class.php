@@ -25,4 +25,17 @@ class HavelistTable extends Doctrine_Table
     				      where('id = ?',$id);	
         return $q->execute();
     }
+	public static function getProductsToSwapFor($productId)
+	{
+		$q = Doctrine_Core::getTable('Havelist')
+		->createQuery('u')
+		->select('Havelist.*')
+		->from('Havelist,Product,Wantlist,sfGuardUser')
+		->where('Wantlist.product_id = ?',$productId)
+		->andWhere('sfGuardUser.id = Wantlist.user_id')
+		->andWhere('Havelist.user_id = sfGuardUser.id')
+		->addGroupBy('Havelist.product_id');
+		
+		return $q->execute();
+	}
 }

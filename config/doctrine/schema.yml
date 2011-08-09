@@ -192,4 +192,31 @@ Review:
       foreignType:  many
       type:         one
       onDelete:     CASCADE
-
+Trade:
+  tableName: trade
+  actAs:
+    Timestampable: ~
+  columns:
+    id: {type: integer, primary:true, autoincrement: true, notnull: true }
+    have_1_id: { type: integer, primary: true, notnull: true }
+    have_2_id: { type: integer, primary: true, notnull: true }
+    state: 
+      type: enum
+      values: [accepted,rejected,waiting]
+  relations:
+    Have_1:
+      class:        Havelist
+      local:        have_1_id
+      foreign:      id
+      foreignAlias: Trade_1
+      foreignType:  one
+      type:         one
+      onDelete:     CASCADE
+    Have_2:
+      class:        Havelist
+      local:        have_2_id
+      foreign:      id
+      foreignAlias: Trade_2
+      foreignType:  one
+      type:         one
+      onDelete:     CASCADE

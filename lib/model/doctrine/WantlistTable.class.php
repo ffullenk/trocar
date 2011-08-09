@@ -18,7 +18,7 @@ class WantlistTable extends Doctrine_Table
     }
     
     /**
-     * Método para verificar si un usuario posee cierto producto en su wantlist
+     * Mï¿½todo para verificar si un usuario posee cierto producto en su wantlist
      * @param integer $userId
      * @param integer $productId
      * @return boolean
@@ -37,4 +37,14 @@ class WantlistTable extends Doctrine_Table
     	else return true;
     
     }
+    public function getWantForProduct($productId)
+    {
+    	$q = $this->getInstance()
+    	->createQuery('c')
+    	->select()
+    	->where('c.product_id = ?', $productId());
+    	
+    	return $q->execute();	
+    }
+    
 }

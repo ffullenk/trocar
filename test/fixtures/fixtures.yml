@@ -24,6 +24,14 @@ sfGuardUser:
       first_name:   Diego
       last_name:    Acuna
     Groups:         [Group_admin]
+  User_member:
+    username:       kubrick.dm101@gmal.com
+    password:       kubrick
+    is_super_admin: false
+    Profile: 
+      first_name:   Juan
+      last_name:    Pavez
+    Groups:         [Group_member]
 
 sfGuardGroup:
   Group_admin:
@@ -58,16 +66,36 @@ Product:
      link: ''
      brand: ''
      model: ''
-     
+   Toshiba_1:
+     id_category: 1
+     name: 'Toshiba 545'
+     description:  'Toshiba Notebook'
+     picture: ''
+     link: ''
+     brand: ''
+     model: ''     
+
 Object:
    Dell_object:
      status: 'Nuevo'
      detail: 'Dell nuevo a buen precio'
      picture: ''
-     
+   Toshiba_object:
+     status: 'Nuevo'
+     detail: 'Dell como nuevo a excelente precio'
+     picture: ''
+
 Havelist:
    Dell_have:
      Product: Dell_1
      Object: Dell_object
      User: User_admin
-       
+   Toshiba_have:
+     Product: Toshiba_1
+     Object: Toshiba_object
+     User: User_member
+
+Wantlist:
+   Dell_want:
+     Product: Dell_1
+     User:    User_member
