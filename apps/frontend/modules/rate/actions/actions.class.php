@@ -19,4 +19,31 @@ class rateActions extends sfActions
   {
     $this->forward('default', 'module');
   }
+  
+  /**
+   * metodo que actualiza el valor del campo reputation en la clase sfGuardUserProfile
+   * @param sfWebRequest $request
+   */
+  public function executeActualizaReputacionUsuario(sfWebRequest $request)
+  {
+  	$this->forward404Unless($request->hasParameter('iduser'));
+  	$this->forward404Unless($request->hasParameter('idintercambio'));
+  	
+  	$idUser    = $request->getParameter('userid');
+  	$user 	   = sfGuardUserTable::getInstance()->find(array($idUser));
+  	
+  	$cantIntercambios = 1000;  //cambiar cuando se agregue modulo/clase de intercambios
+  	
+  	$sumSatisfaction = $user->get
+  	
+  	
+  	
+  	
+  }
+  
+ 
+  
+  
+  
+  
 }

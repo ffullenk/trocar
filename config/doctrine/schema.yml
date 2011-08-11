@@ -39,6 +39,7 @@ sfGuardUserProfile:
     picture:        {  type: string(32)   }
     token:          {  type: string(32)   }
     facebook_uid:   {  type: string(20)   }
+   
   relations:
     User:
       class:        sfGuardUser
@@ -201,9 +202,10 @@ Rate:
     intercambio_id:           {  type: integer,  primary: true,  notnull: true  }
     user_rated_id:            {  type: integer,  primary: true,  notnull: true  }
     user_rater_id:            {  type: integer,  primary: true,  notnull: true  }
-    feedback:                 {  type: integer                  }
-    text:                     {  type: string(150)              }
- 
+    feedback:                 {  type: float                  }
+    satisfaction:             {  type: float                  }
+    credibility:              {  type: float                  }
+    text:                     {  type: string(150)            }
   relations:
     User_rated:
       class:        sfGuardUser
@@ -219,6 +221,33 @@ Rate:
       foreign:      id
       foreignAlias: Rates
       foreignType:  many
+      type:         one
+      onDelete:     CASCADE
+      
+      
+      
+Reputation:
+  tableName: reputation
+  actAs:
+    Timestampable: ~
+  columns:
+    id:                       {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
+    user_id:                  {  type: integer,  primary: true,  notnull: true  }
+    reputation:               {  type: float                                    }      
+    intercambios:              {  type: integer                                 }
+    
+  indexes:
+    reputation_user_uniq:
+       fields: user_id
+       type: unique
+  relations:
+   
+    User:
+      class:        sfGuardUser
+      local:        user_id
+      foreign:      id
+      foreignAlias: Reputation
+      foreignType:  one
       type:         one
       onDelete:     CASCADE
   
