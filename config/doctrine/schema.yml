@@ -193,3 +193,32 @@ Review:
       type:         one
       onDelete:     CASCADE
 
+Rate:
+  tableName: rate
+  actAs:
+    Timestampable: ~
+  columns:
+    intercambio_id:           {  type: integer,  primary: true,  notnull: true  }
+    user_rated_id:            {  type: integer,  primary: true,  notnull: true  }
+    user_rater_id:            {  type: integer,  primary: true,  notnull: true  }
+    feedback:                 {  type: integer                  }
+    text:                     {  type: string(150)              }
+ 
+  relations:
+    User_rated:
+      class:        sfGuardUser
+      local:        user_rated_id
+      foreign:      id
+      foreignAlias: Rated
+      foreignType:  many
+      type:         one
+      onDelete:     CASCADE
+    User_rater:
+      class:        sfGuardUser
+      local:        user_rater_id
+      foreign:      id
+      foreignAlias: Rates
+      foreignType:  many
+      type:         one
+      onDelete:     CASCADE
+  

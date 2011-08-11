@@ -22,6 +22,8 @@
  * @property Doctrine_Collection $Havelist
  * @property Doctrine_Collection $Wantlist
  * @property Doctrine_Collection $Review
+ * @property Doctrine_Collection $Rated
+ * @property Doctrine_Collection $Rates
  * 
  * @method string                getUsername()              Returns the current record's "username" value
  * @method string                getAlgorithm()             Returns the current record's "algorithm" value
@@ -40,6 +42,8 @@
  * @method Doctrine_Collection   getHavelist()              Returns the current record's "Havelist" collection
  * @method Doctrine_Collection   getWantlist()              Returns the current record's "Wantlist" collection
  * @method Doctrine_Collection   getReview()                Returns the current record's "Review" collection
+ * @method Doctrine_Collection   getRated()                 Returns the current record's "Rated" collection
+ * @method Doctrine_Collection   getRates()                 Returns the current record's "Rates" collection
  * @method sfGuardUser           setUsername()              Sets the current record's "username" value
  * @method sfGuardUser           setAlgorithm()             Sets the current record's "algorithm" value
  * @method sfGuardUser           setSalt()                  Sets the current record's "salt" value
@@ -57,6 +61,8 @@
  * @method sfGuardUser           setHavelist()              Sets the current record's "Havelist" collection
  * @method sfGuardUser           setWantlist()              Sets the current record's "Wantlist" collection
  * @method sfGuardUser           setReview()                Sets the current record's "Review" collection
+ * @method sfGuardUser           setRated()                 Sets the current record's "Rated" collection
+ * @method sfGuardUser           setRates()                 Sets the current record's "Rates" collection
  * 
  * @package    trocar
  * @subpackage model
@@ -153,6 +159,14 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasMany('Review', array(
              'local' => 'id',
              'foreign' => 'user_id'));
+
+        $this->hasMany('Rate as Rated', array(
+             'local' => 'id',
+             'foreign' => 'user_rated_id'));
+
+        $this->hasMany('Rate as Rates', array(
+             'local' => 'id',
+             'foreign' => 'user_rater_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));

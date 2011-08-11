@@ -2,6 +2,7 @@ CREATE TABLE product (id BIGINT AUTO_INCREMENT, id_category BIGINT, name VARCHAR
 CREATE TABLE category (id BIGINT AUTO_INCREMENT, id_root BIGINT, name VARCHAR(50), INDEX id_root_idx (id_root), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE have_list (id BIGINT AUTO_INCREMENT, product_id BIGINT NOT NULL, object_id BIGINT, user_id BIGINT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX product_id_idx (product_id), INDEX object_id_idx (object_id), INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE object (id BIGINT AUTO_INCREMENT, status VARCHAR(45), detail VARCHAR(255), picture VARCHAR(200), weight BIGINT, height BIGINT, width BIGINT, lenght BIGINT, color VARCHAR(45), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE rate (intercambio_id BIGINT, user_rated_id BIGINT, user_rater_id BIGINT, feedback BIGINT, text VARCHAR(150), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(intercambio_id, user_rated_id, user_rater_id)) ENGINE = INNODB;
 CREATE TABLE review (id BIGINT AUTO_INCREMENT, user_id BIGINT, product_id BIGINT, text VARCHAR(150), created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id, user_id, product_id)) ENGINE = INNODB;
 CREATE TABLE want_list (id BIGINT AUTO_INCREMENT, user_id BIGINT, product_id BIGINT, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id, user_id, product_id)) ENGINE = INNODB;
 CREATE TABLE forgot_password (id BIGINT AUTO_INCREMENT, user_id BIGINT NOT NULL, unique_key VARCHAR(255), expires_at DATETIME NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
@@ -18,6 +19,8 @@ ALTER TABLE category ADD CONSTRAINT category_id_root_category_id FOREIGN KEY (id
 ALTER TABLE have_list ADD CONSTRAINT have_list_user_id_user_login_id FOREIGN KEY (user_id) REFERENCES user_login(id) ON DELETE CASCADE;
 ALTER TABLE have_list ADD CONSTRAINT have_list_product_id_product_id FOREIGN KEY (product_id) REFERENCES product(id);
 ALTER TABLE have_list ADD CONSTRAINT have_list_object_id_object_id FOREIGN KEY (object_id) REFERENCES object(id);
+ALTER TABLE rate ADD CONSTRAINT rate_user_rater_id_user_login_id FOREIGN KEY (user_rater_id) REFERENCES user_login(id) ON DELETE CASCADE;
+ALTER TABLE rate ADD CONSTRAINT rate_user_rated_id_user_login_id FOREIGN KEY (user_rated_id) REFERENCES user_login(id) ON DELETE CASCADE;
 ALTER TABLE review ADD CONSTRAINT review_user_id_user_login_id FOREIGN KEY (user_id) REFERENCES user_login(id) ON DELETE CASCADE;
 ALTER TABLE review ADD CONSTRAINT review_product_id_product_id FOREIGN KEY (product_id) REFERENCES product(id) ON DELETE CASCADE;
 ALTER TABLE want_list ADD CONSTRAINT want_list_user_id_user_login_id FOREIGN KEY (user_id) REFERENCES user_login(id) ON DELETE CASCADE;
