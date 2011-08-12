@@ -198,23 +198,23 @@ Trade:
     Timestampable: ~
   columns:
     id: {type: integer, primary:true, autoincrement: true, notnull: true }
-    have_1_id: { type: integer, primary: true, notnull: true }
-    have_2_id: { type: integer, primary: true, notnull: true }
+    have_from_id: { type: integer, primary: true, notnull: true }
+    have_to_id: { type: integer, primary: true, notnull: true }
     state: 
       type: enum
       values: [accepted,rejected,waiting]
   relations:
-    Have_1:
+    Have_from:
       class:        Havelist
-      local:        have_1_id
+      local:        have_from_id
       foreign:      id
       foreignAlias: Trade_1
       foreignType:  one
       type:         one
       onDelete:     CASCADE
-    Have_2:
+    Have_to:
       class:        Havelist
-      local:        have_2_id
+      local:        have_to_id
       foreign:      id
       foreignAlias: Trade_2
       foreignType:  one

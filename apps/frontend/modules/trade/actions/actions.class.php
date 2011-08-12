@@ -13,39 +13,68 @@ class tradeActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->trades = Doctrine_Core::getTable('Trade')
-      ->createQuery('a')
-      ->execute();
+      ->getWaitingTrades($this->getUser()->getGuardUser()->getId());
   }
   public function executeConfirm(sfWebRequest $request)
   {
-  	$this->forward404Unless($have1 = HavelistTable::getInstance()->find($request->getParameter('fid')),sprintf('Error in your object'));
-  	$this->forward404Unless($have2 = HavelistTable::getInstance()->find($request->getParameter('tid')),sprintf('Error in object to trade'));
+  	$this->forward404Unless($this->yourhave = HavelistTable::getInstance()->find($request->getParameter('fid')),sprintf('Error in your object'));
+  	$this->forward404Unless($this->wanthave = HavelistTable::getInstance()->find($request->getParameter('tid')),sprintf('Error in object to trade'));
   	
-  }
-
-  public function executeNew(sfWebRequest $request)
-  {
-    $this->form = new TradeForm();
+  	$this->forward404Unless($this->yourhave->getUserId() == $this->getUser()->getGuardUser()->getId(),'You dont have access here');
+  	
   }
 
   public function executeCreate(sfWebRequest $request)
   {
-    $this->forward404Unless($request->isMethod(sfRequest::POST));
-
-    $this->form = new TradeForm();
-
-    $this->processForm($request, $this->form);
-
-    $this->setTemplate('new');
+    $this->forward404Unless($yourHave = HavelistTable::getInstance()->find($request->getParameter('fid')),sprintf('Error in your object'));
+  	$this->forward404Unless($wantHave = HavelistTable::getInstance()->find($request->getParameter('tid')),sprintf('Error in object to trade'));
+  	
+  	$trade = new Trade();
+  	$trade->setHaveFromId($yourHave->getId());
+  	$trade->setHaveToId($wantHave->getId());
+  	$trade->setState('waiting');
+  	$trade->save();
+  
+  }
+  
+  public function executeAccept(sfWebRequest $request)
+  {
+  	$this->forward404Unless($yourHave = HavelistTable::getInstance()->find($request->getParameter('fid')),sprintf('Error in your object'));
+  	$this->forward404Unless($wantHave = HavelistTable::getInstance()->find($request->getParameter('tid')),sprintf('Error in object to trade'));
+  	
+  	$this->forward404Unless($trade = TradeTable::getInstance()->getTradeFor($yourHave->getId(), $wantHave->getId()));
+  	$html = $this->getPartial("trade/successMail");
+  	$message = Trade::ComposeMail($yourHave->getUser()->getUsername(),$html);
+  	$this->forward404Unless($this->getMailer()->send($message),"There is some problems with our mail server");
+  	
+  	$trade->setState('accepted');
+  	$trade->save();
+  	
+  	
+  }
+  
+  public function executeReject(sfWebRequest $request)
+  {
+  	$this->forward404Unless($yourHave = HavelistTable::getInstance()->find($request->getParameter('fid')),sprintf('Error in your object'));
+  	$this->forward404Unless($wantHave = HavelistTable::getInstance()->find($request->getParameter('tid')),sprintf('Error in object to trade'));
+  	
+  	$this->forward404Unless($trade = TradeTable::getInstance()->getTradeFor($yourHave->getId(), $wantHave->getId()));
+  	
+  	$html = $this->getPartial("trade/rejectMail");
+  	$message = Trade::ComposeMail($yourHave->getUser()->getUsername(),$html);
+  	$this->forward404Unless($this->getMailer()->send($message),"There is some problems with our mail server");
+  	
+  	$trade->setState('rejected');
+  	$trade->save();
   }
 
   public function executeEdit(sfWebRequest $request)
   {
     $this->forward404Unless($trade = Doctrine_Core::getTable('Trade')->find(array($request->getParameter('id'),
-                                 $request->getParameter('have_1_id'),
-                                 $request->getParameter('have_2_id'))), sprintf('Object trade does not exist (%s).', $request->getParameter('id'),
-                                 $request->getParameter('have_1_id'),
-                                 $request->getParameter('have_2_id')));
+                                 $request->getParameter('have_from_id'),
+                                 $request->getParameter('have_to_id'))), sprintf('Object trade does not exist (%s).', $request->getParameter('id'),
+                                 $request->getParameter('have_from_id'),
+                                 $request->getParameter('have_to_id')));
     $this->form = new TradeForm($trade);
   }
 
@@ -64,28 +93,4 @@ class tradeActions extends sfActions
     $this->setTemplate('edit');
   }
 
-  public function executeDelete(sfWebRequest $request)
-  {
-    $request->checkCSRFProtection();
-
-    $this->forward404Unless($trade = Doctrine_Core::getTable('Trade')->find(array($request->getParameter('id'),
-                                 $request->getParameter('have_1_id'),
-                                 $request->getParameter('have_2_id'))), sprintf('Object trade does not exist (%s).', $request->getParameter('id'),
-                                 $request->getParameter('have_1_id'),
-                                 $request->getParameter('have_2_id')));
-    $trade->delete();
-
-    $this->redirect('trade/index');
-  }
-
-  protected function processForm(sfWebRequest $request, sfForm $form)
-  {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {
-      $trade = $form->save();
-
-      $this->redirect('trade/edit?id='.$trade->getId().'&have_1_id='.$trade->getHave1Id().'&have_2_id='.$trade->getHave2Id());
-    }
-  }
 }

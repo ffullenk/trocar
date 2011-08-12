@@ -99,3 +99,8 @@ Wantlist:
    Dell_want:
      Product: Dell_1
      User:    User_member
+Trade:
+   Trade_Dell:
+     Have_from: Dell_have
+     Have_to: Toshiba_have
+     state: waiting

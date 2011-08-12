@@ -12,4 +12,16 @@
  */
 class Trade extends BaseTrade
 {
+	public static function ComposeMail($to,$html){
+		
+		$message = sfContext::getInstance()->getMailer()->compose();
+		$subject = "Trocar: Aviso de Intercambio";
+		$from    = "admin@trocar.cl";
+
+		$message->setSubject($subject);
+		$message->setTo($to);
+		$message->setFrom($from);
+		$message->setBody($html,"text/html");
+		return $message;
+	}
 }

@@ -1,5 +1,6 @@
 /cache/*
 /log/*
+/data/products.dev.index/*
 /config/databases.yml
 /lib/filter/doctrine/base/*
 /lib/filter/doctrine/sfDoctrineGuardPlugin/base/*

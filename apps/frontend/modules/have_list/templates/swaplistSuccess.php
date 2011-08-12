@@ -2,7 +2,7 @@
   <div class="grid_10 alpha" style="border: 1px solid #a3a3a3;">
     <h3 style="margin:10px;">Lo que puedes obtener</h3>
     <div class="container">
-    <table style="margin-bottom:0px;border-bottom:1px solid #a3a3a3;">
+    <table style="margin-bottom:0px;">
     <?php for ($i = 0; $i < $haves->count(); $i++): ?>
     <tr style="border-bottom:1px solid #a3a3a3;">
     <td colspan="2"><?php echo image_tag($haves[$i]->getProduct()->getPicture(),'size=50x50 style="margin:3px;border:1px solid #a3a3a3;"') ?></td>

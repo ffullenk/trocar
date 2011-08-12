@@ -55,6 +55,6 @@ class ProductTable extends Doctrine_Table
 
 	public static function getLuceneIndexFile()
 	{
-	  	return sfConfig::get('sf_data_dir').'\products.'.sfConfig::get('sf_environment').'.index';
+	  	return sfConfig::get('sf_data_dir').'/products.'.sfConfig::get('sf_environment').'.index';
 	}
 }
