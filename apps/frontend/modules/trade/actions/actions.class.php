@@ -47,6 +47,24 @@ class tradeActions extends sfActions
   	$message = Trade::ComposeMail($yourHave->getUser()->getUsername(),$html);
   	$this->forward404Unless($this->getMailer()->send($message),"There is some problems with our mail server");
   	
+  	$rep1 = $yourHave->getUser()->getReputation();
+  	$rep2 = $wantHave->getUser()->getReputation();
+  	if(!$rep1){
+  			$rep1 = new Reputation();
+  			$rep1->setUser($yourHave->getUser());
+  			$rep1->setIntercambios(1);
+  	}
+  	else $rep1->setIntercambios($rep1->getIntercambios + 1);
+  	if(!$rep2){
+  			$rep2 = new Reputation();
+  			$rep2->setUser($wantHave->getUser());
+  			$rep2->setIntercambios(1);
+  	}
+   	else $rep2->setIntercambios($rep1->getIntercambios + 1);
+   	
+  	$rep1->save();
+  	$rep2->save();
+  	
   	$trade->setState('accepted');
   	$trade->save();
   	
