@@ -27,6 +27,17 @@ class rateActions extends sfActions
 		
 	}
 	
+	public function executeRateTrade(sfWebRequest $request)
+  {
+  		$this->forward404Unless($trade = TradeTable::getInstance()->find(array($request->getParameter('tid'))), $request->getParameter('tid'));
+		
+    	$user = $this->getUser();
+    	
+    	$this->trade = $trade;
+    	   
+  }
+	
+	
 	
 	
 	
