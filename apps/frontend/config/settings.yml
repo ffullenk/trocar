@@ -37,7 +37,7 @@ all:
     #modules
     enabled_modules:        [default, sfGuardAuth, twitterOAuthPluginSetup]
     
-    standard_helpers:       [Partial, Cache, jQuery]
+    standard_helpers:       [Partial, Cache]
 
     login_module:           sfGuardAuth
     login_action:           signin
