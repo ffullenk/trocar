@@ -30,6 +30,19 @@ class TradeTable extends Doctrine_Table
     	return $q->execute(); 
     }
     
+    public static function getAcceptedTrades($user)
+    {
+    	$q =  Doctrine_Core::getTable('Trade')
+    	->createQuery('u')
+    	->select('Trade.*')
+    	->from('Trade,sfGuardUser,Havelist')
+    	->where('sfGuardUser.id = ?',$user)
+    	->andWhere('Havelist.user_id = sfGuardUser.id')
+    	->andWhere('Trade.have_to_id = Havelist.id')
+    	->andWhere('Trade.state = ?','waiting');
+    	return $q->execute();
+    }
+    
     public static function getTradeFor($havefrom, $haveto)
     {
     	$q = Doctrine_Core::getTable('Trade')
@@ -39,6 +52,17 @@ class TradeTable extends Doctrine_Table
     	->where('Trade.have_from_id = ?',$havefrom)
     	->andWhere('Trade.have_to_id = ?',$haveto);
     	return $q->fetchOne();
+    }
+    public static function getNumTrades(){
+    	
+    	$q = Doctrine_Query::create()
+    	->select('COUNT(t.id) AS num_trades')
+    	->from('Trade t');
+    	
+    	$result = $q->execute();
+    	
+    	return $result[0]['num_trades'];
+    	
     }
     
 }

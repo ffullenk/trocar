@@ -1,5 +1,6 @@
 /cache/*
 /log/*
+/data/sql/schema.sql
 /data/products.dev.index/*
 /config/databases.yml
 /lib/filter/doctrine/base/*

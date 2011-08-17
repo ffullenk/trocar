@@ -12,5 +12,23 @@
  */
 class Reputation extends BaseReputation
 {
+	
+	public function calcularReputation(){
+		
+		$user = $this->getUser();
+		$I = $this->getNumTrades(); // obtiene el numero de intercambios que ha hecho el usuario en el sistema
+		$rateds = $user->getRated(); //collection con todos los rate's donde se ratea a este usuario
+		
+		$totalSatisfaction = 0;
+		foreach($rateds as $r){ //suma el total de satisfaction en los rate que se le han hecho al usuario
+			$totalSatisfaction += $r->getSatisfaction();
+		}
+		
+		$totalTrades = TradeTable::getNumTrades(); //obtiene el total de trades en el sistema
+		$cf = $I / $totalTrades; //adaptive community context factor
+		$T = $totalSatisfaction / $I + $cf;
+		
+		return $T;
+	}
 
 }

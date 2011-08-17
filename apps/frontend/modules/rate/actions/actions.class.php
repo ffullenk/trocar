@@ -27,6 +27,32 @@ class rateActions extends sfActions
 		
 	}
 	
+	public function executePending(sfWebRequest $request){
+		
+		$user = $this->getUser();
+		$tradesAccepted = TradeTable::getAcceptedTrades($user);
+		$tradesPorRatear = array();
+		
+ 		$i = 0;
+ 		foreach($trades as $t){
+			
+ 			$rates = $t->getRates();
+ 			$flag = 0;
+			
+ 			foreach ($rates as $r)if($r->getUserRaterId() == $user->getId())$flag=1;
+			if($flag == 0)$tradesPorRatear[$i] = $t;
+			$i = $i +1;
+ 		}
+		
+		$this->trades = RateTable::getAcceptedUnRatedTrades($user);
+		
+		//$this->trades = RateTable::getAcceptedUnRatedTrades($user);
+		
+		$this->trade1 = $this->trades[0]->getId();
+		
+		
+	}
+	
 	public function executeRateTrade(sfWebRequest $request)
   {
   		$this->forward404Unless($trade = TradeTable::getInstance()->find(array($request->getParameter('tid'))), $request->getParameter('tid'));
@@ -36,7 +62,13 @@ class rateActions extends sfActions
     	$this->trade = $trade;
     	   
   }
-	
+  public function executeShowrates(sfWebRequest $request)
+  {
+  	
+  	$user = $this->getUser()->getGuardUser();
+  	$this->rates = $user->getRates();
+  
+  }
 	
 	
 	

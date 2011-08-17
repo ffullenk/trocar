@@ -16,4 +16,21 @@ class RateTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Rate');
     }
+    
+    
+    public static function getAcceptedUnRatedTrades($user)
+    {
+    	$q =  Doctrine_Core::getTable('Trade')
+    	->createQuery('u')
+    	->select('Trade.*')
+    	->from('Trade,sfGuardUser,Rate')
+    	->where('sfGuardUser.id = ?',$user->getProfile()->getUserId())
+    	->andWhere('Trade.state = ?','accepted')
+    	->andWhere('Rate.trade_id = Trade.id')
+    	->andWhere('Rate.user_rater_id = sfGuardUser.id')
+    	->having('COUNT(Rate.id) = 0');
+    	
+    	return $q->execute();
+    	
+    }
 }

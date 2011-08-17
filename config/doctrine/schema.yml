@@ -214,7 +214,7 @@ Trade:
        fields: [user_1_id,user_2_id]
        type: unique
   relations:
-    Have_from:
+    HaveFrom:
       class:        Havelist
       local:        have_from_id
       foreign:      id
@@ -222,7 +222,7 @@ Trade:
       foreignType:  one
       type:         one
       onDelete:     CASCADE
-    Have_to:
+    HaveTo:
       class:        Havelist
       local:        have_to_id
       foreign:      id
@@ -262,12 +262,12 @@ Rate:
     text:                     {  type: string(150)            }
     
   indexes:
-    rate__uniq:
+    rate_uniq:
        fields: [user_rated_id,user_rater_id,trade_id]
        type: unique
        
   relations:
-    User_rated:
+    UserRated:
       class:        sfGuardUser
       local:        user_rated_id
       foreign:      id
@@ -276,7 +276,7 @@ Rate:
       type:         one
       onDelete:     CASCADE
     
-    User_rater:
+    UserRater:
       class:        sfGuardUser
       local:        user_rater_id
       foreign:      id
@@ -284,7 +284,7 @@ Rate:
       foreignType:  many
       type:         one
       onDelete:     CASCADE
-    Trade_rated:
+    TradeRated:
       class:        Trade
       foreign:      id
       local:        trade_id
