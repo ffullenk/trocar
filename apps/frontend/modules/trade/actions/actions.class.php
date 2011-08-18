@@ -34,7 +34,6 @@ class tradeActions extends sfActions
   	$trade->setHaveToId($wantHave->getId());
   	$trade->setState('waiting');
   	$trade->save();
-  
   }
   
   public function executeAccept(sfWebRequest $request)
@@ -49,8 +48,6 @@ class tradeActions extends sfActions
   	
   	$trade->setState('accepted');
   	$trade->save();
-  	
-  	
   }
   
   public function executeReject(sfWebRequest $request)
@@ -66,31 +63,6 @@ class tradeActions extends sfActions
   	
   	$trade->setState('rejected');
   	$trade->save();
-  }
-
-  public function executeEdit(sfWebRequest $request)
-  {
-    $this->forward404Unless($trade = Doctrine_Core::getTable('Trade')->find(array($request->getParameter('id'),
-                                 $request->getParameter('have_from_id'),
-                                 $request->getParameter('have_to_id'))), sprintf('Object trade does not exist (%s).', $request->getParameter('id'),
-                                 $request->getParameter('have_from_id'),
-                                 $request->getParameter('have_to_id')));
-    $this->form = new TradeForm($trade);
-  }
-
-  public function executeUpdate(sfWebRequest $request)
-  {
-    $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-    $this->forward404Unless($trade = Doctrine_Core::getTable('Trade')->find(array($request->getParameter('id'),
-                                 $request->getParameter('have_1_id'),
-                                 $request->getParameter('have_2_id'))), sprintf('Object trade does not exist (%s).', $request->getParameter('id'),
-                                 $request->getParameter('have_1_id'),
-                                 $request->getParameter('have_2_id')));
-    $this->form = new TradeForm($trade);
-
-    $this->processForm($request, $this->form);
-
-    $this->setTemplate('edit');
   }
 
 }

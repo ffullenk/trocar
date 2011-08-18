@@ -39,7 +39,6 @@ sfGuardUserProfile:
     picture:        {  type: string(32)   }
     token:          {  type: string(32)   }
     facebook_uid:   {  type: string(20)   }
-   
   relations:
     User:
       class:        sfGuardUser
@@ -123,7 +122,6 @@ Product:
       local:      id_category
       foreign:    id
       type:       one
-      
 Category:
   tableName: category
   columns:
@@ -199,9 +197,9 @@ Trade:
   actAs:
     Timestampable: ~
   columns:
-    id: {type: integer, primary:true, autoincrement: true, notnull: true }
-    have_from_id: { type: integer, primary: true, notnull: true }
-    have_to_id: { type: integer, primary: true, notnull: true }
+    id: { type: integer, primary: true, autoincrement: true, notnull: true }
+    have_from_id: { type: integer, notnull: true }
+    have_to_id: { type: integer, notnull: true }
     state: 
       type: enum
       values: [accepted,rejected,waiting]
@@ -222,28 +220,20 @@ Trade:
       foreignType:  one
       type:         one
       onDelete:     CASCADE
-
 Rate:
   tableName: rate
   actAs:
     Timestampable: ~
   columns:
-    intercambio_id:           {  type: integer,  primary: true,  notnull: true  }
-    user_rated_id:            {  type: integer,  primary: true,  notnull: true  }
-    user_rater_id:            {  type: integer,  primary: true,  notnull: true  }
-    feedback:                 {  type: float                  }
-    satisfaction:             {  type: float                  }
-    credibility:              {  type: float                  }
-    text:                     {  type: string(150)            }
+    id:                       {  type: integer, primary: true, notnull: true }
+    intercambio_id:           {  type: integer, primary: true, notnull: true  }
+    user_rated_id:            {  type: integer, primary: true, notnull: true  }
+    user_rater_id:            {  type: integer, primary: true, notnull: true  }
+    feedback:                 {  type: float }
+    satisfaction:             {  type: float }
+    credibility:              {  type: float }
+    text:                     {  type: string(150) }
   relations:
-    Trade_rated:
-      class:        Trade
-      local:        intercambio_id
-      foreign:      id
-      foreignAlias: RatedTrade
-      foreignType:  many
-      type:         one
-      onDelete:     CASCADE
     User_rated:
       class:        sfGuardUser
       local:        user_rated_id
@@ -260,6 +250,12 @@ Rate:
       foreignType:  many
       type:         one
       onDelete:     CASCADE
+    Trade:
+      class:        Trade
+      local:        intercambio_id
+      foreign:      id
+      owningSide:   true
+      onDelete:     CASCADE
       
 Reputation:
   tableName: reputation
@@ -270,13 +266,11 @@ Reputation:
     user_id:                  {  type: integer,  primary: true,  notnull: true  }
     reputation:               {  type: float                                    }      
     intercambios:              {  type: integer                                 }
-    
   indexes:
     reputation_user_uniq:
-       fields: user_id
-       type: unique
+      fields: user_id
+      type: unique
   relations:
-   
     User:
       class:        sfGuardUser
       local:        user_id

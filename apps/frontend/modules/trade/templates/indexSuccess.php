@@ -19,8 +19,8 @@
      <td>estado: <?php echo $trade->getHave_to()->getObject()->getStatus()?></td>
      <td>estado: <?php echo $trade->getHave_from()->getObject()->getStatus()?></td>
      </tr>
-     <tr><td> <?php echo link_to('Confirmar Intercambio','trade/accept?fid='.$trade->getHave_from()->getId().'&tid='.$trade->getHave_to()->getId())?></br></td>
-     &nbsp;&nbsp;<td> <?php echo link_to('Rechazar Intercambio','trade/reject?fid='.$trade->getHave_from()->getId().'&tid='.$trade->getHave_to()->getId())?></br></td></tr>
+     <tr><td> <?php echo link_to('Confirmar Intercambio','intercambio/accept?fid='.$trade->getHave_from()->getId().'&tid='.$trade->getHave_to()->getId())?></br></td>
+     &nbsp;&nbsp;<td> <?php echo link_to('Rechazar Intercambio','intercambio/reject?fid='.$trade->getHave_from()->getId().'&tid='.$trade->getHave_to()->getId())?></br></td></tr>
      <?php endforeach; 	?>
      </table>
      <table>

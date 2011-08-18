@@ -10,19 +10,6 @@
  */
 class objectActions extends sfActions
 {
-  public function executeIndex(sfWebRequest $request)
-  {
-    $this->objects = Doctrine_Core::getTable('Object')
-      ->createQuery('a')
-      ->execute();
-  }
-
-  public function executeShow(sfWebRequest $request)
-  {
-    $this->object = Doctrine_Core::getTable('Object')->find(array($request->getParameter('id')));
-    $this->forward404Unless($this->object);
-  }
-
   public function executeNew(sfWebRequest $request)
   {
     $this->form = new ObjectForm();
@@ -60,16 +47,6 @@ class objectActions extends sfActions
     $this->processForm($request, $this->form);
 
     $this->setTemplate('edit');
-  }
-
-  public function executeDelete(sfWebRequest $request)
-  {
-    $request->checkCSRFProtection();
-
-    $this->forward404Unless($object = Doctrine_Core::getTable('Object')->find(array($request->getParameter('id'))), sprintf('Object object does not exist (%s).', $request->getParameter('id')));
-    $object->delete();
-
-    $this->redirect('object/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)

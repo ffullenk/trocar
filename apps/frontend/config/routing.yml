@@ -21,14 +21,37 @@ sf_guard_signin:
 sf_guard_signout:
   url: /logout
   params: { module: sfGuardAuth, action: signout }
-  
 
+oferto_index: 
+  url: /oferto
+  params: { module: have_list, action: index }
+
+oferto:
+  url: /oferto/:action/*
+  params: { module: have_list }
+  
+busco_index:
+  url: /busco
+  params: { module: wantlist, action: index }
+ 
+busco:
+  url: /busco/:action/*
+  params: { module: wantlist }
+  
+intercambio_index:
+  url: /intercambio
+  params: { module: trade, action: index }
+  
+intercambio:
+  url: /intercambio/:action/*
+  params: { module: trade }
+   
 products_search:
-  url:   /search.:sf_format
+  url:   /search2.:sf_format
   param: { module: products, action: search, sf_format: html }
   requirements:
     sf_format: (?:html|js)
-      
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

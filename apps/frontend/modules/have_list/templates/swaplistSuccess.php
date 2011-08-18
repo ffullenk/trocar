@@ -15,8 +15,8 @@
     <td width="10%"><?php echo $haves[$i]->getObject()->getStatus() ?></td>
     <td width="10%"><?php echo $haves[$i]->getUser()->getUsername()?></td>
     <td width="30%"><?php echo $haves[$i]->getUser()->getProfile()->getAddress()?></td>
-    <td width="10%"><?php echo link_to('Mas Informacion','have_list/show?id='.$haves[$i]->getId())?></td>
-    <td width="10%"><?php echo link_to('Obtener','trade/confirm?fid='.$youhave->getId().'&tid='.$haves[$i]->getId())?></td>
+    <td width="10%"><?php echo link_to('Mas Informacion','oferto/show?id='.$haves[$i]->getId())?></td>
+    <td width="10%"><?php echo link_to('Obtener','intercambio/confirm?fid='.$youhave->getId().'&tid='.$haves[$i]->getId())?></td>
     </tr>
     <?php $i++; 
           if ($i == $haves->count()) break;?>

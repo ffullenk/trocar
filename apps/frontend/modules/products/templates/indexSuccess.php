@@ -40,12 +40,8 @@
                                    
                       &mdash;
                           
-                          
-                          
-                          
-                          
                           <?php echo link_to_unless($product->usuarioHasProduct($sf_user->getGuardUser()->getId()),
-                                      'Lo tengo', 'have_list/add?id='.$product->getId()); 
+                                      'Lo tengo', 'oferto/add?id='.$product->getId()); 
                           ?>
                     
                     
@@ -72,10 +68,10 @@
 function wantlist(idproduct,valor) {
 	
 	if(valor){
-		direccion= "wantlist/remove"
+		direccion= "busco/remove"
 	}
 	else{
-		direccion= "wantlist/add"
+		direccion= "busco/add"
 	}
 	var dataString = 'idproduct='+ idproduct;
 	$("#flash2").show();

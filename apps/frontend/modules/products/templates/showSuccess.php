@@ -126,10 +126,10 @@ return false;
 function wantlist(idproduct,valor) {
 	
 	if(valor){
-		direccion= "../../../wantlist/remove"
+		direccion= "../../../busco/remove"
 	}
 	else{
-		direccion= "../../../wantlist/add"
+		direccion= "../../../busco/add"
 	}
 	var dataString = 'idproduct='+ idproduct;
 	$("#flash2").show();

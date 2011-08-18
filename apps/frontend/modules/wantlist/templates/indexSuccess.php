@@ -17,7 +17,7 @@
         <?php echo image_tag($product->getPicture(),'size=60x60 style="margin:5px;margin-bottom:10px;"') ?><br/>
         <?php  if($product->usuarioHasWantedProduct($sf_user->getGuardUser()->getId()))
                     echo jq_link_to_remote('Remover de WantList', array(
-                      'url'=> 'wantlist/remove?id='.$product->getId()),
+                      'url'=> 'busco/remove?id='.$product->getId()),
                       array('style' => ''
                     ));
           ?>

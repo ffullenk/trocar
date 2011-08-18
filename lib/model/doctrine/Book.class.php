@@ -59,3 +59,4 @@ class Book extends BaseProduct
     return $this->attrib[$attribName];
   }
 }
+?>

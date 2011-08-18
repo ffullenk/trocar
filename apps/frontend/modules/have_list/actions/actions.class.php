@@ -76,7 +76,7 @@ class have_listActions extends sfActions
     $have_list->delete();
     if ($object = Doctrine_Core::getTable('Object')->find($objectId)) $object->delete();
 
-    $this->redirect('have_list/index');
+    $this->redirect('oferto/index');
   }
 
   protected function processForm(sfWebRequest $request, sfForm $form)
@@ -86,7 +86,7 @@ class have_listActions extends sfActions
     {
       $have_list = $form->save();
 	  	Doctrine_core::getTable('HaveList')->updateObject($have_list->getId(),$have_list->getObjectId());
-      $this->redirect('have_list/edit?id='.$have_list->getId());
+      $this->redirect('oferto/edit?id='.$have_list->getId());
     }
   }
   public function executeSwap(sfWebRequest $request)

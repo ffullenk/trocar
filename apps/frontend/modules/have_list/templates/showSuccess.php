@@ -99,7 +99,7 @@ jQuery(document).ready(function() {
                </td>
              </tr>
              <tr>
-                <td><?php echo link_to('Volver','have_list/index') ?></td>
+                <td><?php echo link_to('Volver','oferto/index') ?></td>
              </tr>
          </table>
       </div>

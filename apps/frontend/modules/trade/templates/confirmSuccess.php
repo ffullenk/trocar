@@ -25,7 +25,7 @@
      Esta información será enviada al otro usuario, para completar la transacción</br>
      Nombre: <?php echo $sf_user->getProfile()->getFirstName().' '.$sf_user->getProfile()->getLastName()?></br>
      Direccion: <?php echo $sf_user->getProfile()->getAddress() ?></br>
-     <?php echo link_to('Confirmar Intercambio','trade/create?fid='.$yourhave->getId().'&tid='.$wanthave->getId())?></br>
+     <?php echo link_to('Confirmar Intercambio','intercambio/create?fid='.$yourhave->getId().'&tid='.$wanthave->getId())?></br>
      </p></td>
      </table>
      </div>

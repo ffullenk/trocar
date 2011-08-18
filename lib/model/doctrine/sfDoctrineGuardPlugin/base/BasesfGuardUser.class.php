@@ -24,6 +24,7 @@
  * @property Doctrine_Collection $Review
  * @property Doctrine_Collection $Rated
  * @property Doctrine_Collection $Rates
+ * @property Reputation $Reputation
  * 
  * @method string                getUsername()              Returns the current record's "username" value
  * @method string                getAlgorithm()             Returns the current record's "algorithm" value
@@ -44,6 +45,7 @@
  * @method Doctrine_Collection   getReview()                Returns the current record's "Review" collection
  * @method Doctrine_Collection   getRated()                 Returns the current record's "Rated" collection
  * @method Doctrine_Collection   getRates()                 Returns the current record's "Rates" collection
+ * @method Reputation            getReputation()            Returns the current record's "Reputation" value
  * @method sfGuardUser           setUsername()              Sets the current record's "username" value
  * @method sfGuardUser           setAlgorithm()             Sets the current record's "algorithm" value
  * @method sfGuardUser           setSalt()                  Sets the current record's "salt" value
@@ -63,6 +65,7 @@
  * @method sfGuardUser           setReview()                Sets the current record's "Review" collection
  * @method sfGuardUser           setRated()                 Sets the current record's "Rated" collection
  * @method sfGuardUser           setRates()                 Sets the current record's "Rates" collection
+ * @method sfGuardUser           setReputation()            Sets the current record's "Reputation" value
  * 
  * @package    trocar
  * @subpackage model
@@ -167,6 +170,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasMany('Rate as Rates', array(
              'local' => 'id',
              'foreign' => 'user_rater_id'));
+
+        $this->hasOne('Reputation', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable(array(
              ));

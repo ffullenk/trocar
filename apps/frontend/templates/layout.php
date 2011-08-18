@@ -140,7 +140,8 @@
     
     <div class="grid_8">
         <form method="post" action="<?php echo url_for('search/index');?>">
-        <input type="text" name="query" size="50"  value="<?php echo $sf_request->getParameter('query') ?>" id="search_keywords"/>
+         <input type="text" name="buscar" size="50" />
+       
     	<img id="loader" src="/images/loader.gif" style="vertical-align: middle; display: none" />
     	
     </div>
