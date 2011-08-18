@@ -32,23 +32,20 @@ class ProductTable extends Doctrine_Table
 	  }
 	}
 
-	public function getForLuceneQuery($query)
+	public function getForLuceneQuery($query, $category)
 	{
   		$hits = self::getLuceneIndex()->find($query);
  
 	  	$pks = array();
   		foreach ($hits as $hit)
- 	 	{
     		$pks[] = $hit->pk;
-  		}
  
   		if (empty($pks))
-  		{
   		  return array();
-  		}
  
-  		$q = $this->createQuery('j')
-   	 	->whereIn('j.id', $pks)
+  		$q = $this->createQuery('producto')
+   	 	->whereIn('producto.id', $pks)
+      ->andWhere('producto.id_category = ?', $category)
    	 	->limit(20);
 	  	return $q->execute();
 	}

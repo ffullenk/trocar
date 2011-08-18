@@ -23,8 +23,13 @@ class productsActions extends sfActions
   {
     $this->forwardUnless($query = $request->getParameter('query'), 'products', 'index');
  
+    //Este array almacenara todos los resultados de la busqueda
+    $this->resultados = array();
+    
     //busco con zend lucene
-    $this->products = ProductTable::getInstance()->getForLuceneQuery($query);
+    $this->products = ProductTable::getInstance()->getForLuceneQuery($query, 1);
+    foreach($this->products as $product)
+      array_push($this->resultados, $product);
     
     $q = $this->buildQuery("books", $query);
     $test = file_get_contents($q);
@@ -34,7 +39,9 @@ class productsActions extends sfActions
         $books_parse = $respuesta['items'];
         $this->books = array();
         foreach($books_parse as $book){
-          array_push($this->books, $this->getBook($book));
+          $nuevo = new Book();
+          $nuevo->createBook($book);
+          array_push($this->resultados, $nuevo);
         }
       }else{
         $this->getUser()->setFlash('resultados', 'No se encontraron resultados de busqueda');
@@ -135,32 +142,7 @@ class productsActions extends sfActions
     }
   }
   
-  private function getBook($book)
-  {
-    $newBook = new Book();
-    $newBook->setName($book['volumeInfo']['title']);
-    $newBook->setThumbnail(isset($book['volumeInfo']['imageLinks']) ? $book['volumeInfo']['imageLinks']['thumbnail'] : 'no-product.jpg');
-    $autores = $book['volumeInfo']['authors'];
-    $autor_tmp = "";
-    foreach($autores as $autor)
-    {
-      //he observado que a veces un solo autor contiene a varios (separados por ,)
-      if(strpos($autor, ",") !== false)
-      {
-        $autor_especial = explode(",", $autor);
-        foreach($autor_especial as $a)
-          $autor_tmp .= $a.", ";
-      }
-      else
-      {
-        $autor_tmp .= $autor.", ";
-      }
-    }
-    $newBook->setAuthors(substr($autor_tmp, 0, -2));
-    
-    return $newBook;
-  }
-  
+
   private function buildQuery($type, $search_term)
   {
     switch($type)
