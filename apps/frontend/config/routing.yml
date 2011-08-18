@@ -22,7 +22,6 @@ sf_guard_signout:
   url: /logout
   params: { module: sfGuardAuth, action: signout }
   
-
 products_search:
   url:   /search.:sf_format
   param: { module: products, action: search, sf_format: html }

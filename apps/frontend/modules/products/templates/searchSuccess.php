@@ -11,6 +11,23 @@
   <div class="clear" style="margin:10px;"></div>
 
    <div style="margin:10px;">
+     <?php if(isset($books)): ?>
+      <?php foreach($books as $book): ?>
+          <p style="text-align:center;margin-bottom:0px;">
+            <a href="#" style="font-size:16px;">
+            <b><?php echo $book->getName();?> &mdash; <?php	echo $book->printAuthors();?></b>
+            </a>
+          <?php 
+            echo image_tag($book->getThumbnail(),'style="margin:5px;margin-bottom:10px;"');
+          ?>
+          Remover de wantlist
+          </p>
+        </div>
+        
+			<?php
+        endforeach;
+      endif;?>
+     
 	<?php foreach ($products as $product): ?>
 
      
