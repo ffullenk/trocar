@@ -36,10 +36,12 @@ class TradeTable extends Doctrine_Table
     	->createQuery('u')
     	->select('Trade.*')
     	->from('Trade,sfGuardUser,Havelist')
-    	->where('sfGuardUser.id = ?',$user)
+    	->where('sfGuardUser.id = ?',$user->getProfile()->getUserId())
     	->andWhere('Havelist.user_id = sfGuardUser.id')
     	->andWhere('Trade.have_to_id = Havelist.id')
-    	->andWhere('Trade.state = ?','waiting');
+    	->orWhere('Trade.have_from_id = Havelist.id')
+    	->andWhere('Trade.state = ?','accepted')
+    	->groupBy('Trade.id');
     	return $q->execute();
     }
     
@@ -64,5 +66,17 @@ class TradeTable extends Doctrine_Table
     	return $result[0]['num_trades'];
     	
     }
+    
+    public static function getAcceptedUnRatedTrades($user)
+    {
+    	$sql = 'SELECT * FROM trade WHERE NOT EXISTS (SELECT * FROM rate WHERE rate.trade_id = trade.id) AND (trade.user_1_id = 1 OR trade.user_2_id = 1)';
+    	$q = Doctrine_Manager::getInstance()->getCurrentConnection();
+    	$result = $q->execute($sql);
+    	 
+    	return $result;
+    	 
+    }
+    
+    
     
 }
