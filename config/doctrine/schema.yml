@@ -165,98 +165,6 @@ Wantlist:
       type:         one
       onDelete:     CASCADE
 
-Review:
-  tableName: review
-  actAs:
-    Timestampable: ~
-  columns:
-    id:                       {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
-    user_id:                  {  type: integer,  primary: true,  notnull: true  }
-    product_id:               {  type: integer,  primary: true,  notnull: true  }
-    text:                     {  type: string(150)                              }
-  relations:
-    Product:
-      class:        Product
-      local:        product_id
-      foreign:      id
-      type:         one
-      foreignType:  many
-      foreignAlias: Review
-      onDelete:     CASCADE
-    User:
-      class:        sfGuardUser
-      local:        user_id
-      foreign:      id
-      foreignAlias: Review
-      foreignType:  many
-      type:         one
-      onDelete:     CASCADE
-
-Trade:
-  tableName: trade
-  actAs:
-    Timestampable: ~
-  columns:
-    id: { type: integer, primary: true, autoincrement: true, notnull: true }
-    have_from_id: { type: integer, notnull: true }
-    have_to_id: { type: integer, notnull: true }
-    state: 
-      type: enum
-      values: [accepted,rejected,waiting]
-  relations:
-    Have_from:
-      class:        Havelist
-      local:        have_from_id
-      foreign:      id
-      foreignAlias: Trade_1
-      foreignType:  one
-      type:         one
-      onDelete:     CASCADE
-    Have_to:
-      class:        Havelist
-      local:        have_to_id
-      foreign:      id
-      foreignAlias: Trade_2
-      foreignType:  one
-      type:         one
-      onDelete:     CASCADE
-Rate:
-  tableName: rate
-  actAs:
-    Timestampable: ~
-  columns:
-    id:                       {  type: integer, primary: true, notnull: true }
-    intercambio_id:           {  type: integer, primary: true, notnull: true  }
-    user_rated_id:            {  type: integer, primary: true, notnull: true  }
-    user_rater_id:            {  type: integer, primary: true, notnull: true  }
-    feedback:                 {  type: float }
-    satisfaction:             {  type: float }
-    credibility:              {  type: float }
-    text:                     {  type: string(150) }
-  relations:
-    User_rated:
-      class:        sfGuardUser
-      local:        user_rated_id
-      foreign:      id
-      foreignAlias: Rated
-      foreignType:  many
-      type:         one
-      onDelete:     CASCADE
-    User_rater:
-      class:        sfGuardUser
-      local:        user_rater_id
-      foreign:      id
-      foreignAlias: Rates
-      foreignType:  many
-      type:         one
-      onDelete:     CASCADE
-    Trade:
-      class:        Trade
-      local:        intercambio_id
-      foreign:      id
-      owningSide:   true
-      onDelete:     CASCADE
-      
 Reputation:
   tableName: reputation
   actAs:
@@ -265,11 +173,12 @@ Reputation:
     id:                       {  type: integer,  primary: true,  autoincrement: true, notnull: true  }
     user_id:                  {  type: integer,  primary: true,  notnull: true  }
     reputation:               {  type: float                                    }      
-    intercambios:              {  type: integer                                 }
+    num_trades:                   {  type: integer                                  }
+    
   indexes:
     reputation_user_uniq:
-      fields: user_id
-      type: unique
+       fields: user_id
+       type: unique
   relations:
     User:
       class:        sfGuardUser
@@ -278,4 +187,102 @@ Reputation:
       foreignAlias: Reputation
       foreignType:  one
       type:         one
+      onDelete:     CASCADE  
+Trade:
+  tableName: trade
+  actAs:
+    Timestampable: ~
+  columns:
+    id:                     { type: integer,autoincrement: true, primary: true, notnull: true  }
+    have_from_id:           { type: integer                               }
+    have_to_id:             { type: integer                               }
+    user_1_id:              { type: integer }
+    user_2_id:              { type: integer }
+    state: 
+      type: enum
+      values: [accepted,rejected,waiting]
+      
+  indexes:
+    trade_have_uniq:
+       fields: [have_from_id,have_to_id]
+       type: unique
+    trade_user_uniq:
+       fields: [user_1_id,user_2_id]
+       type: unique
+  relations:
+    HaveFrom:
+      class:        Havelist
+      local:        have_from_id
+      foreign:      id
+      foreignAlias: Trade_1
+      foreignType:  one
+      type:         one
       onDelete:     CASCADE
+    HaveTo:
+      class:        Havelist
+      local:        have_to_id
+      foreign:      id
+      foreignAlias: Trade_2
+      foreignType:  one
+      type:         one
+      onDelete:     CASCADE
+    User1:
+      class:        sfGuardUser
+      local:        user_1_id
+      foreign:      id
+      foreignAlias: Trades
+      foreignType:  many
+      type:         one
+    User2:
+      class:        sfGuardUser
+      local:        user_2_id
+      foreign:      id
+      foreignAlias: Trades
+      foreignType:  many
+      type:         one
+      
+Rate:
+  tableName: rate
+  actAs:
+    Timestampable: ~
+  columns:
+    id:                       { type: integer, primary: true, notnull: true, autoincrement: true }
+    user_rated_id:            {  type: integer,  notnull: true  }
+    user_rater_id:            {  type: integer,  notnull: true  }
+    trade_id:                 {  type: integer,  notnull: true  }
+    feedback:                 {  type: float                  }
+    satisfaction:             {  type: float                  }
+    credibility:              {  type: float                  }
+    text:                     {  type: string(150)            }
+    
+  indexes:
+    rate_uniq:
+       fields: [user_rated_id,user_rater_id,trade_id]
+       type: unique
+       
+  relations:
+    UserRated:
+      class:        sfGuardUser
+      local:        user_rated_id
+      foreign:      id
+      foreignAlias: Rated
+      foreignType:  many
+      type:         one
+      onDelete:     CASCADE
+    
+    UserRater:
+      class:        sfGuardUser
+      local:        user_rater_id
+      foreign:      id
+      foreignAlias: Rates
+      foreignType:  many
+      type:         one
+      onDelete:     CASCADE
+    TradeRated:
+      class:        Trade
+      foreign:      id
+      local:        trade_id
+      type:         one
+      onDelete:     CASCADE
+      foreignAlias: Rates
+      foreignType:  many

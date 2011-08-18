@@ -23,7 +23,29 @@ class productsActions extends sfActions
   {
     $this->forwardUnless($query = $request->getParameter('query'), 'products', 'index');
  
-    $this->products = ProductTable::getInstance()->getForLuceneQuery($query);
+    //Este array almacenara todos los resultados de la busqueda
+    $this->resultados = array();
+    
+    //busco con zend lucene
+    $this->products = ProductTable::getInstance()->getForLuceneQuery($query, 1);
+    foreach($this->products as $product)
+      array_push($this->resultados, $product);
+    
+    $q = $this->buildQuery("books", $query);
+    $test = file_get_contents($q);
+    $respuesta = json_decode($test,true);
+
+      if(isset($respuesta['kind'])){
+        $books_parse = $respuesta['items'];
+        $this->books = array();
+        foreach($books_parse as $book){
+          $nuevo = new Book();
+          $nuevo->createBook($book);
+          array_push($this->resultados, $nuevo);
+        }
+      }else{
+        $this->getUser()->setFlash('resultados', 'No se encontraron resultados de busqueda');
+      }
     
     if ($request->isXmlHttpRequest())
   {
@@ -117,6 +139,32 @@ class productsActions extends sfActions
       $product = $form->save();
 
       $this->redirect('products/edit?id='.$product->getId());
+    }
+  }
+  
+
+  private function buildQuery($type, $search_term)
+  {
+    switch($type)
+    {
+      case "books":
+          $query = 'https://www.googleapis.com/books/v1/volumes?';
+          $query .= 'q='.urlencode($search_term);
+          $query .= '&maxResults=10';
+          return $query;
+        break;
+      case "music":
+          $query = 'http://ws.audioscrobbler.com/2.0/?method=album.search&format=json&api_key=b25b959554ed76058ac220b7b2e0a026';
+          $query .= '&album='.urlencode($search_term);
+          return $query;
+        break;
+      case "movies":
+          $query = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=vgpq8cvgfs6m5gsfnrypzqup&page_limit=10';
+          $query .= '&q='.urlencode($search_term);
+          return $query;
+        break;
+      default:
+        return null;
     }
   }
 }

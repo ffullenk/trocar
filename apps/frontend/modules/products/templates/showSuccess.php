@@ -64,7 +64,7 @@
         
       </div>
       <div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#xfbml=1">
-          </script><fb:comments href="trocar.cl" num_posts="4" width="578"></fb:comments>
+          </script><fb:comments href=<?php echo url_for('products/show?id='.$product->getId())?> num_posts="4" width="578"></fb:comments>
   	 <p style="margin-bottom:0px;">Reviews:</p>
          
 			<div >

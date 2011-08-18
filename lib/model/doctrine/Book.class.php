@@ -11,52 +11,57 @@
  */
 class Book extends BaseProduct
 {
-  private $name;
-  private $authors;
-  private $thumbnail;
-  private $attrib = array();
+  //se construye el objeto a partir de la respuesta JSON parseada a un array devuelta por
+  //la API de google books
+  public function createBook($book)
+  {
+    $this->setId(1);
+    $this->setName($book['volumeInfo']['title']);
+    $this->setPicture(isset($book['volumeInfo']['imageLinks']) ? $book['volumeInfo']['imageLinks']['thumbnail'] : 'no-product.jpg');
     
+    $autores = $book['volumeInfo']['authors'];
+    $autor_tmp = "";
+    foreach($autores as $autor)
+    {
+      //he observado que a veces un solo autor contiene a varios (separados por ,)
+      if(strpos($autor, ",") !== false)
+      {
+        $autor_especial = explode(",", $autor);
+        foreach($autor_especial as $a)
+          $autor_tmp .= $a.", ";
+      }
+      else
+        $autor_tmp .= $autor.", ";
+    }
+    
+    $this->setAuthors(substr($autor_tmp, 0, -2));
+  }
+  
+  //Usare el atributo 'model' de la clase Producto para almacenar los autores
+  //lo siguiente es solo un poco de magia ;)
+  public function setAuthors($autor)
+  {
+    $this->model = $autor;
+  }
+  
+  public function getAuthors()
+  {
+    return $this->model;
+  }
+  
   public function printAuthors($size = 2)
   {
     $final = "";
-    $cant = 0;
     $autor = explode(",", $this->getAuthors());
-    foreach($autor as $a)
+    foreach($autor as $key => $a)
     {
-      if($cant < $size)
+      if($key < $size)
           $final .= $a.", ";
       else
         break;
-      $cant++;
     }
     return substr($final, 0, -2);
   }
-  
-  /** METODOS MAGICOS **/
-  public function __call($method, $args)
-  {
-    $methodType = substr($method, 0, 3);
-    $attribName = ucfirst(substr($method, 3));
 
-    if($methodType == "set")
-    {
-     $this->setAttrib($attribName, $args[0]);
-    }
-
-    if( $methodType == "get" )
-    {
-     return $this->getAttrib($attribName);
-    }
-  }
-
-  private function setAttrib($attribName, $value)
-  {
-    $this->attrib[$attribName] = $value;
-  }
-
-  private function getAttrib($attribName)
-  {
-    return $this->attrib[$attribName];
-  }
 }
 ?>

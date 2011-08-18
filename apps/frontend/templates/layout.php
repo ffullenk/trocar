@@ -1,225 +1,239 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
 <head>
   <?php use_javascript('search.js') ?>
-  <?php use_javascript('jquery-1.6.2.min.js') ?>
   <?php include_http_metas() ?>
   <?php include_metas() ?>
   <?php include_title() ?>
-  <link rel="shortcut icon" href="/favicon.ico" />
   <?php include_stylesheets() ?>
   <?php include_javascripts() ?>
-    
+  
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#menu-nav li').click(function(){
+		$('.selected').removeClass('selected');
+		$(this).addClass('selected');
+		var selector = '#submenu-'+$(this).attr('id')+'-data';
+		$(selector).fadeIn('slow').siblings().hide();
+	});
+});
+</script>
 </head>
 
 <body>
-    <script src="http://platform.twitter.com/anywhere.js?id=OZIdqD0P8SKU47MYZDXg&v=1" type="text/javascript"></script>
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-  {lang: 'es-419'}
-</script>
-  <div id="fb-root"></div>
-  <script>
-    FB.init({
-      appId  : '179663705425430',
-      status : true, 
-      cookie : true, 
-      xfbml  : true  
-    });
-    
-    FB.Event.subscribe('auth.sessionChange', function(response) {
-      if (response.session) {
-        // el usuario esta logeado, se procesa su login en la plataforma
-        window.location="<?php echo url_for('@facebook_connect',true); ?>";
-      } else {
-        // no hay sesion de facebook, retornar al home
-        window.location="<?php echo url_for('@sf_guard_signout',true); ?>";
-      }
-    });
-  </script>
 
-<script type="text/javascript">
- 
-  twttr.anywhere(function (T) {
-    T("#twitterlogin").connectButton();
-  });
- 
-</script>
+<!-- header -->
+<div class="container_16">
+	<div id="header" class="grid_16">
+		<ul id="menu-user">
+			<li><a href="#">Home</a></li>
+			<li><strong>LOGIN</strong></li>
+		</ul>
+		
+		<ul id="menu-social">
+			<li><a href="#"><?php echo image_tag('facebook.png','size=24x24 alt="facebook"');?></a></li>
+			<li><a href="#"><?php echo image_tag('twitter.png','size=24x24 alt="twitter"');?></a></li>
+			<li><a href="#"><?php echo image_tag('rss.png','size=24x24 alt="rss"');?></a></li>
+		</ul>
+	</div>
+	
+	<div class="grid_9 container-utils">
+		<p id="logo"><?php echo image_tag('logo.png','alt="Trocar.cl"');?></p>
+	</div>
+	
+	<div class="grid_7 container-utils">
+		<?php echo image_tag('twitter_bird.png','id="twitter-bird" alt="Siguenos en twitter"');?>
+    <?php echo image_tag('user.png','id="user-img" alt="Usuarios trocando"');?>
+    <?php echo image_tag('testimonial.png','id="testimonial-img" alt="Danos tu opinion"');?>
+	</div>
+	
+	<div class="grid_1 omega menu-nav-border"></div>
+	
+	<div class="grid_5 alpha omega">
+		<ul id="menu-nav">
+			<li class="selected" id="menu1">Want List</li>
+			<li id="menu2">Have List</li>
+			<li id="menu3" class="last-child">Intercambios</li>
+		</ul>
+		<div id="complete-border"></div>
+	</div>
+	
+	<div class="grid_10 alpha menu-nav-border" style="width:610px;">
+		<p>
+			<a href="#">Siguenos en twitter</a>
+			<a href="#" id="usuarios-trocando">25 usuarios trocando</a>
+			<a href="#" id="dar-opinion">Danos tu opini&oacute;n</a>
+		</p>
+	</div>
+	
+	<div class="grid_16" id="submenu-nav">
+		<div id="submenu-data">
+			<ul id="submenu-menu1-data">
+				<li>Agregar Productos</li>
+				<li>Ver mis productos</li>
+				<li>Explorar otros usuarios</li>
+			</ul>
+			
+			<ul id="submenu-menu2-data">
+				<li>Agregar productos</li>
+				<li>Editar mi have list</li>
+				<li>Explorar otros usuarios</li>
+			</ul>
+	
+			<ul id="submenu-menu3-data">
+				<li>En espera</li>
+				<li>Realizados</li>
+				<li>Posibles intercambios</li>
+			</ul>
+		</div>
+		
+		<form>
+			<input type="text" name="param" style="width:300px;">
+			<select>
+				<option>Categorias</option>
+			</select>
+			<input type="submit" name="buscar" value="Buscar">
+		</form>
+	</div>
+</div>
+<!-- end header -->
 
+<!-- content -->
+<div class="container_16">
+	<div class="grid_16 separator"></div>
   
-  <script type="text/javascript">
-    $(document).ready(function(){
-        $('#isesion').click(function(){
-          if ($("#login").is(":hidden")){
-            $("#login").slideDown("slow");
-          }
-          else{
-            $("#login").slideUp("slow");
-          }
-        });        
-    })
-  </script>
+  	<!-- Menu lateral -->
+	<div class="grid_4">
+	
+		<div class="sidebar-title">
+			<h3>M&aacute;s popular</h3>
+		</div>
+		
+		<div class="sidebar-content">
+		
+			<div class="popular-element" id="element-first">
+				<div class="popular-element-image">
+          <?php echo image_tag('catalogo.png','id="img-first" alt="catalogo"');?>
+				</div>
+				<div class="popular-element-content">
+					<h4 id="content-first">Cat&aacute;logo</h4>
+					<p>Revisa todos los art&iacute;culos a tu disposici&oacute;n</p>
+				</div>
+			</div>
+			
+			<div class="lines"><p>-------------------------------------------</p></div>
+			
+			<div class="popular-element">
+				<div class="popular-element-image">
+					<?php echo image_tag('libros.png','alt="libros"');?>
+				</div>
+				<div class="popular-element-content">
+					<h4>Cat&aacute;logo</h4>
+					<p>Revisa todos los art&iacute;culos a tu disposici&oacute;n</p>
+				</div>
+			</div>
+			
+			<div class="lines"><p>-------------------------------------------</p></div>
 
+			<div class="popular-element">
+				<div class="popular-element-image">
+          <?php echo image_tag('musica.png','alt="musica"');?>
+				</div>
+				<div class="popular-element-content">
+					<h4>Cat&aacute;logo</h4>
+					<p>Revisa todos los art&iacute;culos a tu disposici&oacute;n</p>
+				</div>
+			</div>
+			
+			<div class="lines"><p>-------------------------------------------</p></div>
+
+			<div class="popular-element" id="element-last">
+				<div class="popular-element-image">
+          <?php echo image_tag('peliculas.png','alt="peliculas"');?>
+				</div>
+				<div class="popular-element-content">
+					<h4>Cat&aacute;logo</h4>
+					<p>Revisa todos los art&iacute;culos a tu disposici&oacute;n</p>
+				</div>
+			</div>
+
+		</div>
+		
+		<div class="separator"></div>
+		
+		<div class="sidebar-title">
+			<h3>Comunidad</h3>
+		</div>
+		
+		<div class="sidebar-content">	
+			<ul id="comunidad" class="arrow-list">
+				<li><a href="#">Noticias</a></li>
+				<li><a href="#">Blog</a></li>
+				<li><a href="#">Grupos</a></li>
+				<li><a href="#">Feedback</a></li>
+			</ul>			
+		</div>
+		
+		<div class="separator"></div>
+		
+		<div class="sidebar-title">
+			<h3>Ayuda</h3>
+		</div>
+		
+		<div class="sidebar-content">	
+			<ul id="comunidad" class="arrow-list">
+				<li><a href="#">FAQ</a></li>
+				<li><a href="#">¿Como funciona?</a></li>
+				<li><a href="#">Gu&iacute;a del usuario</a></li>
+			</ul>			
+		</div>
+
+	</div>
+	<!-- Fin Menu lateral -->
   
-  <div class="container_16">
-    <div class="grid_16 alpha omega">
-      <div class="grid_8 alpha">
-        <div id="social-menu">
-          <ul>
-            <li><a href="http://www.facebook.com/pages/trocarcl/125428490873626"><?php echo image_tag('facebook.png');?></a></li>
-            <li><a href="http://www.twitter.com/trocarcl"><?php echo image_tag('twitter.png');?></a></li>
-             </ul>
-          <g:plusone size="medium"></g:plusone>
-            <a href="http://twitter.com/trocarcl" class="twitter-follow-button" data-show-count="false" data-lang="es">Follow @trocarcl</a>
-<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
-            <iframe src="http://www.facebook.com/plugins/like.php?app_id=241244122553572&amp;href=http%3A%2F%2Fwww.trocar.cl&amp;send=false&amp;width="100";layout="button_count"&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:280px; height:30px;float:left;padding-top:4px;" allowTransparency="true"></iframe>
-        	
-        </div>
-      </div>
+  <?php echo $sf_content ?>
   
-    <?php use_helper('I18N') ?>
-    <?php if (!$sf_user->isAuthenticated()): ?>
-      <div class="grid_8 omega" style="padding-top:6px;">
-        <div id="social-menu">
-          <ul>
-            <li>Bienvenido!</li>
-          </ul>
-        </div>
-        
-        <div class="left"><fb:login-button perms="email"></fb:login-button></div>
- <span id="twitterlogin"></span>
-        <div id="social-menu" class="left">
-          <ul>
-            <li><?php echo link_to('REGISTRARSE', 'register/index');?></li>
-            <li>|</li>
-            <li><a href="#" id="isesion">INICIAR SESI&Oacute;N</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div id="login" style="z-index:50000;position:absolute;top: 30px;left:650px;float:right;border: solid 1px #a2a2a2;background: #fff;display:none;">
-        <?php echo get_partial('sfGuardAuth/signin_form', array('form' => new sfGuardFormSignin())); ?>
-      </div>
-      <?php endif ?>
-      
-      <?php if ($sf_user->isAuthenticated()): ?>
-        <div class="grid_8 omega" style="padding-top:6px;">
-        <div id="social-menu">
-          <ul>
-            <li>Bienvenido! 
-            <b><?php
-              $name = $sf_user->getProfile()->getFirstName(); 
-              echo isset($name) ? $name : $sf_user->getUsername(); ?>
-            </b>
-            </li>
-            <li><?php echo link_to('Tu Perfil', 'user/editProfile'); ?></li>
-          </ul>
-        </div>
-    
-        <div id="social-menu" class="left">
-          <ul>
-            <li><?php echo link_to('Tu WantList', 'wantlist/index'); ?></li>
-            <li>&nbsp;</li>
-            <li>&nbsp;</li>
-            <li><?php echo link_to('SALIR','@sf_guard_signout'); ?></li>
-          </ul>
-        </div>
-      </div>
-      <?php endif ?>
-  
-    </div>
-   
-    <div class="clear" style="margin:20px;"></div>
-    
-    <div class="grid_16 alpha omega">
-      <?php echo image_tag('cinta-logo.png');?>
-    </div>
-    
-    <div class="clear" style="margin:10px;"></div>
-    
-    <div class="grid_1 alpha"><p>&nbsp;</p></div>
-    
-    <div class="grid_8">
-        <form method="post" action="<?php echo url_for('search/index');?>">
-         <input type="text" name="buscar" size="50" />
-       
-    	<img id="loader" src="/images/loader.gif" style="vertical-align: middle; display: none" />
-    	
-    </div>
-    
-    <div class="grid_3">
-        <select name="search_type">
-          <option value="books">Libros</option>
-          <option value="music">M&uacute;sica</option>
-          <option value="movies">Pel&iacute;culas</option>
-          <option value="movies">Otras categor&iacute;as...</option>
-        </select>
-    </div>
-    
-    <div class="grid_2">
-        <input type="submit" name="enviar" id="submit" value="BUSCAR">
-      </form>
-    </div>
-    
-    <div class="grid_2 omega"><p>&nbsp;</p></div>
-    
-    <!-- Menu lateral -->
-    <div class="grid_1 second-line alpha"></div>
-   
-    <div class="grid_4">
-      
-      <div class="grid_4 alpha menu-title">
-        <p>Menu principal</p>
-      </div>
-       
-      <div class="grid_4 alpha container" id="sidebar">
-         
-        <div>
-          <?php echo image_tag('catalogo.png','class="sidebar-image"');?>
-          <p class="sidebar-text">
-            <b><?php echo link_to('Cat&aacute;logo', 'products/index'); ?></b><br><br>
-            <span>Revisa todos los articulos a tu disposici&oacute;n</span>
-          </p>
-        </div>
-        <?php echo image_tag('lines.png');?>
-         
-        <div>
-          <?php echo image_tag('libros.png','class="sidebar-image"');?>
-          <p class="sidebar-text">
-            <b>Libros</b><br><br>
-            <span>Buscas libros o deseas intercambiar alguno</span>
-          </p>
-        </div>
-        <?php echo image_tag('lines.png');?>
-         
-        <div>
-          <?php echo image_tag('musica.png','class="sidebar-image"');?>
-          <p class="sidebar-text">
-            <b>M&uacute;sica</b><br><br>
-            <span>Intercambia tu m&uacute;sica favorita mediante trocar</span>
-          </p>
-        </div>
-        <?php echo image_tag('lines.png');?>
-         
-        <div>
-          <?php echo image_tag('peliculas.png','class="sidebar-image"');?>
-          <p class="sidebar-text">
-            <b>Pel&iacute;culas</b><br><br>
-            <span>Busca e intercambia todo el cine que desees</span>
-          </p>
-        </div>
-         
-      </div>
-       
-    </div>
-      
-      
-    <?php echo $sf_content ?>
-      
-    <div class="clear" style="margin:15px;"></div>
-    
-    <div class="grid_16 alpha omega" id="footer"><p></p></div>
-    
-  </div>
+</div>
+<!-- fin footer -->
+
+<!-- footer -->
+<div class="container_16">
+	 <div class="grid_16 separator"></div>
+	<div id="footer" class="grid_16">
+		<ul>
+			<li><a href="#">dRIM</a></li>
+			<li>|</li>
+			<li><a href="#">Blog</a></li>
+			<li>|</li>
+			<li><a href="#">FAQ</a></li>
+			<li>|</li>
+			<li><a href="#">Gu&iacute;a del usuario</a></li>
+			<li>|</li>
+			<li><a href="#">Cont&aacute;ctanos</a></li>
+			<li>|</li>
+			<li><a href="#">Twitter</a></li>
+			<li>|</li>
+			<li><a href="#">Facebook</a></li>
+			<li>|</li>
+			<li><a href="#">Rss</a></li>
+		</ul>
+		<p style="text-align:center;">Copyright &copy; Trocar.cl 2011. Todos los derechos reservados.</p>
+	</div>
+</div>
+<!-- fin footer -->
+
+<form method="post" action="<?php echo url_for('search/index');?>">
+<input type="text" name="query" size="50" value="<?php echo $sf_request->getParameter('query') ?>" id="search_keywords"/>
+<img id="loader" src="/images/loader.gif" style="vertical-align: middle; display: none" />
+<select name="search_type">
+<option value="books">Libros</option>
+<option value="music">M&uacute;sica</option>
+<option value="movies">Pel&iacute;culas</option>
+<option value="movies">Otras categor&iacute;as...</option>
+</select>
+<input type="submit" name="enviar" id="submit" value="BUSCAR">
+</form>
+>>>>>>> 01dfffe00d730c588b4134b5b9763aaf4b1b1092
 
 </body>
 </html>

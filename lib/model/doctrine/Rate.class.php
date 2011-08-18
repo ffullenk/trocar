@@ -12,4 +12,5 @@
  */
 class Rate extends BaseRate
 {
+
 }

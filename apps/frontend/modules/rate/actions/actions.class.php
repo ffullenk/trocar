@@ -10,40 +10,136 @@
  */
 class rateActions extends sfActions
 {
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
-  public function executeIndex(sfWebRequest $request)
+	public function executeProfile(sfWebRequest $request)
+	{
+	
+		$this->forward404Unless($user = sfGuardUserTable::getInstance()->find(array($request->getParameter('uid'))), $request->getParameter('uid'));
+		$reputation = $user->getReputation();
+		
+		$this->numIntercambios = count($reputation->getNumTrades());
+		$this->reputation = $reputation->getReputation();
+		$this->fechaRegistro = $user->getDateTimeObject('created_at')->format('U');
+		$this->nombreUsuario = $user->getProfile()->getFirstName()." ".$user->getProfile()->getLastName();
+		
+		$this->trades = $user->getTrades();
+		
+		$this->rated = $user->getRated();
+		
+	}
+	
+	public function executePending(sfWebRequest $request){
+		
+		$user = $this->getUser()->getGuardUser();
+		$tradesAccepted = TradeTable::getAcceptedTrades($user);
+		$rates = $user->getRates();
+				
+		$this->trades = TradeTable::getAcceptedUnRatedTrades($user);
+		
+	}
+	
+	public function executeRateTrade(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+  		$this->forward404Unless($trade = TradeTable::getInstance()->find(array($request->getParameter('tid'))), $request->getParameter('tid'));
+		
+    	$user = $this->getUser()->getGuardUser();
+    	
+    	$this->trade = $trade;
+    	   
   }
-  
-  /**
-   * metodo que actualiza el valor del campo reputation en la clase sfGuardUserProfile
-   * @param sfWebRequest $request
-   */
-  public function executeActualizaReputacionUsuario(sfWebRequest $request)
+  public function executeShowrates(sfWebRequest $request)
   {
-  	$this->forward404Unless($request->hasParameter('iduser'));
-  	$this->forward404Unless($request->hasParameter('idintercambio'));
   	
-  	$idUser    = $request->getParameter('userid');
-  	$user 	   = sfGuardUserTable::getInstance()->find(array($idUser));
-  	
-  	$cantIntercambios = 1000;  //cambiar cuando se agregue modulo/clase de intercambios
-  	
-  	$sumSatisfaction = $user->get
-  	
-  	
-  	
-  	
+  	$user = $this->getUser()->getGuardUser();
+  	$this->rates = $user->getRates();
+  
   }
-  
- 
-  
-  
-  
-  
+	
+	
+	
+	
+	public function executeIndex(sfWebRequest $request)
+  {
+    $this->rates = Doctrine_Core::getTable('Rate')
+      ->createQuery('a')
+      ->execute();
+    
+    
+    
+    
+    
+  }
+
+  public function executeShow(sfWebRequest $request)
+  {
+    $this->rate = Doctrine_Core::getTable('Rate')->find(array($request->getParameter('intercambio_id'),
+                                                         $request->getParameter('user_rated_id'),
+                                                         $request->getParameter('user_rater_id')));
+    $this->forward404Unless($this->rate);
+  }
+
+  public function executeNew(sfWebRequest $request)
+  {
+    $this->form = new RateForm();
+  }
+
+  public function executeCreate(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod(sfRequest::POST));
+
+    $this->form = new RateForm();
+
+    $this->processForm($request, $this->form);
+
+    $this->setTemplate('new');
+  }
+
+  public function executeEdit(sfWebRequest $request)
+  {
+    $this->forward404Unless($rate = Doctrine_Core::getTable('Rate')->find(array($request->getParameter('intercambio_id'),
+                                   $request->getParameter('user_rated_id'),
+                                   $request->getParameter('user_rater_id'))), sprintf('Object rate does not exist (%s).', $request->getParameter('intercambio_id'),
+                                   $request->getParameter('user_rated_id'),
+                                   $request->getParameter('user_rater_id')));
+    $this->form = new RateForm($rate);
+  }
+
+  public function executeUpdate(sfWebRequest $request)
+  {
+    $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
+    $this->forward404Unless($rate = Doctrine_Core::getTable('Rate')->find(array($request->getParameter('intercambio_id'),
+                                   $request->getParameter('user_rated_id'),
+                                   $request->getParameter('user_rater_id'))), sprintf('Object rate does not exist (%s).', $request->getParameter('intercambio_id'),
+                                   $request->getParameter('user_rated_id'),
+                                   $request->getParameter('user_rater_id')));
+    $this->form = new RateForm($rate);
+
+    $this->processForm($request, $this->form);
+
+    $this->setTemplate('edit');
+  }
+
+  public function executeDelete(sfWebRequest $request)
+  {
+    $request->checkCSRFProtection();
+
+    $this->forward404Unless($rate = Doctrine_Core::getTable('Rate')->find(array($request->getParameter('intercambio_id'),
+                                   $request->getParameter('user_rated_id'),
+                                   $request->getParameter('user_rater_id'))), sprintf('Object rate does not exist (%s).', $request->getParameter('intercambio_id'),
+                                   $request->getParameter('user_rated_id'),
+                                   $request->getParameter('user_rater_id')));
+    $rate->delete();
+
+    $this->redirect('rate/index');
+  }
+
+  protected function processForm(sfWebRequest $request, sfForm $form)
+  {
+    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
+    if ($form->isValid())
+    {
+      $rate = $form->save();
+
+      $this->redirect('rate/edit?intercambio_id='.$rate->getIntercambioId().'&user_rated_id='.$rate->getUserRatedId().'&user_rater_id='.$rate->getUserRaterId());
+    }
+  }
 }

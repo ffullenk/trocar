@@ -10,9 +10,9 @@
   
   <div class="clear" style="margin:10px;"></div>
 
-   <div style="margin:10px;">
-	<?php foreach ($products as $product): ?>
-
+   <div style="margin:10px;">    
+     
+	<?php foreach ($resultados as $product): ?>
      
           
               <div class="menu-title">
@@ -35,7 +35,7 @@
                       <div id="flash2"></div>
                       <div id="wantlist" style="width:100%;">
                       <?php
-                      if($product->usuarioHasWantedProduct($sf_user->getGuardUser()->getId())){
+                      if(method_exists($product, "usuarioHasWantedProduct") && $product->usuarioHasWantedProduct($sf_user->getGuardUser()->getId())){
                       	?>
                       			<a href="#" onclick="javascript:wantlist(<?php echo $product->getId() ?>,true)">Ya no lo quiero</a>
                            	 <?php  
@@ -49,18 +49,9 @@
                                    
                       &mdash;
                           
-                          
-                          
-                          
-                          
                           <?php echo link_to_unless($product->usuarioHasProduct($sf_user->getGuardUser()->getId()),
                                       'Lo tengo', 'oferto/add?id='.$product->getId()); 
                           ?>
-                    
-                    
-                    
-                    
-                    
                     
                     </td>
                   </tr>

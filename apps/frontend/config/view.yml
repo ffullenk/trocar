@@ -12,9 +12,9 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [reset.css, 960_cols.css, text.css, trocar.css]
+  stylesheets:    [reset.css, text.css, grid.css, trocar.css, jquery.qtip.min.css,]
 
-  javascripts:    [facebook.js]
+  javascripts:    [jquery.min.js, jquery.qtip.min.js, facebook.js]
 
   has_layout:     true
   layout:         layout
