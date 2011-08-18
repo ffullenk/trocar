@@ -33,7 +33,7 @@ class rateActions extends sfActions
 		$tradesAccepted = TradeTable::getAcceptedTrades($user);
 		$rates = $user->getRates();
 				
-		$this->trades = TradeTable::getAcceptedUnRatedTrades($user);
+		$this->trades = TradeTable::getInstance()->getAcceptedUnRatedTrades($user);
 		
 	}
 	

@@ -67,13 +67,39 @@ class TradeTable extends Doctrine_Table
     	
     }
     
-    public static function getAcceptedUnRatedTrades($user)
+    public function getAcceptedUnRatedTrades($user)
     {
-    	$sql = 'SELECT * FROM trade WHERE NOT EXISTS (SELECT * FROM rate WHERE rate.trade_id = trade.id) AND (trade.user_1_id = 1 OR trade.user_2_id = 1)';
+    	$sql = 'SELECT * FROM trade WHERE NOT EXISTS (SELECT * FROM rate WHERE rate.trade_id = trade.id)
+    	 AND (trade.user_1_id = '.$user->getProfile()->getUserId().' OR trade.user_2_id = '.$user->getProfile()->getUserId().')';
     	$q = Doctrine_Manager::getInstance()->getCurrentConnection();
     	$result = $q->execute($sql);
-    	 
-    	return $result;
+    	//$result = $result->setFetchMode(Doctrine_Core::FETCH_OBJ);
+    	$result = $result->fetchAll();
+    	//return $result;
+    	
+    	
+    	
+    	//$PDO = Doctrine_Manager::getInstance()->connection()->getDbh();
+    	//return $PDO->prepare($sql)->execute();
+    	
+    	
+//      	$conn = Doctrine_Manager::connection();
+//      	$pdo = $conn->execute($sql);
+//      	$pdo->setFetchMode(Doctrine_Core::FETCH_OBJ);
+//      	$result = $pdo->fetchAll();
+
+
+     	$i = 0;
+      	foreach($result as $t){
+      		$id = $result[$i]['id'];
+      		$trade = TradeTable::getInstance()->find(array($id));
+      		$arrayTrades[$i] = $trade;
+      		$i = $i + 1;  		
+    		
+      	}
+    	
+    	
+      	return $arrayTrades;
     	 
     }
     
