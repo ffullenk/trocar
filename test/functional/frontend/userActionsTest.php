@@ -2,7 +2,7 @@
 include(dirname(__FILE__).'/../../bootstrap/functional.php');
 
 $browser = new UserTestFunctional(new sfBrowser());
-
+$browser->loadData();
 $user = $browser->getValidUser();
 
 $browser->info('1 - Login de usuario valido');

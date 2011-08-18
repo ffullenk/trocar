@@ -59,7 +59,7 @@ Category:
 
 Product:
    Dell_1:
-     id_category: 1
+     Category: Computacion
      name: 'Dell Vostro'
      description: 'Dell Vostro PC'
      picture: ''
@@ -67,7 +67,7 @@ Product:
      brand: ''
      model: ''
    Toshiba_1:
-     id_category: 1
+     Category: Computacion
      name: 'Toshiba 545'
      description:  'Toshiba Notebook'
      picture: ''
@@ -101,6 +101,8 @@ Wantlist:
      User:    User_member
 Trade:
    Trade_Dell:
-     Have_from: Dell_have
-     Have_to: Toshiba_have
+     HaveFrom: Dell_have
+     HaveTo: Toshiba_have
+     User1:  User_admin
+     User2:  User_member
      state: waiting

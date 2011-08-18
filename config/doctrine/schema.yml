@@ -201,14 +201,6 @@ Trade:
     state: 
       type: enum
       values: [accepted,rejected,waiting]
-      
-  indexes:
-    trade_have_uniq:
-       fields: [have_from_id,have_to_id]
-       type: unique
-    trade_user_uniq:
-       fields: [user_1_id,user_2_id]
-       type: unique
   relations:
     HaveFrom:
       class:        Havelist

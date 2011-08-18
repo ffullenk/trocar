@@ -183,7 +183,7 @@ $(document).ready(function(){
 		<div class="sidebar-content">	
 			<ul id="comunidad" class="arrow-list">
 				<li><a href="#">FAQ</a></li>
-				<li><a href="#">¿Como funciona?</a></li>
+				<li><a href="#">多Como funciona?</a></li>
 				<li><a href="#">Gu&iacute;a del usuario</a></li>
 			</ul>			
 		</div>
@@ -233,7 +233,6 @@ $(document).ready(function(){
 </select>
 <input type="submit" name="enviar" id="submit" value="BUSCAR">
 </form>
->>>>>>> 01dfffe00d730c588b4134b5b9763aaf4b1b1092
 
 </body>
 </html>
