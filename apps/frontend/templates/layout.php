@@ -221,6 +221,18 @@ $(document).ready(function(){
 	</div>
 </div>
 <!-- fin footer -->
-  
+
+<form method="post" action="<?php echo url_for('search/index');?>">
+<input type="text" name="query" size="50" value="<?php echo $sf_request->getParameter('query') ?>" id="search_keywords"/>
+<img id="loader" src="/images/loader.gif" style="vertical-align: middle; display: none" />
+<select name="search_type">
+<option value="books">Libros</option>
+<option value="music">M&uacute;sica</option>
+<option value="movies">Pel&iacute;culas</option>
+<option value="movies">Otras categor&iacute;as...</option>
+</select>
+<input type="submit" name="enviar" id="submit" value="BUSCAR">
+</form>
+
 </body>
 </html>
